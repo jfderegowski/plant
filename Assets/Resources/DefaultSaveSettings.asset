@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a73140ca7443497c90be402066fa930f, type: 3}
+  m_Name: DefaultSaveSettings
+  m_EditorClassIdentifier: 
+  SaveSettings:
+    _fileLimit:
+      value: 10
+      hasValue: 0
+    _jsonCustomSettings:
+      value:
+        TypeNameHandling: 3
+        Formatting: 1
+        WriteCommentPosition: 0
+      hasValue: 1
+    _encryption:
+      value:
+        Salt: g46dzQ80
+        InitVector: OFRna74m*aze01xY
+        Password: 9f4b3763-c0cd-46de-8296-c02fd8b05e62
+      hasValue: 0

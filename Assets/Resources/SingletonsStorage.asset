@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f6baa0a7ac4ce0a5fdf6892ba1a140, type: 3}
+  m_Name: SingletonsStorage
+  m_EditorClassIdentifier: 
+  <SingletonBehaviours>k__BackingField:
+  - {fileID: 7554844888816926462, guid: 47e4deb6098f5ec448cb220c01f431c8, type: 3}
+  <SingletonObjects>k__BackingField: []
