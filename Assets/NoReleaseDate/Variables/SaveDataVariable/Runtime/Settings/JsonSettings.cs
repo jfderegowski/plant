@@ -14,13 +14,14 @@ namespace NoReleaseDate.Variables.SaveDataVariable.Runtime.Settings
 
         private JsonConverter[] Converters => new JsonConverter[] {
             new SaveData.JsonConverter(),
-            new BetterSaveData.JsonConverter(this)
+            new BetterSaveDataJsonConverter(this)
         };
 
         public JsonSerializerSettings JsonSerializerSettings => new() {
             TypeNameHandling = TypeNameHandling,
             Formatting = Formatting,
-            Converters = Converters
+            Converters = Converters,
+            MetadataPropertyHandling = MetadataPropertyHandling.Default
         };
 
         public TypeNameHandling TypeNameHandling = TypeNameHandling.All;

@@ -3,18 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using NoReleaseDate.Common.Runtime.Extensions;
 using NoReleaseDate.Systems.EncryptionSystem;
-using NoReleaseDate.Variables.HasValueVariable.Runtime;
 using NoReleaseDate.Variables.SaveDataVariable.Runtime.Settings;
-using NoReleaseDate.Variables.SerializableGuidVariable.Runtime;
-using NUnit.Framework.Internal.Execution;
 using UnityEngine;
 
 namespace NoReleaseDate.Variables.SaveDataVariable.Runtime
 {
-    [Serializable]
+    [Serializable] [JsonObject] [JsonConverter(typeof(BetterSaveDataJsonConverter))]
     public class BetterSaveData
     {
         public Dictionary<SaveKey, object> Data { get; private set; } = new();
@@ -170,129 +166,5 @@ namespace NoReleaseDate.Variables.SaveDataVariable.Runtime
             Directory.Exists(folderPath)
                 ? new DirectoryInfo(folderPath).GetFiles("*.sav", SearchOption.AllDirectories)
                 : null;
-
-        [JsonConverter(typeof(JsonConverter))]
-        internal class JsonConverter : JsonConverter<BetterSaveData>
-        {
-            public JsonConverter(JsonSettings jsonSettings) => _jsonSettings = jsonSettings;
-
-            private static JsonSettings _jsonSettings;
-            private int _indentLevel;
-
-            public override void WriteJson(JsonWriter writer, BetterSaveData value, JsonSerializer serializer)
-            {
-                _indentLevel++;
-                
-                writer.WriteStartObject();
-
-                var type = value.GetType();
-                var assemblyName = type.Assembly.GetName().Name;
-                writer.WritePropertyName("$type");
-                writer.WriteValue($"{type.FullName}, {assemblyName}");
-
-                var isPrettyPrint = writer.Formatting == Formatting.Indented;
-                var indentation = isPrettyPrint ? new string(' ', _indentLevel * 2) : string.Empty;
-
-                foreach (var (saveKey, saveValue) in value.Data)
-                {
-                    if (_jsonSettings.WriteCommentPosition == JsonSettings.CommentPosition.BeforeObject)
-                        WriteCommentWithFormatting(writer, saveKey.Comment, isPrettyPrint, indentation);
-
-                    writer.WritePropertyName(saveKey.ToString());
-                    serializer.Serialize(writer, saveValue);
-
-                    if (_jsonSettings.WriteCommentPosition == JsonSettings.CommentPosition.AfterObject)
-                        WriteCommentWithFormatting(writer, saveKey.Comment, isPrettyPrint, indentation);
-                }
-
-                writer.WriteEndObject();
-
-                _indentLevel--;
-            }
-
-            private static void WriteCommentWithFormatting(JsonWriter writer, HasValue<string> comment,
-                bool isPrettyPrint, string indentation)
-            {
-                if (!comment.hasValue) return;
-
-                if (isPrettyPrint)
-                    writer.WriteWhitespace(
-                        _jsonSettings.WriteCommentPosition == JsonSettings.CommentPosition.BeforeObject
-                            ? $"\n{indentation}"
-                            : " "
-                    );
-                
-                writer.WriteComment(comment.value);
-            }
-
-            public override BetterSaveData ReadJson(JsonReader reader, Type objectType, BetterSaveData existingValue,
-                bool hasExistingValue, JsonSerializer serializer)
-            {
-                var saveData = existingValue ?? new BetterSaveData();
-                string currentComment = null;
-
-                string jsonComment = null;
-                string jsonName = null;
-                object jsonValue = null;
-                
-                while (reader.Read())
-                {
-                    switch (reader.TokenType)
-                    {
-                        case JsonToken.Comment:
-                            currentComment = reader.Value?.ToString();
-                            break;
-
-                        case JsonToken.PropertyName:
-                            var propertyName = reader.Value.ToString();
-                            
-                            if (propertyName == "$type")
-                            {
-                                reader.Read(); // Przejdź do wartości
-                                break;
-                            }
-                            
-                            reader.Read(); // Przejdź do wartości
-
-                            var key = ParseSaveKey(propertyName);
-                            if (!string.IsNullOrEmpty(currentComment))
-                            {
-                                key = key.WithComment(currentComment);
-                                currentComment = null; // Zresetuj komentarz po przypisaniu
-                            }
-
-                            var value = DeserializeValue(reader, serializer);
-                            saveData.Set(key, value);
-                            break;
-                    }
-                }
-
-                return saveData;
-            }
-
-            private static object DeserializeValue(JsonReader reader, JsonSerializer serializer)
-            {
-                if (reader.TokenType != JsonToken.StartObject) return serializer.Deserialize(reader);
-                
-                var nestedData = new BetterSaveData();
-                while (reader.Read() && reader.TokenType != JsonToken.EndObject)
-                {
-                    if (reader.TokenType != JsonToken.PropertyName) continue;
-                        
-                    var key = ParseSaveKey(reader.Value.ToString());
-                    
-                    reader.Read();
-                    
-                    nestedData.Set(key, DeserializeValue(reader, serializer));
-                }
-                
-                return nestedData;
-            }
-
-            private static SaveKey ParseSaveKey(string keyString) =>
-                SerializableGuid.IsHexString(keyString)
-                    ? new SaveKey(SerializableGuid.FromHexString(keyString))
-                    : new SaveKey(keyString);
-        }
     }
 }

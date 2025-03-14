@@ -20,6 +20,8 @@ namespace NoReleaseDate.Variables.SaveDataVariable.Editor
             window.titleContent = new GUIContent("SaveData Viewer");
             window.minSize = new Vector2(400, 300);
             window.SetJsonContent(jsonContent);
+
+            Debug.Log(jsonContent);
         }
 
         public void SetJsonContent(string jsonContent)

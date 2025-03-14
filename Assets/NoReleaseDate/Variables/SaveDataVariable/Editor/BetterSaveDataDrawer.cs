@@ -1,5 +1,6 @@
 ﻿using NoReleaseDate.Variables.SaveDataVariable.Runtime;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,54 +12,62 @@ namespace NoReleaseDate.Variables.SaveDataVariable.Editor
         public override VisualElement CreatePropertyGUI(SerializedProperty property)
         {
             // Główny kontener poziomy
-            var horizontalContainer = new VisualElement();
-            horizontalContainer.style.flexDirection = FlexDirection.Row;
-            horizontalContainer.style.alignItems = Align.Center;
-            horizontalContainer.style.flexGrow = 1;
-            horizontalContainer.style.marginBottom = 2;
-
-            // Etykieta z nazwą zmiennej
-            var label = new Label(property.displayName);
-            label.style.minWidth = 150;
-            label.style.unityTextAlign = TextAnchor.MiddleLeft;
-            label.style.marginRight = 5;
-            horizontalContainer.Add(label);
-
-            // Przycisk "Show"
-            var showButton = new Button(() =>
-            {
-                // Pobieramy obiekt SaveData
-                var targetObject = property.serializedObject.targetObject;
-                var saveData = fieldInfo.GetValue(targetObject) as BetterSaveData;
-
-                // Sprawdzamy, czy obiekt nie jest pusty
-                if (saveData != null)
-                {
-                    // Otwieramy niestandardowe okno z tekstem JSON
-                    SaveDataViewerWindow.ShowWindow(saveData.ToJson());
+            var container = new VisualElement {
+                style = {
+                    flexDirection = FlexDirection.Row,
+                    alignItems = Align.Center,
+                    flexGrow = 1,
+                    height = 24,
+                    marginBottom = 2
                 }
-            })
-            {
-                text = "Show"
             };
 
-            // Stylizacja przycisku
-            showButton.style.height = 20;
-            showButton.style.flexGrow = 1;
-            showButton.style.marginLeft = 5;
-            showButton.style.marginTop = 2;
-            showButton.style.marginBottom = 2;
-            showButton.style.unityTextAlign = TextAnchor.MiddleCenter;
+            // Etykieta z nazwą właściwości
+            var label = new Label(property.displayName) {
+                style = {
+                    minWidth = 150,
+                    width = 150,
+                    unityTextAlign = TextAnchor.MiddleLeft,
+                    marginRight = 5
+                }
+            };
 
-            // Sprawdzamy, czy saveData jest dostępny i deaktywujemy przycisk, jeśli nie jest
-            var targetObject = property.serializedObject.targetObject;
-            var saveData = fieldInfo.GetValue(targetObject) as BetterSaveData;
-            showButton.SetEnabled(saveData != null);
+            // Przycisk do wyświetlania danych
+            var showButton = new Button(() => {
+                property.serializedObject.Update();
+                var saveData = fieldInfo.GetValue(property.serializedObject.targetObject) as BetterSaveData;
+                if (saveData != null) 
+                    SaveDataViewerWindow.ShowWindow(saveData.ToJson());
+            }) {
+                text = "Show",
+                style = {
+                    height = 20,
+                    minWidth = 60,
+                    flexGrow = 1,
+                    marginLeft = 5,
+                    unityTextAlign = TextAnchor.MiddleCenter
+                }
+            };
 
-            // Dodajemy przycisk do kontenera
-            horizontalContainer.Add(showButton);
+            // Funkcja aktualizująca stan przycisku
+            void UpdateButtonState()
+            {
+                property.serializedObject.Update();
+                var saveData = fieldInfo.GetValue(property.serializedObject.targetObject) as BetterSaveData;
+                showButton.SetEnabled(saveData != null);
+            }
 
-            return horizontalContainer;
+            // Inicjalna aktualizacja stanu
+            UpdateButtonState();
+
+            // Automatyczne śledzenie zmian właściwości
+            container.TrackPropertyValue(property, _ => UpdateButtonState());
+
+            // Składanie UI
+            container.Add(label);
+            container.Add(showButton);
+
+            return container;
         }
     }
 }

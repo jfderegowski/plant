@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using NoReleaseDate.Variables.SaveDataVariable.Runtime;
 using Sirenix.OdinInspector;
@@ -60,8 +61,10 @@ namespace NoReleaseDate.Variables.SaveDataVariable.Samples
             _betterSaveData = new BetterSaveData();
             _betterSaveData.Set(SaveKey.RandomKey, 1)
                 .Set(SaveKey.RandomKey.WithComment("This is 2"), 2)
-                .Set(SaveKey.RandomKey, 3);
-            
+                .Set(SaveKey.RandomKey, 3)
+                .Set(SaveKey.RandomKey, Vector3Int.zero)
+                .Set(SaveKey.RandomKey, new MyStruct { Value = 1, String = "This is a string" });
+
             var key1 = SaveKey.RandomKey.WithComment("This is for key 1");
             _betterSaveData.Get(key1, out var betterSaveData1, new BetterSaveData());
             betterSaveData1.Set(SaveKey.RandomKey, 4)
@@ -76,7 +79,18 @@ namespace NoReleaseDate.Variables.SaveDataVariable.Samples
                 .Set(SaveKey.RandomKey, Vector3Int.one);
             
             betterSaveData1.Set(key2, betterSaveData2);
-            _betterSaveData.Set(key1, betterSaveData1);
+            _betterSaveData.Set(key1, betterSaveData1)
+                .Set(SaveKey.RandomKey, 10)
+                .Set(SaveKey.RandomKey, 11)
+                .Set(SaveKey.RandomKey, 12)
+                .Set(SaveKey.RandomKey, Vector3Int.one)
+                .Set(SaveKey.RandomKey, new MyStruct {
+                    Value = 2, String = "This is another string",
+                    BetterSaveData = new BetterSaveData().Set(
+                        SaveKey.RandomKey.WithComment("Comment for BetterSaveData inside MyStruct"),
+                        "This is a BetterSaveData")
+                })
+                .Set(SaveKey.RandomKey, "After BetterSaveData");
             
             _betterSaveData.Save(Application.persistentDataPath + "/betterSaveData.sav");
         }
@@ -86,5 +100,13 @@ namespace NoReleaseDate.Variables.SaveDataVariable.Samples
         {
             _betterSaveData.Load(Application.persistentDataPath + "/betterSaveData.sav");
         }
+    }
+    
+    [Serializable]
+    public struct MyStruct
+    {
+        public int Value;
+        public string String;
+        public BetterSaveData BetterSaveData;
     }
 }
