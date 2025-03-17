@@ -20,8 +20,7 @@ namespace NoReleaseDate.Variables.SaveDataVariable.Runtime.Settings
         public JsonSerializerSettings JsonSerializerSettings => new() {
             TypeNameHandling = TypeNameHandling,
             Formatting = Formatting,
-            Converters = Converters,
-            MetadataPropertyHandling = MetadataPropertyHandling.Default
+            Converters = Converters
         };
 
         public TypeNameHandling TypeNameHandling = TypeNameHandling.All;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using NoReleaseDate.Variables.SaveDataVariable.Runtime;
 using Sirenix.OdinInspector;
@@ -100,13 +99,5 @@ namespace NoReleaseDate.Variables.SaveDataVariable.Samples
         {
             _betterSaveData.Load(Application.persistentDataPath + "/betterSaveData.sav");
         }
-    }
-    
-    [Serializable]
-    public struct MyStruct
-    {
-        public int Value;
-        public string String;
-        public BetterSaveData BetterSaveData;
     }
 }

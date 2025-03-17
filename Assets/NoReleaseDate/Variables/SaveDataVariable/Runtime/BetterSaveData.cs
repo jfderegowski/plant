@@ -10,10 +10,12 @@ using UnityEngine;
 
 namespace NoReleaseDate.Variables.SaveDataVariable.Runtime
 {
-    [Serializable] [JsonObject] [JsonConverter(typeof(BetterSaveDataJsonConverter))]
+    [Serializable] [JsonConverter(typeof(BetterSaveDataJsonConverter))]
     public class BetterSaveData
     {
         public Dictionary<SaveKey, object> Data { get; private set; } = new();
+
+        public BetterSaveData() { }
 
         public BetterSaveData Get<T>(SaveKey key, out T value, T defaultValue)
         {
