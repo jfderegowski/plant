@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NoReleaseDate.Variables.SaveDataVariable.Runtime;
+using NUnit.Framework;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -54,18 +55,18 @@ namespace NoReleaseDate.Variables.SaveDataVariable.Samples
             return clasData;
         }
 
-        [Button]
-        private void TestSave()
+        [Button] [Test]
+        public void TestSave()
         {
-            _betterSaveData = new BetterSaveData();
-            _betterSaveData.Set(SaveKey.RandomKey, 1)
+            var betterSaveData = new BetterSaveData();
+            betterSaveData.Set(SaveKey.RandomKey, 1)
                 .Set(SaveKey.RandomKey.WithComment("This is 2"), 2)
                 .Set(SaveKey.RandomKey, 3)
                 .Set(SaveKey.RandomKey, Vector3Int.zero)
                 .Set(SaveKey.RandomKey, new MyStruct { Value = 1, String = "This is a string" });
 
             var key1 = SaveKey.RandomKey.WithComment("This is for key 1");
-            _betterSaveData.Get(key1, out var betterSaveData1, new BetterSaveData());
+            betterSaveData.Get(key1, out var betterSaveData1, new BetterSaveData());
             betterSaveData1.Set(SaveKey.RandomKey, 4)
                 .Set(SaveKey.RandomKey, 5)
                 .Set(SaveKey.RandomKey, 6);
@@ -78,7 +79,7 @@ namespace NoReleaseDate.Variables.SaveDataVariable.Samples
                 .Set(SaveKey.RandomKey, Vector3Int.one);
             
             betterSaveData1.Set(key2, betterSaveData2);
-            _betterSaveData.Set(key1, betterSaveData1)
+            betterSaveData.Set(key1, betterSaveData1)
                 .Set(SaveKey.RandomKey, 10)
                 .Set(SaveKey.RandomKey, 11)
                 .Set(SaveKey.RandomKey, 12)
@@ -91,13 +92,18 @@ namespace NoReleaseDate.Variables.SaveDataVariable.Samples
                 })
                 .Set(SaveKey.RandomKey, "After BetterSaveData");
             
-            _betterSaveData.Save(Application.persistentDataPath + "/betterSaveData.sav");
+            betterSaveData.Save(Application.persistentDataPath + "/betterSaveData.sav");
         }
 
-        [Button]
-        private void TestLoad()
+        [Button] [Test]
+        public void TestLoad()
         {
-            _betterSaveData.Load(Application.persistentDataPath + "/betterSaveData.sav");
+            var betterSaveData = new BetterSaveData();
+            betterSaveData.Load(Application.persistentDataPath + "/betterSaveData.sav", onAfterLoad: OnAfterLoad);
+            
+            return;
+            
+            void OnAfterLoad() => betterSaveData.Save(Application.persistentDataPath + "/betterSaveDataLoad.sav");
         }
     }
 }

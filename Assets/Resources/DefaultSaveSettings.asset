@@ -18,9 +18,9 @@ MonoBehaviour:
       hasValue: 0
     _jsonCustomSettings:
       value:
-        TypeNameHandling: 3
+        TypeNameHandling: 0
         Formatting: 1
-        WriteCommentPosition: 0
+        WriteCommentPosition: 1
       hasValue: 1
     _encryption:
       value:

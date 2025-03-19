@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace NoReleaseDate.Variables.SaveDataVariable.Runtime.Settings
 {
@@ -14,7 +15,7 @@ namespace NoReleaseDate.Variables.SaveDataVariable.Runtime.Settings
 
         private JsonConverter[] Converters => new JsonConverter[] {
             new SaveData.JsonConverter(),
-            new BetterSaveDataJsonConverter(this)
+            new BetterSaveData.JsonConverter(this)
         };
 
         public JsonSerializerSettings JsonSerializerSettings => new() {
@@ -23,7 +24,7 @@ namespace NoReleaseDate.Variables.SaveDataVariable.Runtime.Settings
             Converters = Converters
         };
 
-        public TypeNameHandling TypeNameHandling = TypeNameHandling.All;
+        public TypeNameHandling TypeNameHandling = TypeNameHandling.None;
         public Formatting Formatting = Formatting.Indented;
         public CommentPosition WriteCommentPosition = CommentPosition.BeforeObject;
     }
