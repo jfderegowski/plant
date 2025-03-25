@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace NoReleaseDate.Common.Runtime.Extensions
+namespace fefek5.Common.Runtime.Extensions
 {
     public static class TransformExtensions
     {

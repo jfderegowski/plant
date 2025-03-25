@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using NoReleaseDate.Systems.SingletonSystem.Runtime;
+using fefek5.Systems.SingletonSystem.Runtime;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NoReleaseDate.Plugins.UIRebuilderSystem.Runtime
+namespace fefek5.Systems.UIRebuilderSystem.Runtime
 {
     /// <summary>
     /// Rebuilds UI elements that need to be rebuilt.

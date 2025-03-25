@@ -1,8 +1,8 @@
-﻿using NoReleaseDate.Common.Runtime.PropertyAttributes;
+﻿using fefek5.Common.Runtime.PropertyAttributes;
 using UnityEditor;
 using UnityEngine;
 
-namespace NoReleaseDate.Common.Editor.Editor.PropertyDrawers
+namespace fefek5.Common.Editor.PropertyDrawers
 {
     [CustomPropertyDrawer(typeof(DrawInInspector), true)]
     public class DrawInInspectorDrawer : PropertyDrawer

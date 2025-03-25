@@ -1,4 +1,4 @@
-﻿namespace IntuitiveBackSystem.Runtime
+﻿namespace fefek5.Systems.IntuitiveBackSystem.Runtime
 {
     /// <summary>
     /// Interface that can be implemented to handle the back action.

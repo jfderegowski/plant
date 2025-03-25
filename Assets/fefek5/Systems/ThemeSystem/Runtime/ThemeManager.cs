@@ -1,7 +1,7 @@
-using NoReleaseDate.Systems.SingletonSystem.Runtime;
+using fefek5.Systems.SingletonSystem.Runtime;
 using UnityEngine;
 
-namespace NoReleaseDate.ThemeSystem.Runtime
+namespace fefek5.Systems.ThemeSystem.Runtime
 {
     [CreateAssetMenu(fileName = "ThemeManager", menuName = "No Release Date/Theme System/Theme Manager")]
     public class ThemeManager : SingletonObject<ThemeManager>

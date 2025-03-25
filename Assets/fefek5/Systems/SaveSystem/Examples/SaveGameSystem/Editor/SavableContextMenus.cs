@@ -1,9 +1,6 @@
-﻿using System;
-using NoReleaseDate.Plugins.SaveSystem.Examples.SaveGameSystem;
-using NoReleaseDate.Variables.SaveDataVariable.Runtime;
-using UnityEditor;
+﻿using UnityEditor;
 
-namespace Plugins.SaveSystem.Examples.SaveGameSystem.Editor
+namespace fefek5.Systems.SaveSystem.Examples.SaveGameSystem.Editor
 {
     public static class SavableContextMenus
     {

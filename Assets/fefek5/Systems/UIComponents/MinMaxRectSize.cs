@@ -1,10 +1,10 @@
 using System;
-using NoReleaseDate.Variables.HasValueVariable.Runtime;
+using fefek5.Variables.HasValueVariable.Runtime;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace NoReleaseDate.Plugins.UIComponents
+namespace fefek5.Systems.UIComponents
 {
     [ExecuteAlways]
     [ExecuteInEditMode]

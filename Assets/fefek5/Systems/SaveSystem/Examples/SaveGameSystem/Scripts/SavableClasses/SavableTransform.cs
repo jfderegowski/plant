@@ -1,9 +1,9 @@
-﻿using NoReleaseDate.Common.Runtime.Serializable;
-using NoReleaseDate.Variables.HasValueVariable.Runtime;
-using NoReleaseDate.Variables.SaveDataVariable.Runtime;
+﻿using fefek5.Common.Runtime.Serializable;
+using fefek5.Variables.HasValueVariable.Runtime;
+using fefek5.Variables.SaveDataVariable.Runtime;
 using UnityEngine;
 
-namespace NoReleaseDate.Plugins.SaveSystem.Examples.SaveGameSystem.SavableClasses
+namespace fefek5.Systems.SaveSystem.Examples.SaveGameSystem.Scripts.SavableClasses
 {
     public class SavableTransform : SavableMonoBehaviour
     {

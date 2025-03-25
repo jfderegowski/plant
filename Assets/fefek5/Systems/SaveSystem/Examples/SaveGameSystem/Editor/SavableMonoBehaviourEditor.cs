@@ -1,11 +1,7 @@
-using System;
-using Newtonsoft.Json;
-using NoReleaseDate.Plugins.SaveSystem.Examples.SaveGameSystem;
-using NoReleaseDate.Variables.SaveDataVariable.Runtime;
+using fefek5.Systems.SaveSystem.Examples.SaveGameSystem.Scripts;
 using UnityEditor;
-using UnityEngine;
 
-namespace Plugins.SaveSystem.Examples.SaveGameSystem.Editor
+namespace fefek5.Systems.SaveSystem.Examples.SaveGameSystem.Editor
 {
     [CustomEditor(typeof(SavableMonoBehaviour), true), CanEditMultipleObjects]
     public class SavableMonoBehaviourEditor : UnityEditor.Editor

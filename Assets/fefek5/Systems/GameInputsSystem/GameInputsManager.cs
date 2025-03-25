@@ -1,8 +1,9 @@
 using System;
-using NoReleaseDate.Systems.SingletonSystem.Runtime;
+using fefek5.Systems.SingletonSystem.Runtime;
+using NoReleaseDate.Systems.GameInputsSystem;
 using UnityEngine.InputSystem;
 
-namespace NoReleaseDate.Systems.GameInputsSystem
+namespace fefek5.Systems.GameInputsSystem
 {
     public abstract class GameInputsManager : SingletonRawClass<GameInputsManager>
     {

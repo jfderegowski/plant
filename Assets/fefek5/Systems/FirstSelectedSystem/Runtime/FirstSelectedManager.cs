@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using NoReleaseDate.Systems.SingletonSystem.Runtime;
+using fefek5.Systems.SingletonSystem.Runtime;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
-namespace NoReleaseDate.Plugins.FirstSelectedSystem.Runtime
+namespace fefek5.Systems.FirstSelectedSystem.Runtime
 {
     public class FirstSelectedManager : SingletonBehaviour<FirstSelectedManager>
     {

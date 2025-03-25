@@ -1,9 +1,7 @@
-using System;
-using NoReleaseDate.Common.Runtime.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NoReleaseDate.Plugins.SaveSystem.Examples.SaveGameSystem.Scripts.UI
+namespace fefek5.Systems.SaveSystem.Examples.SaveGameSystem.Scripts.UI
 {
     public enum Navigation
     {

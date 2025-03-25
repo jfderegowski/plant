@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace NoReleaseDate.Plugins.InteractionSystem
+namespace fefek5.Systems.InteractionSystem
 {
     public class Interactable : MonoBehaviour
     {

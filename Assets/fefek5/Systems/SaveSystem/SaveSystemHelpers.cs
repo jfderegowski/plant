@@ -2,9 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using NoReleaseDate.Common.Runtime.Extensions;
+using fefek5.Common.Runtime.Extensions;
 
-namespace NoReleaseDate.Plugins.SaveSystem
+namespace fefek5.Systems.SaveSystem
 {
     public static class SaveSystemHelpers
     {

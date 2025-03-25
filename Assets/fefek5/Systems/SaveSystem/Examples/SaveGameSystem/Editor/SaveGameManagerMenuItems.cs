@@ -1,9 +1,4 @@
-﻿using System.IO;
-using NoReleaseDate.Plugins.SaveSystem.Examples.SaveGameSystem;
-using NoReleaseDate.SaveSystem.Editor;
-using UnityEditor;
-
-namespace Plugins.SaveSystem.Examples.SaveGameSystem.Editor
+﻿namespace fefek5.Systems.SaveSystem.Examples.SaveGameSystem.Editor
 {
     public static class SaveGameManagerMenuItems
     {

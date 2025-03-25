@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NoReleaseDate.Common.Runtime.PropertyAttributes
+namespace fefek5.Common.Runtime.PropertyAttributes
 {
     public class LabelAttribute : PropertyAttribute
     {

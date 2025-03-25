@@ -1,12 +1,9 @@
-using System.Collections.Generic;
-using NoReleaseDate.Variables.SaveDataVariable.Runtime;
-using NoReleaseDate.Variables.SaveDataVariable.Runtime.Settings;
-using NUnit.Framework;
+using fefek5.Variables.SaveDataVariable.Runtime;
+using fefek5.Variables.SaveDataVariable.Runtime.Settings;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace NoReleaseDate.Variables.SaveDataVariable.Samples
+namespace fefek5.Variables.SaveDataVariable.Samples
 {
     public class SaveDataExample : MonoBehaviour
     {

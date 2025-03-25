@@ -1,8 +1,8 @@
-﻿using NoReleaseDate.Variables.HasValueVariable.Runtime;
+﻿using fefek5.Variables.HasValueVariable.Runtime;
 using UnityEditor;
 using UnityEngine;
 
-namespace NoReleaseDate.Variables.HasValueVariable.Editor
+namespace fefek5.Variables.HasValueVariable.Editor
 {
     [CustomPropertyDrawer(typeof(HasValue<>))]
     public class HasValueDrawer : PropertyDrawer

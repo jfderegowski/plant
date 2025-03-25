@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using NoReleaseDate.Systems.SingletonSystem.Runtime;
+using fefek5.Systems.SingletonSystem.Runtime;
 using UnityEngine;
 
-namespace NoReleaseDate.TickerSystem.Runtime
+namespace fefek5.Systems.TickerSystem.Runtime
 {
     /// <summary>
     /// A class to handle tick actions

@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using NoReleaseDate.Common.Runtime.Extensions;
-using NoReleaseDate.Variables.SaveDataVariable.Runtime;
-using NoReleaseDate.Variables.SaveDataVariable.Runtime.Settings;
-using UnityEngine;
-
-namespace NoReleaseDate.Plugins.SaveSystem.Examples.SaveGameSystem
+﻿namespace fefek5.Systems.SaveSystem.Examples.SaveGameSystem.Scripts
 {
     public enum SaveType
     {

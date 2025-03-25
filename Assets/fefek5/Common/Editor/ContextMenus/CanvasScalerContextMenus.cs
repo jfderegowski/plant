@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NoReleaseDate.Common.ContextMenus
+namespace fefek5.Common.Editor.ContextMenus
 {
     public static class CanvasScalerContextMenus
     {

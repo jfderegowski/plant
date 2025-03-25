@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NoReleaseDate.Plugins.CursorSystem.Runtime
+namespace fefek5.Systems.CursorSystem.Runtime
 {
     /// <summary>
     /// Generic cursor lock mode class.

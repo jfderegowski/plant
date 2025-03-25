@@ -1,4 +1,4 @@
-﻿namespace NoReleaseDate.ThemeSystem.Runtime
+﻿namespace fefek5.Systems.ThemeSystem.Runtime
 {
     /// <summary>
     /// An enum to define the color type

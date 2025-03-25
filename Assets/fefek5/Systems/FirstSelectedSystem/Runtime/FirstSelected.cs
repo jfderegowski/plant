@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NoReleaseDate.Plugins.FirstSelectedSystem.Runtime
+namespace fefek5.Systems.FirstSelectedSystem.Runtime
 {
     public class FirstSelected : MonoBehaviour
     {

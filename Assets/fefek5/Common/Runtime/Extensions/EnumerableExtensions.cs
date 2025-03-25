@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NoReleaseDate.Common.Runtime.Extensions
+namespace fefek5.Common.Runtime.Extensions
 {
     public static class EnumerableExtensions
     {

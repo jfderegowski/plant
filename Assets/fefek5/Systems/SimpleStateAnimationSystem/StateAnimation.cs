@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NoReleaseDate.Plugins.SimpleStateAnimationSystem
+namespace fefek5.Systems.SimpleStateAnimationSystem
 {
     public class StateAnimation : IDisposable
     {

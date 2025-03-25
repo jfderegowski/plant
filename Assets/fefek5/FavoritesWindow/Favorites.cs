@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using NoReleaseDate.Systems.SingletonSystem.Runtime;
+using fefek5.Systems.SingletonSystem.Runtime;
 using UnityEngine;
 
-namespace NoReleaseDate.FavoritesWindow
+namespace fefek5.FavoritesWindow
 {
     public class Favorites : SingletonObject<Favorites>
     {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace NoReleaseDate.ThemeSystem.Runtime
+namespace fefek5.Systems.ThemeSystem.Runtime
 {
     [AddComponentMenu("No Release Date/Theme System/Theme Controller Image")]
     [RequireComponent(typeof(Image))]

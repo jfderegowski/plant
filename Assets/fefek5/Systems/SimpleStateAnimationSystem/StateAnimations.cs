@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NoReleaseDate.Plugins.SimpleStateAnimationSystem
+namespace fefek5.Systems.SimpleStateAnimationSystem
 {
     public class StateAnimations<T> : IDisposable where T : Enum
     {

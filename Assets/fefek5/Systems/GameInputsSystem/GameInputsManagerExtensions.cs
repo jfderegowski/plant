@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 
-namespace NoReleaseDate.Systems.GameInputsSystem
+namespace fefek5.Systems.GameInputsSystem
 {
     public static class GameInputsManagerExtensions
     {

@@ -1,10 +1,9 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NoReleaseDate.Plugins.SaveSystem.Examples.SaveGameSystem.Scripts.UI
+namespace fefek5.Systems.SaveSystem.Examples.SaveGameSystem.Scripts.UI
 {
     public class SaveSlotUIElement : MonoBehaviour
     {

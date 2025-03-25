@@ -1,4 +1,4 @@
-﻿namespace EventButtonSystem.Runtime
+﻿namespace fefek5.Systems.SelectableWithEventsSystem.Runtime
 {
     public enum PublicSelectableState
     {

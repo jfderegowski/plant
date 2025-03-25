@@ -1,4 +1,4 @@
-﻿namespace NoReleaseDate.Plugins.SaveSystem.Examples.SaveGameSystem
+﻿namespace fefek5.Systems.SaveSystem.Examples.SaveGameSystem.Scripts
 {
     public enum SaveLoadPlace
     {

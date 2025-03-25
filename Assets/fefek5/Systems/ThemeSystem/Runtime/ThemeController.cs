@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NoReleaseDate.ThemeSystem.Runtime
+namespace fefek5.Systems.ThemeSystem.Runtime
 {
     [ExecuteInEditMode]
     public abstract class ThemeController : MonoBehaviour

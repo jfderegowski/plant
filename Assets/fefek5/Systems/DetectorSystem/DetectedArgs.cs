@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace NoReleaseDate.Plugins.DetectorSystem
+namespace fefek5.Systems.DetectorSystem
 {
     [Serializable]
     public struct DetectedArgs<T>

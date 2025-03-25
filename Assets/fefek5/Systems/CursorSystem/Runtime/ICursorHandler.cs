@@ -1,4 +1,4 @@
-﻿namespace NoReleaseDate.Plugins.CursorSystem.Runtime
+﻿namespace fefek5.Systems.CursorSystem.Runtime
 {
     /// <summary>
     /// Interface for cursor handlers.

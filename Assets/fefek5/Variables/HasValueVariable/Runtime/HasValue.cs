@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace NoReleaseDate.Variables.HasValueVariable.Runtime
+namespace fefek5.Variables.HasValueVariable.Runtime
 {
     [Serializable]
     public class HasValue<T>

@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace NoReleaseDate.Systems.EncryptionSystem
+namespace fefek5.Systems.EncryptionSystem
 {
     /// <summary>
     /// AES is a symmetric 256-bit encryption algorithm.

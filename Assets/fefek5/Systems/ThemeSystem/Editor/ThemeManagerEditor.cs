@@ -1,9 +1,9 @@
-﻿using NoReleaseDate.ThemeSystem.Runtime;
+﻿using fefek5.Systems.ThemeSystem.Runtime;
 using TMPro;
 using UnityEditor;
 using UnityEngine.UI;
 
-namespace NoReleaseDate.Plugins.ThemeSystem.Editor
+namespace fefek5.Systems.ThemeSystem.Editor
 {
     public static class ThemeManagerEditor
     {

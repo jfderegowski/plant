@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NoReleaseDate.Variables.SerializableGuidVariable.Runtime
+namespace fefek5.Variables.SerializableGuidVariable.Runtime
 {
     public static class GuidExtensions
     {

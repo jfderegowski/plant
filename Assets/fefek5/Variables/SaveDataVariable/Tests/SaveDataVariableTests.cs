@@ -1,8 +1,8 @@
-﻿using NoReleaseDate.Variables.SaveDataVariable.Runtime;
-using NoReleaseDate.Variables.SerializableGuidVariable.Runtime;
+﻿using fefek5.Variables.SaveDataVariable.Runtime;
+using fefek5.Variables.SerializableGuidVariable.Runtime;
 using NUnit.Framework;
 
-namespace NoReleaseDate.Variables.SaveDataVariable.Tests
+namespace fefek5.Variables.SaveDataVariable.Tests
 {
     public class SaveDataVariableTests
     {

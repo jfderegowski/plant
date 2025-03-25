@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace NoReleaseDate.FavoritesWindow.Editor
+namespace fefek5.FavoritesWindow.Editor
 {
     public static class FavoritesMenuItems
     {

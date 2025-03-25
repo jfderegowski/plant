@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using NoReleaseDate.Systems.SingletonSystem.Runtime;
+using fefek5.Systems.SingletonSystem.Runtime;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace IntuitiveBackSystem.Runtime
+namespace fefek5.Systems.IntuitiveBackSystem.Runtime
 {
     /// <summary>
     /// Manager that handles the back action and calls the current IIntuitiveBackHandler.

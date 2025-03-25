@@ -1,7 +1,7 @@
-﻿using NoReleaseDate.Common.Runtime.Extensions;
+﻿using fefek5.Common.Runtime.Extensions;
 using UnityEngine;
 
-namespace NoReleaseDate.ThemeSystem.Runtime
+namespace fefek5.Systems.ThemeSystem.Runtime
 {
     /// <summary>
     /// Color Palette for the UI Theme System

@@ -1,9 +1,9 @@
-﻿using EventButtonSystem.Runtime;
+﻿using fefek5.Systems.SelectableWithEventsSystem.Runtime;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Other.Editor.ContextMenus
+namespace fefek5.Systems.SelectableWithEventsSystem.Editor
 {
     public static class ButtonContextMenus
     {

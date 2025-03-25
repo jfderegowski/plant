@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NoReleaseDate.Plugins.UIRebuilderSystem.Runtime
+namespace fefek5.Systems.UIRebuilderSystem.Runtime
 {
     /// <summary>
     /// Rebuilds the UI element that this component is attached to.

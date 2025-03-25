@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace NoReleaseDate.Common.Runtime.Serializable
+namespace fefek5.Common.Runtime.Serializable
 {
     /// <summary>
     /// Represents a serializable version of the Unity Vector3 struct.

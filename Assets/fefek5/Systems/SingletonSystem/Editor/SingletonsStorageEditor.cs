@@ -1,7 +1,7 @@
-﻿using NoReleaseDate.Systems.SingletonSystem.Runtime;
+﻿using fefek5.Systems.SingletonSystem.Runtime;
 using UnityEditor;
 
-namespace NoReleaseDate.Systems.SingletonSystem.Editor
+namespace fefek5.Systems.SingletonSystem.Editor
 {
     public static class SingletonsStorageEditor
     {

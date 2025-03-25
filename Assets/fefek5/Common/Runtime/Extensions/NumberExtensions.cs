@@ -3,7 +3,7 @@
 using Unity.Mathematics;
 #endif
 
-namespace NoReleaseDate.Common.Runtime.Extensions
+namespace fefek5.Common.Runtime.Extensions
 {
     public static class NumberExtensions
     {

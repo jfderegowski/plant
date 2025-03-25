@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
-using NoReleaseDate.Systems.SingletonSystem.Runtime;
 using UnityEditor;
 using UnityEngine;
 using System.Reflection;
+using fefek5.Systems.SingletonSystem.Runtime;
 using Object = UnityEngine.Object;
 
 namespace Scripts.GameWindowSystem

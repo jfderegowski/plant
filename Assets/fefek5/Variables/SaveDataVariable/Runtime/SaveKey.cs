@@ -1,10 +1,10 @@
 ﻿using System;
-using NoReleaseDate.Common.Runtime.Extensions;
-using NoReleaseDate.Variables.HasValueVariable.Runtime;
-using NoReleaseDate.Variables.SerializableGuidVariable.Runtime;
+using fefek5.Common.Runtime.Extensions;
+using fefek5.Variables.HasValueVariable.Runtime;
+using fefek5.Variables.SerializableGuidVariable.Runtime;
 using UnityEngine;
 
-namespace NoReleaseDate.Variables.SaveDataVariable.Runtime
+namespace fefek5.Variables.SaveDataVariable.Runtime
 {
     [Serializable]
     public struct SaveKey : IEquatable<SaveKey>, IEquatable<SerializableGuid>, IEquatable<string>

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using NoReleaseDate.Systems.SingletonSystem.Runtime;
+using fefek5.Systems.SingletonSystem.Runtime;
 using UnityEngine;
 
-namespace NoReleaseDate.Plugins.CursorSystem.Runtime
+namespace fefek5.Systems.CursorSystem.Runtime
 {
     /// <summary>
     /// Cursor manager class. It manages the cursor settings and the cursor handlers.

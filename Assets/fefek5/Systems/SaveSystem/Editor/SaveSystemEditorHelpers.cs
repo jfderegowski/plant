@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace NoReleaseDate.SaveSystem.Editor
+namespace fefek5.Systems.SaveSystem.Editor
 {
     public class SaveSystemEditorHelpers
     {

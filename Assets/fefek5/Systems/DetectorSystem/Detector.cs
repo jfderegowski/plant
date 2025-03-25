@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-namespace NoReleaseDate.Plugins.DetectorSystem
+namespace fefek5.Systems.DetectorSystem
 {
     public abstract class Detector<T> : MonoBehaviour where T : class
     {

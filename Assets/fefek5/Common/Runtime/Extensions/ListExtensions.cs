@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NoReleaseDate.Common.Runtime.Extensions
+namespace fefek5.Common.Runtime.Extensions
 {
     public static class ListExtensions
     {

@@ -1,8 +1,7 @@
-﻿using Plugins.SaveSystem;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
-namespace NoReleaseDate.SaveSystem.Editor
+namespace fefek5.Systems.SaveSystem.Editor
 {
     public static class SaveSystemMenuItems
     {

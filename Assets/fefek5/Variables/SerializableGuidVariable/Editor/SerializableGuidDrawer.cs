@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using System.Text;
-using NoReleaseDate.Variables.SerializableGuidVariable.Runtime;
+using fefek5.Variables.SerializableGuidVariable.Runtime;
 using UnityEditor;
 using UnityEngine;
 
-namespace NoReleaseDate.Plugins.Variables.SerializableGuidVariable.Editor
+namespace fefek5.Variables.SerializableGuidVariable.Editor
 {
     [CustomPropertyDrawer(typeof(SerializableGuid))]
     public class SerializableGuidDrawer : PropertyDrawer

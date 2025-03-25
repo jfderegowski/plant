@@ -1,10 +1,6 @@
-﻿using NoReleaseDate.Common.Runtime.Serializable;
-using NoReleaseDate.Variables.SaveDataVariable.Runtime;
-using NoReleaseDate.Variables.SerializableGuidVariable.Runtime;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine;
 
-namespace NoReleaseDate.Plugins.SaveSystem.Examples.SaveGameSystem
+namespace fefek5.Systems.SaveSystem.Examples.SaveGameSystem.Scripts
 {
     public abstract class SavableMonoBehaviour : MonoBehaviour
     {

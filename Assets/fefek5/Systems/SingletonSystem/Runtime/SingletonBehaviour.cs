@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NoReleaseDate.Systems.SingletonSystem.Runtime
+namespace fefek5.Systems.SingletonSystem.Runtime
 {
     /// <summary>
     /// Base class for all singletons.

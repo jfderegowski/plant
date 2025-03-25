@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NoReleaseDate.Common.Runtime.Serializable
+namespace fefek5.Common.Runtime.Serializable
 {
     public struct SerializableVector2
     {

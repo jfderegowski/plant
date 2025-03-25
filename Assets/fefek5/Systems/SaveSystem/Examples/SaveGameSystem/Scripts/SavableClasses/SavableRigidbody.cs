@@ -1,10 +1,9 @@
 ﻿using System;
-using NoReleaseDate.Common.Runtime.Serializable;
-using NoReleaseDate.Variables.SaveDataVariable.Runtime;
+using fefek5.Variables.SaveDataVariable.Runtime;
 using UnityEngine;
-using static NoReleaseDate.Variables.SaveDataVariable.Runtime.SaveKey;
+using static fefek5.Variables.SaveDataVariable.Runtime.SaveKey;
 
-namespace NoReleaseDate.Plugins.SaveSystem.Examples.SaveGameSystem.SavableClasses
+namespace fefek5.Systems.SaveSystem.Examples.SaveGameSystem.Scripts.SavableClasses
 {
     [Flags]
     public enum RigidbodyDataToSaveTypes

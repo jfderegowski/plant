@@ -1,9 +1,9 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using System.Collections.Generic;
 
-namespace NoReleaseDate.Variables.SaveDataVariable.Editor
+namespace fefek5.Variables.SaveDataVariable.Editor
 {
     public class SaveDataViewerWindow : EditorWindow
     {

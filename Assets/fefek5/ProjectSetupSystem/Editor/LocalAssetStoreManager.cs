@@ -1,148 +1,151 @@
-using UnityEditor;
-using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
+using UnityEngine;
 
-public class LocalAssetStoreManager : EditorWindow
+namespace fefek5.ProjectSetupSystem.Editor
 {
-    private string assetStorePath = ""; // Path to Asset Store cache folder
-    private List<string> assetNames = new List<string>();
-    private List<string> assetPaths = new List<string>();
-    private List<bool> selectedAssets = new List<bool>();
-    private List<bool> importedAssets = new List<bool>(); // Tracks if each asset is already imported
-    private Vector2 scrollPos;
-    private string searchQuery = ""; // New variable for search query
-
-    [MenuItem("Tools/No Release Date/Local Asset Store Manager")]
-    public static void ShowWindow()
+    public class LocalAssetStoreManager : EditorWindow
     {
-        GetWindow<LocalAssetStoreManager>("Local Asset Store Manager");
-    }
+        private string assetStorePath = ""; // Path to Asset Store cache folder
+        private List<string> assetNames = new List<string>();
+        private List<string> assetPaths = new List<string>();
+        private List<bool> selectedAssets = new List<bool>();
+        private List<bool> importedAssets = new List<bool>(); // Tracks if each asset is already imported
+        private Vector2 scrollPos;
+        private string searchQuery = ""; // New variable for search query
 
-    private void OnEnable()
-    {
-        #if UNITY_EDITOR_WIN
+        [MenuItem("Tools/No Release Date/Local Asset Store Manager")]
+        public static void ShowWindow()
+        {
+            GetWindow<LocalAssetStoreManager>("Local Asset Store Manager");
+        }
+
+        private void OnEnable()
+        {
+#if UNITY_EDITOR_WIN
             assetStorePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "Unity", "Asset Store-5.x");
-        #elif UNITY_EDITOR_OSX
+#elif UNITY_EDITOR_OSX
             assetStorePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "Library", "Unity", "Asset Store-5.x");
-        #endif
+#endif
 
-        // Load assets and check import status once on window open
-        LoadLocalAssets();
-        CheckImportedAssets();
-    }
-
-    private void LoadLocalAssets()
-    {
-        assetNames.Clear();
-        assetPaths.Clear();
-        selectedAssets.Clear();
-        importedAssets.Clear();
-
-        if (!Directory.Exists(assetStorePath))
-        {
-            Debug.LogError("Asset Store cache folder not found: " + assetStorePath);
-            return;
-        }
-
-        // Find all .unitypackage files in the cache folder
-        string[] files = Directory.GetFiles(assetStorePath, "*.unitypackage", SearchOption.AllDirectories);
-        foreach (string file in files)
-        {
-            string assetName = Path.GetFileNameWithoutExtension(file); // Get asset name
-            assetNames.Add(assetName);
-            assetPaths.Add(file);
-            selectedAssets.Add(false); // Default all checkboxes to unchecked
-            importedAssets.Add(false); // Default imported status to false
-        }
-    }
-
-    private void OnGUI()
-    {
-        EditorGUILayout.LabelField("Select Local Asset Store Packages to Import", EditorStyles.boldLabel);
-
-        // Search field for filtering assets
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.LabelField("Search: ", GUILayout.Width(50));
-        searchQuery = EditorGUILayout.TextField(searchQuery);
-        EditorGUILayout.EndHorizontal();
-
-        // Refresh button to reload assets and check their import status
-        if (GUILayout.Button("Refresh Asset List"))
-        {
+            // Load assets and check import status once on window open
             LoadLocalAssets();
             CheckImportedAssets();
         }
 
-        // Scroll view for displaying all assets
-        scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
-
-        for (int i = 0; i < assetNames.Count; i++)
+        private void LoadLocalAssets()
         {
-            if (string.IsNullOrEmpty(searchQuery) || assetNames[i].ToLower().Contains(searchQuery.ToLower()))
+            assetNames.Clear();
+            assetPaths.Clear();
+            selectedAssets.Clear();
+            importedAssets.Clear();
+
+            if (!Directory.Exists(assetStorePath))
             {
-                EditorGUILayout.BeginHorizontal();
+                Debug.LogError("Asset Store cache folder not found: " + assetStorePath);
+                return;
+            }
 
-                // Checkbox for selection
-                selectedAssets[i] = EditorGUILayout.Toggle(selectedAssets[i], GUILayout.Width(20));
+            // Find all .unitypackage files in the cache folder
+            string[] files = Directory.GetFiles(assetStorePath, "*.unitypackage", SearchOption.AllDirectories);
+            foreach (string file in files)
+            {
+                string assetName = Path.GetFileNameWithoutExtension(file); // Get asset name
+                assetNames.Add(assetName);
+                assetPaths.Add(file);
+                selectedAssets.Add(false); // Default all checkboxes to unchecked
+                importedAssets.Add(false); // Default imported status to false
+            }
+        }
 
-                // Asset name label
-                EditorGUILayout.LabelField(assetNames[i]);
+        private void OnGUI()
+        {
+            EditorGUILayout.LabelField("Select Local Asset Store Packages to Import", EditorStyles.boldLabel);
 
-                // Show "Some Matching Name Was Found" if the asset is already imported
-                if (importedAssets[i])
+            // Search field for filtering assets
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Search: ", GUILayout.Width(50));
+            searchQuery = EditorGUILayout.TextField(searchQuery);
+            EditorGUILayout.EndHorizontal();
+
+            // Refresh button to reload assets and check their import status
+            if (GUILayout.Button("Refresh Asset List"))
+            {
+                LoadLocalAssets();
+                CheckImportedAssets();
+            }
+
+            // Scroll view for displaying all assets
+            scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
+
+            for (int i = 0; i < assetNames.Count; i++)
+            {
+                if (string.IsNullOrEmpty(searchQuery) || assetNames[i].ToLower().Contains(searchQuery.ToLower()))
                 {
-                    GUI.contentColor = Color.green;
-                    EditorGUILayout.LabelField("Some Matching Name Was Found");
-                    GUI.contentColor = Color.white; // Reset color
+                    EditorGUILayout.BeginHorizontal();
+
+                    // Checkbox for selection
+                    selectedAssets[i] = EditorGUILayout.Toggle(selectedAssets[i], GUILayout.Width(20));
+
+                    // Asset name label
+                    EditorGUILayout.LabelField(assetNames[i]);
+
+                    // Show "Some Matching Name Was Found" if the asset is already imported
+                    if (importedAssets[i])
+                    {
+                        GUI.contentColor = Color.green;
+                        EditorGUILayout.LabelField("Some Matching Name Was Found");
+                        GUI.contentColor = Color.white; // Reset color
+                    }
+
+                    EditorGUILayout.EndHorizontal();
                 }
-
-                EditorGUILayout.EndHorizontal();
             }
-        }
 
-        EditorGUILayout.EndScrollView();
+            EditorGUILayout.EndScrollView();
 
-        if (GUILayout.Button("Import Selected Assets"))
-        {
-            ImportSelectedAssets();
-        }
-    }
-
-    private void ImportSelectedAssets()
-    {
-        for (int i = 0; i < assetPaths.Count; i++)
-        {
-            if (selectedAssets[i])
+            if (GUILayout.Button("Import Selected Assets"))
             {
-                string assetPath = assetPaths[i];
-                
-                // Import the .unitypackage file into the project
-                AssetDatabase.ImportPackage(assetPath, false);
-                Debug.Log("Imported: " + assetPath);
-                
-                // Update the imported status for this asset
-                importedAssets[i] = true;
+                ImportSelectedAssets();
             }
         }
 
-        AssetDatabase.Refresh();
-    }
-
-    private void CheckImportedAssets()
-    {
-        for (int i = 0; i < assetNames.Count; i++)
+        private void ImportSelectedAssets()
         {
-            importedAssets[i] = IsAssetImported(assetNames[i]);
-        }
-    }
+            for (int i = 0; i < assetPaths.Count; i++)
+            {
+                if (selectedAssets[i])
+                {
+                    string assetPath = assetPaths[i];
+                
+                    // Import the .unitypackage file into the project
+                    AssetDatabase.ImportPackage(assetPath, false);
+                    Debug.Log("Imported: " + assetPath);
+                
+                    // Update the imported status for this asset
+                    importedAssets[i] = true;
+                }
+            }
 
-    private bool IsAssetImported(string assetName)
-    {
-        // Use AssetDatabase to check if any asset contains the name in the project's Assets folder
-        string[] guids = AssetDatabase.FindAssets(assetName, new[] { "Assets" });
+            AssetDatabase.Refresh();
+        }
+
+        private void CheckImportedAssets()
+        {
+            for (int i = 0; i < assetNames.Count; i++)
+            {
+                importedAssets[i] = IsAssetImported(assetNames[i]);
+            }
+        }
+
+        private bool IsAssetImported(string assetName)
+        {
+            // Use AssetDatabase to check if any asset contains the name in the project's Assets folder
+            string[] guids = AssetDatabase.FindAssets(assetName, new[] { "Assets" });
         
-        // If any GUID is found, the asset is considered imported
-        return guids.Length > 0;
+            // If any GUID is found, the asset is considered imported
+            return guids.Length > 0;
+        }
     }
 }

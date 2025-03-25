@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace EventButtonSystem.Runtime
+namespace fefek5.Systems.SelectableWithEventsSystem.Runtime
 {
     public class ButtonWithEvents : Button, IBeginDragHandler, IDragHandler, IEndDragHandler
     {

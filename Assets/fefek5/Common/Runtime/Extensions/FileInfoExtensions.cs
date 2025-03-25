@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 
-namespace NoReleaseDate.Common.Runtime.Extensions
+namespace fefek5.Common.Runtime.Extensions
 {
     public static class FileInfoExtensions
     {

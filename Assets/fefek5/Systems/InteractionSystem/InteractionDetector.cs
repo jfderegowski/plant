@@ -1,6 +1,6 @@
-﻿using NoReleaseDate.Plugins.DetectorSystem;
+﻿using fefek5.Systems.DetectorSystem;
 
-namespace NoReleaseDate.Plugins.InteractionSystem
+namespace fefek5.Systems.InteractionSystem
 {
     public class InteractionDetector : Detector<Interactable>
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace NoReleaseDate.Plugins.CursorSystem.Runtime
+namespace fefek5.Systems.CursorSystem.Runtime
 {
     /// <summary>
     /// Cursor settings class. It contains the cursor settings.

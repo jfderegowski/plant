@@ -1,6 +1,6 @@
-﻿using NoReleaseDate.Systems.SingletonSystem.Runtime;
+﻿using fefek5.Systems.SingletonSystem.Runtime;
 
-namespace NoReleaseDate.Variables.SaveDataVariable.Runtime.Settings
+namespace fefek5.Variables.SaveDataVariable.Runtime.Settings
 {
     internal class DefaultSaveSettings : SingletonObject<DefaultSaveSettings>
     {

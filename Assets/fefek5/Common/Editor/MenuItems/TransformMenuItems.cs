@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace NoReleaseDate.Common.Editor.MenuItems
+namespace fefek5.Common.Editor.MenuItems
 {
     public static class TransformMenuItems
     {
