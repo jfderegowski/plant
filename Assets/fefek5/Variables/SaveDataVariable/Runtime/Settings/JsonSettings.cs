@@ -21,7 +21,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime.Settings
             [SerializeField] private bool _writeGameVersion;
             [SerializeField] private bool _writeSaveTime;
 
-            private HasValue<string> _customComment = new(string.Empty);
+            private HasValue<string> _customComment = new(string.Empty, false);
             
             internal string GetComment()
             {
@@ -84,6 +84,6 @@ namespace fefek5.Variables.SaveDataVariable.Runtime.Settings
         public Formatting Formatting = Formatting.Indented;
         public CommentPosition WriteCommentPosition = CommentPosition.BeforeObject;
 
-        [SerializeField] private HasValue<SaveFileComment> _fileComment = new(new SaveFileComment());
+        [SerializeField] private HasValue<SaveFileComment> _fileComment = new(new SaveFileComment(), false);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using static System.Text.RegularExpressions.Regex;
 
 namespace fefek5.Variables.SerializableGuidVariable.Runtime
 {
@@ -7,16 +8,26 @@ namespace fefek5.Variables.SerializableGuidVariable.Runtime
     /// Represents a globally unique identifier (GUID) that is serializable with Unity and usable in game scripts.
     /// </summary>
     [Serializable]
-    public struct SerializableGuid : IEquatable<SerializableGuid>
+    public struct SerializableGuid : IEquatable<SerializableGuid>, IEquatable<Guid>, IEquatable<string>
     {
+        #region Fields
+
         [SerializeField, HideInInspector] public uint Part1;
         [SerializeField, HideInInspector] public uint Part2;
         [SerializeField, HideInInspector] public uint Part3;
         [SerializeField, HideInInspector] public uint Part4;
 
+        #endregion
+
+        #region Properties
+
         public static SerializableGuid Empty => new(0, 0, 0, 0);
         
         public bool IsEmpty => this == Empty;
+
+        #endregion
+
+        #region Constructors
 
         public SerializableGuid(uint val1, uint val2, uint val3, uint val4)
         {
@@ -29,65 +40,136 @@ namespace fefek5.Variables.SerializableGuidVariable.Runtime
         public SerializableGuid(Guid guid)
         {
             var bytes = guid.ToByteArray();
+
             Part1 = BitConverter.ToUInt32(bytes, 0);
             Part2 = BitConverter.ToUInt32(bytes, 4);
             Part3 = BitConverter.ToUInt32(bytes, 8);
             Part4 = BitConverter.ToUInt32(bytes, 12);
         }
 
-        public static SerializableGuid NewGuid() => Guid.NewGuid().ToSerializableGuid();
-
-        public static SerializableGuid FromHexString(string hexString)
+        public SerializableGuid(string hexString)
         {
-            if (hexString.Length != 32) return Empty;
-
-            return new SerializableGuid
-            (
-                Convert.ToUInt32(hexString[..8], 16),
-                Convert.ToUInt32(hexString.Substring(8, 8), 16),
-                Convert.ToUInt32(hexString.Substring(16, 8), 16),
-                Convert.ToUInt32(hexString.Substring(24, 8), 16)
-            );
+            if (IsHexString(hexString))
+            {
+                Part1 = Convert.ToUInt32(hexString[..8], 16);
+                Part2 = Convert.ToUInt32(hexString.Substring(8, 8), 16);
+                Part3 = Convert.ToUInt32(hexString.Substring(16, 8), 16);
+                Part4 = Convert.ToUInt32(hexString.Substring(24, 8), 16);
+            }
+            else Part1 = Part2 = Part3 = Part4 = 0;
         }
-        
-        public static bool TryConvertFromHexString(string hexString, out SerializableGuid guid)
-        {
-            var isValid = IsHexString(hexString);
-            
-            guid = isValid ? FromHexString(hexString) : Empty;
-            
-            return isValid;
-        }
-        
-        public static bool IsHexString(string hexString) => hexString.Length == 32;
 
-        public string ToHexString() => $"{Part1:X8}{Part2:X8}{Part3:X8}{Part4:X8}";
+        #endregion
 
-        public override string ToString() => ToHexString();
+        #region Methods
+
+        public static SerializableGuid NewGuid() => new(Guid.NewGuid());
+
+        public static SerializableGuid FromHexString(string hexString) => new(hexString);
+
+        public static bool IsHexString(string hexString) =>
+            hexString is { Length: 32 } && IsMatch(hexString, @"\A\b[0-9a-fA-F]+\b\Z");
 
         public Guid ToGuid()
         {
             var bytes = new byte[16];
-            BitConverter.GetBytes(Part1).CopyTo(bytes, 0);
-            BitConverter.GetBytes(Part2).CopyTo(bytes, 4);
-            BitConverter.GetBytes(Part3).CopyTo(bytes, 8);
-            BitConverter.GetBytes(Part4).CopyTo(bytes, 12);
+            var span = new Span<byte>(bytes);
+            
+            BitConverter.TryWriteBytes(span.Slice(0, 4), Part1);
+            BitConverter.TryWriteBytes(span.Slice(4, 4), Part2);
+            BitConverter.TryWriteBytes(span.Slice(8, 4), Part3);
+            BitConverter.TryWriteBytes(span.Slice(12, 4), Part4);
+            
             return new Guid(bytes);
         }
+        
+        #endregion
+
+        #region ToString
+
+        public override string ToString() => ToHexString();
+
+        public string ToHexString()
+        {
+            // return $"{Part1:X8}{Part2:X8}{Part3:X8}{Part4:X8}";
+            
+            Span<char> hexChars = stackalloc char[32];
+            
+            WriteUIntToHex(Part1, hexChars.Slice(0, 8));
+            WriteUIntToHex(Part2, hexChars.Slice(8, 8));
+            WriteUIntToHex(Part3, hexChars.Slice(16, 8));
+            WriteUIntToHex(Part4, hexChars.Slice(24, 8));
+            
+            return new string(hexChars);
+        }
+
+        private static void WriteUIntToHex(uint value, Span<char> destination)
+        {
+            for (var i = 7; i >= 0; i--)
+            {
+                var digit = value & 0xF;
+                destination[i] = digit < 10 ? (char)('0' + digit) : (char)('A' + digit - 10);
+                value >>= 4;
+            }
+        }
+
+        #endregion
+
+        #region Equality
 
         public bool Equals(SerializableGuid other) =>
             Part1 == other.Part1 && Part2 == other.Part2 && Part3 == other.Part3 && Part4 == other.Part4;
+        
+        public bool Equals(Guid other) => Equals(new SerializableGuid(other));
 
-        public override bool Equals(object obj) => obj is SerializableGuid guid && this.Equals(guid);
+        public bool Equals(string other) => 
+            IsHexString(other) && string.Equals(ToHexString(), other, StringComparison.OrdinalIgnoreCase);
+
+        public override bool Equals(object obj) => obj switch {
+            SerializableGuid serializableGuid => Equals(serializableGuid),
+            Guid guid => Equals(guid),
+            string str => Equals(str),
+            _ => false
+        };
+
+        #endregion
+
+        #region HashCode
 
         public override int GetHashCode() => HashCode.Combine(Part1, Part2, Part3, Part4);
 
+        #endregion
+
+        #region Implicit Conversions
+
         public static implicit operator Guid(SerializableGuid serializableGuid) => serializableGuid.ToGuid();
-        
+
         public static implicit operator SerializableGuid(Guid guid) => new(guid);
-        
+
+        #endregion
+
+        #region Operators
+
         public static bool operator ==(SerializableGuid left, SerializableGuid right) => left.Equals(right);
+
+        public static bool operator !=(SerializableGuid left, SerializableGuid right) => !left.Equals(right);
+
+        public static bool operator ==(SerializableGuid left, Guid right) => left.Equals(right);
         
-        public static bool operator !=(SerializableGuid left, SerializableGuid right) => !(left == right);
+        public static bool operator !=(SerializableGuid left, Guid right) => !left.Equals(right);
+        
+        public static bool operator ==(Guid left, SerializableGuid right) => right.Equals(left);
+        
+        public static bool operator !=(Guid left, SerializableGuid right) => !right.Equals(left);
+
+        public static bool operator ==(SerializableGuid left, string right) => left.Equals(right);
+        
+        public static bool operator !=(SerializableGuid left, string right) => !left.Equals(right);
+
+        public static bool operator ==(string left, SerializableGuid right) => right.Equals(left);
+
+        public static bool operator !=(string left, SerializableGuid right) => !right.Equals(left);
+
+        #endregion
     }
 }

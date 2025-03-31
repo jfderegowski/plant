@@ -148,34 +148,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5f4eb19768b5a4fb4c07b98119d15a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _guid:
+    Part1: 234682677
+    Part2: 1143884005
+    Part3: 2395373728
+    Part4: 1493325833
   _saveKey:
     Key:
-      Part1: 3934482964
-      Part2: 1188145628
-      Part3: 1201785016
-      Part4: 397479273
+      Part1: 870084189
+      Part2: 1215035288
+      Part3: 3366973080
+      Part4: 2761858003
     StringKey:
       value: 
       hasValue: 0
     Comment:
       value: 
       hasValue: 0
-  _saveKeyForList:
-    Key:
-      Part1: 2688372313
-      Part2: 1325529177
-      Part3: 2358134937
-      Part4: 3481530852
-    StringKey:
-      value: Bartek
-      hasValue: 1
-    Comment:
-      value: Lista
-      hasValue: 1
-  _list:
-  - aaaa
-  - bbbbb
-  - nnnnn
 --- !u!4 &590681021
 Transform:
   m_ObjectHideFlags: 0

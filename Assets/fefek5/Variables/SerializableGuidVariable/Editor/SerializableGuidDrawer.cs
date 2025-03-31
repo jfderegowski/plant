@@ -69,8 +69,10 @@ namespace fefek5.Variables.SerializableGuidVariable.Editor
             
             var hexString = EditorGUIUtility.systemCopyBuffer;
             
-            if (!SerializableGuid.TryConvertFromHexString(hexString, out var guid)) return;
-
+            if (!SerializableGuid.IsHexString(hexString)) return;
+            
+            var guid = SerializableGuid.FromHexString(hexString);
+            
             property.FindPropertyRelative(_guidParts[0]).uintValue = guid.Part1;
             property.FindPropertyRelative(_guidParts[1]).uintValue = guid.Part2;
             property.FindPropertyRelative(_guidParts[2]).uintValue = guid.Part3;

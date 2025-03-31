@@ -45,37 +45,20 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         public SaveData(SaveData saveData) => Data = new Dictionary<SaveKey, object>(saveData.Data);
 
         #endregion
-
+        
         #region Getters
 
         /// <summary>
         /// Get value from Data by StringKey
         /// </summary>
-        /// <param name="key">Key for searching in Data</param>
+        /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="defaultValue">Default value that will be returned if key is not found</param>
         /// <param name="value">The value that will be found in Data or default value</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>This instance of SaveData</returns>
-        public SaveData GetKey<T>(string key, T defaultValue, out T value)
+        public SaveData GetKey<T>(string saveKey, T defaultValue, out T value)
         {
-            if (SerializableGuid.IsHexString(key))
-                return GetKey(SerializableGuid.FromHexString(key), defaultValue, out value);
-
-            foreach (var saveKey in Data.Keys)
-            {
-                if (saveKey != key) continue;
-                
-                if (Data[saveKey] is T tValue)
-                {
-                    value = tValue;
-                    
-                    return this;
-                }
-                    
-                break;
-            }
-
-            value = defaultValue;
+            value = this[saveKey] is T tValue ? tValue : defaultValue;
 
             return this;
         }
@@ -90,21 +73,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <returns>This instance of SaveData</returns>
         public SaveData GetKey<T>(SerializableGuid key, T defaultValue, out T value)
         {
-            foreach (var saveKey in Data.Keys)
-            {
-                if (saveKey != key) continue;
-
-                if (Data[saveKey] is T tValue)
-                {
-                    value = tValue;
-                
-                    return this;
-                }
-                
-                break;
-            }
-
-            value = defaultValue;
+            value = this[key] is T tValue ? tValue : defaultValue;
 
             return this;
         }
@@ -119,13 +88,8 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <returns>This instance of SaveData</returns>
         public SaveData GetKey<T>(SaveKey key, T defaultValue, out T value)
         {
-            if (Data.TryGetValue(key, out var outValue) && outValue is T tValue)
-            {
-                value = tValue;
-                return this;
-            }
+            value = this[key] is T tValue ? tValue : defaultValue;
             
-            value = defaultValue;
             return this;
         }
         
@@ -162,17 +126,17 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <summary>
         /// Get value from Data by SerializableGuid
         /// </summary>
-        /// <param name="key">Key for searching in Data</param>
+        /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">The value that will be found in Data or default value</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>True if key is found, otherwise false</returns>
-        public bool TryGetKey<T>(SerializableGuid key, out T value)
+        public bool TryGetKey<T>(SerializableGuid saveKey, out T value)
         {
-            foreach (var saveKey in Data.Keys)
+            foreach (var key in Data.Keys)
             {
-                if (saveKey != key) continue;
+                if (key != saveKey) continue;
 
-                if (Data[saveKey] is T tValue)
+                if (Data[key] is T tValue)
                 {
                     value = tValue;
                 
@@ -190,13 +154,13 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <summary>
         /// Get value from Data by SerializableGuid
         /// </summary>
-        /// <param name="key">Key for searching in Data</param>
+        /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">The value that will be found in Data or default value</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>True if key is found, otherwise false</returns>
-        public bool TryGetKey<T>(SaveKey key, out T value)
+        public bool TryGetKey<T>(SaveKey saveKey, out T value)
         {
-            if (Data.TryGetValue(key, out var outValue) && outValue is T tValue)
+            if (Data.TryGetValue(saveKey, out var outValue) && outValue is T tValue)
             {
                 value = tValue;
                 return true;
@@ -204,6 +168,45 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
 
             value = default;
             return false;
+        }
+
+        public object this[string saveKey]
+        {
+            get
+            {
+                if (SerializableGuid.IsHexString(saveKey))
+                    return this[SerializableGuid.FromHexString(saveKey)];
+                
+                foreach (var key in Data.Keys)
+                {
+                    if (key != saveKey) continue;
+                    
+                    return Data[key];
+                }
+
+                return null;
+            }
+        }
+        
+        public object this[SerializableGuid saveKey]
+        {
+            get
+            {
+                foreach (var key in Data.Keys)
+                {
+                    if (key != saveKey) continue;
+                    
+                    return Data[key];
+                }
+
+                return null;
+            }
+        }
+        
+        public object this[SaveKey saveKey]
+        {
+            get => Data.GetValueOrDefault(saveKey);
+            set => Data[saveKey] = value;
         }
 
         #endregion
@@ -357,7 +360,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
 
         #endregion
 
-        #region Save/Load
+        #region Save | Load
         
         /// <summary>
         /// Save data to file

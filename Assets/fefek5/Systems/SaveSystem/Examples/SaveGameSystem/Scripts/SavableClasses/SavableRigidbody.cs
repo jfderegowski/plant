@@ -34,21 +34,21 @@ namespace fefek5.Systems.SaveSystem.Examples.SaveGameSystem.Scripts.SavableClass
 
         private Rigidbody _rigidbody;
 
-        [SerializeField] private SaveKey _positionSaveKey = RandomKey.WithComment("Position");
-        [SerializeField] private SaveKey _rotationSaveKey = RandomKey.WithComment("Rotation");
-        [SerializeField] private SaveKey _scaleSaveKey = RandomKey.WithComment("Scale");
-        [SerializeField] private SaveKey _massSaveKey = RandomKey.WithComment("Mass");
-        [SerializeField] private SaveKey _dragSaveKey = RandomKey.WithComment("Drag");
-        [SerializeField] private SaveKey _angularDragSaveKey = RandomKey.WithComment("AngularDrag");
-        [SerializeField] private SaveKey _automaticCenterOfMassSaveKey = RandomKey.WithComment("AutomaticCenterOfMass");
-        [SerializeField] private SaveKey _automaticTensorSaveKey = RandomKey.WithComment("AutomaticTensor");
-        [SerializeField] private SaveKey _useGravitySaveKey = RandomKey.WithComment("UseGravity");
-        [SerializeField] private SaveKey _isKinematicSaveKey = RandomKey.WithComment("IsKinematic");
-        [SerializeField] private SaveKey _interpolationSaveKey = RandomKey.WithComment("Interpolation");
-        [SerializeField] private SaveKey _collisionDetectionSaveKey = RandomKey.WithComment("CollisionDetection");
-        [SerializeField] private SaveKey _constraintsSaveKey = RandomKey.WithComment("Constraints");
-        [SerializeField] private SaveKey _layerOverrideIncludeSaveKey = RandomKey.WithComment("LayerOverrideInclude");
-        [SerializeField] private SaveKey _layerOverrideExcludeSaveKey = RandomKey.WithComment("LayerOverrideExclude");
+        [SerializeField] private SaveKey _positionSaveKey = RandomKey.SetComment("Position");
+        [SerializeField] private SaveKey _rotationSaveKey = RandomKey.SetComment("Rotation");
+        [SerializeField] private SaveKey _scaleSaveKey = RandomKey.SetComment("Scale");
+        [SerializeField] private SaveKey _massSaveKey = RandomKey.SetComment("Mass");
+        [SerializeField] private SaveKey _dragSaveKey = RandomKey.SetComment("Drag");
+        [SerializeField] private SaveKey _angularDragSaveKey = RandomKey.SetComment("AngularDrag");
+        [SerializeField] private SaveKey _automaticCenterOfMassSaveKey = RandomKey.SetComment("AutomaticCenterOfMass");
+        [SerializeField] private SaveKey _automaticTensorSaveKey = RandomKey.SetComment("AutomaticTensor");
+        [SerializeField] private SaveKey _useGravitySaveKey = RandomKey.SetComment("UseGravity");
+        [SerializeField] private SaveKey _isKinematicSaveKey = RandomKey.SetComment("IsKinematic");
+        [SerializeField] private SaveKey _interpolationSaveKey = RandomKey.SetComment("Interpolation");
+        [SerializeField] private SaveKey _collisionDetectionSaveKey = RandomKey.SetComment("CollisionDetection");
+        [SerializeField] private SaveKey _constraintsSaveKey = RandomKey.SetComment("Constraints");
+        [SerializeField] private SaveKey _layerOverrideIncludeSaveKey = RandomKey.SetComment("LayerOverrideInclude");
+        [SerializeField] private SaveKey _layerOverrideExcludeSaveKey = RandomKey.SetComment("LayerOverrideExclude");
 
         // private ClassData GetCurrentData()
         // {

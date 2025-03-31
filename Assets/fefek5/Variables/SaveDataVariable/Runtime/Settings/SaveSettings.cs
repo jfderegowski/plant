@@ -45,8 +45,8 @@ namespace fefek5.Variables.SaveDataVariable.Runtime.Settings
             set => _encryption.value = value;
         }
         
-        [SerializeField] private HasValue<int> _fileLimit = new(10);
+        [SerializeField] private HasValue<int> _fileLimit = new(10, false);
         [SerializeField] private HasValue<JsonSettings> _jsonCustomSettings = new(new JsonSettings(), true);
-        [SerializeField] private HasValue<EncryptionSettings> _encryption = new(new EncryptionSettings());
+        [SerializeField] private HasValue<EncryptionSettings> _encryption = new(new EncryptionSettings(), false);
     }
 }

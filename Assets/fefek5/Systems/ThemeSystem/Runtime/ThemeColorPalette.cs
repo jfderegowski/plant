@@ -3,6 +3,14 @@ using UnityEngine;
 
 namespace fefek5.Systems.ThemeSystem.Runtime
 {
+    
+    public static class EditorPaths
+    {
+        public const string FEFEK5 = "fefek5";
+        public const string SYSTEMS = "Systems";
+        public const string THEME_SYSTEM = "ThemeSystem";
+    }
+    
     /// <summary>
     /// Color Palette for the UI Theme System
     /// </summary>

@@ -1,4 +1,5 @@
-﻿using fefek5.Systems.ThemeSystem.Runtime;
+﻿using fefek5.Common.Runtime.Helpers;
+using fefek5.Systems.ThemeSystem.Runtime;
 using TMPro;
 using UnityEditor;
 using UnityEngine.UI;
@@ -10,14 +11,14 @@ namespace fefek5.Systems.ThemeSystem.Editor
         /// <summary>
         /// Open the SingletonsCollection in the inspector
         /// </summary>
-        [MenuItem("Tools/No Release Date/Theme System/Open Theme Manager")]
+        [MenuItem(MenuPaths.fefek5.Systems.ThemeSystem.PATH + "/Open Theme Manager")]
         private static void OpenThemeManager() => EditorUtility.OpenPropertyEditor(ThemeManager.Instance);
         
         /// <summary>
         /// Add a ThemeControllerImage to the Image component
         /// </summary>
         /// <param name="command"></param>
-        [MenuItem("CONTEXT/Image/Add Theme Controller")]
+        [MenuItem(MenuPaths.CONTEXT.Image.PATH + "/Add Theme Controller")]
         private static void AddUIThemeController(MenuCommand command)
         {
             var image = (Image)command.context;
@@ -30,7 +31,7 @@ namespace fefek5.Systems.ThemeSystem.Editor
         /// Add a ThemeControllerText to the TextMeshProUGUI component
         /// </summary>
         /// <param name="command"></param>
-        [MenuItem("CONTEXT/TMP_Text/Add Theme Controller")]
+        [MenuItem(MenuPaths.CONTEXT.TMP_Text.PATH + "/Add Theme Controller")]
         private static void AddTMPThemeController(MenuCommand command)
         {
             var text = (TextMeshProUGUI)command.context;

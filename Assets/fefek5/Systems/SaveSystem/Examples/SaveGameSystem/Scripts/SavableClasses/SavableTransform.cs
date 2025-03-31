@@ -7,9 +7,9 @@ namespace fefek5.Systems.SaveSystem.Examples.SaveGameSystem.Scripts.SavableClass
 {
     public class SavableTransform : SavableMonoBehaviour
     {
-        [SerializeField] private HasValue<SaveKey> _positionSaveKey = new(SaveKey.RandomKey.WithComment("Position"), true);
-        [SerializeField] private HasValue<SaveKey> _rotationSaveKey = new(SaveKey.RandomKey.WithComment("Rotation"), true);
-        [SerializeField] private HasValue<SaveKey> _scaleSaveKey = new(SaveKey.RandomKey.WithComment("Scale"));
+        [SerializeField] private HasValue<SaveKey> _positionSaveKey = new(SaveKey.RandomKey.SetComment("Position"), true);
+        [SerializeField] private HasValue<SaveKey> _rotationSaveKey = new(SaveKey.RandomKey.SetComment("Rotation"), true);
+        [SerializeField] private HasValue<SaveKey> _scaleSaveKey = new(SaveKey.RandomKey.SetComment("Scale"), false);
 
         private SerializableVector3 CurrentPosition => Transform.position;
         private SerializableQuaternion CurrentRotation => Transform.rotation;

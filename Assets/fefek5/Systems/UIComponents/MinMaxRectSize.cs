@@ -123,18 +123,18 @@ namespace fefek5.Systems.UIComponents
         [SerializeField] private bool _ignoreLayout;
 
         [Header("Width")]
-        [SerializeField] private HasValue<float> _minWidth = new(-1);
-        [SerializeField] private HasValue<float> _maxWidth = new(-1);
+        [SerializeField] private HasValue<float> _minWidth = new(-1, false);
+        [SerializeField] private HasValue<float> _maxWidth = new(-1, false);
 
         [Header("Height")]
-        [SerializeField] private HasValue<float> _minHeight = new(-1);
-        [SerializeField] private HasValue<float> _maxHeight = new(-1);
+        [SerializeField] private HasValue<float> _minHeight = new(-1, false);
+        [SerializeField] private HasValue<float> _maxHeight = new(-1, false);
         
         [Header("Fit Mode")]
         [SerializeField] private FitMode _horizontalFit = FitMode.Unconstrained;
         [SerializeField] private FitMode _verticalFit = FitMode.Unconstrained;
 
-        [SerializeField, Space] private HasValue<int> _layoutPriority = new(1);
+        [SerializeField, Space] private HasValue<int> _layoutPriority = new(1, false);
 
         private ILayoutElement[] _layoutElements;
         private RectTransform _rectTransform;
