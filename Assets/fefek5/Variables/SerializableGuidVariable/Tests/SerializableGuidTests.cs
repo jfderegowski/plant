@@ -62,13 +62,11 @@ namespace fefek5.Variables.SerializableGuidVariable.Tests
         }
 
         [Test]
-        public void SerializableGuidConstructorFromInvalidHexStringShouldSetPartsToZero()
+        public void SerializableGuidConstructorFromInvalidHexStringShouldThrowException()
         {
-            var serializableGuid = new SerializableGuid("invalidHexString");
-            Assert.AreEqual(0u, serializableGuid.Part1);
-            Assert.AreEqual(0u, serializableGuid.Part2);
-            Assert.AreEqual(0u, serializableGuid.Part3);
-            Assert.AreEqual(0u, serializableGuid.Part4);
+            Assert.Throws(typeof(ArgumentException), () => {
+                var serializableGuid = new SerializableGuid("invalidHexString");
+            });
         }
 
         [Test]
@@ -90,10 +88,11 @@ namespace fefek5.Variables.SerializableGuidVariable.Tests
         }
 
         [Test]
-        public void SerializableGuidFromHexStringShouldReturnEmptyForInvalidHexString()
+        public void SerializableGuidFromHexStringShouldThrowException()
         {
-            var serializableGuid = SerializableGuid.FromHexString("invalidHexString");
-            Assert.AreEqual(SerializableGuid.Empty, serializableGuid);
+            Assert.Throws(typeof(ArgumentException), () => {
+                var serializableGuid = SerializableGuid.FromHexString("invalidHexString");
+            });
         }
 
         [Test]

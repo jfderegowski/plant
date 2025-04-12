@@ -20,13 +20,14 @@ MonoBehaviour:
       value:
         TypeNameHandling: 0
         Formatting: 1
+        WriteComments: 1
         WriteCommentPosition: 0
         _fileComment:
           value:
             _title: SaveData Variable made by fefek5
             _writeGameVersion: 1
             _writeSaveTime: 1
-          hasValue: 1
+          hasValue: 0
       hasValue: 1
     _encryption:
       value:

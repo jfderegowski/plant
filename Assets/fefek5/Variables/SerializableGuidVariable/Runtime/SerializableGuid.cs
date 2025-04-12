@@ -49,14 +49,13 @@ namespace fefek5.Variables.SerializableGuidVariable.Runtime
 
         public SerializableGuid(string hexString)
         {
-            if (IsHexString(hexString))
-            {
-                Part1 = Convert.ToUInt32(hexString[..8], 16);
-                Part2 = Convert.ToUInt32(hexString.Substring(8, 8), 16);
-                Part3 = Convert.ToUInt32(hexString.Substring(16, 8), 16);
-                Part4 = Convert.ToUInt32(hexString.Substring(24, 8), 16);
-            }
-            else Part1 = Part2 = Part3 = Part4 = 0;
+            if (!IsHexString(hexString))
+                throw new ArgumentException("Invalid hex string.", nameof(hexString));
+            
+            Part1 = Convert.ToUInt32(hexString[..8], 16);
+            Part2 = Convert.ToUInt32(hexString.Substring(8, 8), 16);
+            Part3 = Convert.ToUInt32(hexString.Substring(16, 8), 16);
+            Part4 = Convert.ToUInt32(hexString.Substring(24, 8), 16);
         }
 
         #endregion
@@ -103,12 +102,13 @@ namespace fefek5.Variables.SerializableGuidVariable.Runtime
             return new string(hexChars);
         }
 
+        private static readonly char[] _hexDigits = "0123456789ABCDEF".ToCharArray();
         private static void WriteUIntToHex(uint value, Span<char> destination)
         {
             for (var i = 7; i >= 0; i--)
             {
                 var digit = value & 0xF;
-                destination[i] = digit < 10 ? (char)('0' + digit) : (char)('A' + digit - 10);
+                destination[i] = _hexDigits[digit];
                 value >>= 4;
             }
         }

@@ -21,13 +21,13 @@ namespace fefek5.Variables.SaveDataVariable.Samples
                 .SetKey(SaveKey.RandomKey, 3)
                 .SetKey(SaveKey.RandomKey, Vector3Int.zero)
                 .SetKey(SaveKey.RandomKey, Vector3Int.zero);
-
+        
             var key1 = SaveKey.RandomKey.SetComment("This is for key 1");
             betterSaveData.GetKey(key1, new SaveData(), out var betterSaveData1);
             betterSaveData1.SetKey(SaveKey.RandomKey, 4)
                 .SetKey(SaveKey.RandomKey, 5)
                 .SetKey(SaveKey.RandomKey, 6);
-
+        
             var key2 = SaveKey.RandomKey.SetComment("This is for key 2");
             betterSaveData1.GetKey(key2, new SaveData(), out var betterSaveData2);
             betterSaveData2.SetKey(SaveKey.RandomKey.SetComment("This is 7"), 7)
@@ -43,16 +43,10 @@ namespace fefek5.Variables.SaveDataVariable.Samples
                 .SetKey(SaveKey.RandomKey, Vector3Int.one)
                 .SetKey(SaveKey.RandomKey, Vector3Int.zero)
                 .SetKey(SaveKey.RandomKey, "After BetterSaveData");
-
-            var saveSettings = new SaveSettings() {
-                JsonCustomSettings = new JsonSettings() {
-                    FileComment = "Dawidek",
-                }
-            };
             
-            betterSaveData.Save(Application.persistentDataPath + "/betterSaveData.sav", saveSettings);
+            betterSaveData.Save(Application.persistentDataPath + "/betterSaveData.sav");
         }
-
+        
         [Button]
         public void TestLoad()
         {

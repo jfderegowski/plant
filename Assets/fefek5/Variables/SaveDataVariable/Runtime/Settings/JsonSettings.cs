@@ -1,5 +1,7 @@
 ﻿using System;
+using fefek5.Common.Runtime.Extensions;
 using fefek5.Variables.HasValueVariable.Runtime;
+using fefek5.Variables.SaveDataVariable.Runtime.Converters;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -21,12 +23,12 @@ namespace fefek5.Variables.SaveDataVariable.Runtime.Settings
             [SerializeField] private bool _writeGameVersion;
             [SerializeField] private bool _writeSaveTime;
 
-            private HasValue<string> _customComment = new(string.Empty, false);
+            private HasValue<string> _fileComment = new(string.Empty, false);
             
-            internal string GetComment()
+            internal string GetFileComment()
             {
-                if (_customComment.hasValue)
-                    return _customComment.value;
+                if (_fileComment.hasValue)
+                    return _fileComment.value;
                 
                 var comment = string.Empty;
                 
@@ -45,17 +47,29 @@ namespace fefek5.Variables.SaveDataVariable.Runtime.Settings
                 return comment;
             }
 
-            internal void SetCustomComment(string comment)
+            internal void SetFileComment(string comment)
             {
-                if (string.IsNullOrEmpty(comment) || string.IsNullOrWhiteSpace(comment))
+                if (comment.IsBlank())
                 {
-                    _customComment.hasValue = false;
+                    _fileComment.hasValue = false;
                     return;
                 }
 
-                _customComment.hasValue = true;
-                _customComment.value = comment;
+                _fileComment.hasValue = true;
+                _fileComment.value = comment;
             }
+        }
+        
+        public bool HasWriteComment
+        {
+            get => _writeComment.hasValue;
+            set => _writeComment.hasValue = value;
+        }
+        
+        public CommentPosition WriteComment
+        {
+            get => _writeComment.value;
+            set => _writeComment.value = value;
         }
 
         public bool HasFileComment
@@ -66,8 +80,8 @@ namespace fefek5.Variables.SaveDataVariable.Runtime.Settings
 
         public string FileComment
         {
-            get => _fileComment.value.GetComment();
-            set => _fileComment.value.SetCustomComment(value);
+            get => _fileComment.value.GetFileComment();
+            set => _fileComment.value.SetFileComment(value);
         }
 
         public JsonSerializerSettings JsonSerializerSettings => new() {
@@ -76,14 +90,16 @@ namespace fefek5.Variables.SaveDataVariable.Runtime.Settings
             Converters = Converters
         };
 
-        private JsonConverter[] Converters => new JsonConverter[] {
-            new SaveData.JsonConverter(this)
-        };
+        private JsonConverter[] Converters => new JsonConverter[] { new SaveDataConverter(this) };
 
+        [Header("Json")]
         public TypeNameHandling TypeNameHandling = TypeNameHandling.None;
         public Formatting Formatting = Formatting.Indented;
-        public CommentPosition WriteCommentPosition = CommentPosition.BeforeObject;
+        
+        [Header("Comments")]
+        [SerializeField] private HasValue<CommentPosition> _writeComment = new(CommentPosition.BeforeObject, true);
 
+        [Header("File Comment")]
         [SerializeField] private HasValue<SaveFileComment> _fileComment = new(new SaveFileComment(), false);
     }
 }
