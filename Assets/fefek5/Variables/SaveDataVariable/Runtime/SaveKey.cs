@@ -52,6 +52,24 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         #region Constructors
 
         /// <summary>
+        /// Constructor for the SaveKey. It will create a new key with the given Guid.
+        /// </summary>
+        /// <param name="key">The key for the save data. It is a Guid.</param>
+        public SaveKey(Guid key)
+        {
+            Key = key.ToSerializableGuid();
+            StringKey = new HasValue<string>(string.Empty, false);
+            Comment = new HasValue<string>(string.Empty, false);
+        }
+
+        public SaveKey(Guid key, string comment)
+        {
+            Key = key.ToSerializableGuid();
+            StringKey = new HasValue<string>(string.Empty, false);
+            Comment = new HasValue<string>(comment, !comment.IsBlank());
+        }
+
+        /// <summary>
         /// Constructor for the SaveKey. It will create a new key with the given SerializableGuid.
         /// </summary>
         /// <param name="key">The key for the save data. It is a SerializableGuid.</param>
@@ -271,8 +289,8 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// </summary>
         /// <returns>The hash code for the key.</returns>
         public override int GetHashCode() => StringKey.hasValue 
-            ? HashCode.Combine(true, StringKey.value) 
-            : HashCode.Combine(false, Key);
+            ? HashCode.Combine(true, StringKey.value.GetHashCode())
+            : HashCode.Combine(false, Key.GetHashCode());
 
         #endregion
         
@@ -369,6 +387,13 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="key">The key for the save data. It is a SerializableGuid.</param>
         /// <returns>The SaveKey.</returns>
         public static implicit operator SaveKey(SerializableGuid key) => new(key);
+        
+        /// <summary>
+        /// Implicit conversion from SerializableGuid to SaveKey.
+        /// </summary>
+        /// <param name="key">The key for the save data. It is a SerializableGuid.</param>
+        /// <returns></returns>
+        public static implicit operator SaveKey(Guid key) => new(key);
         
         /// <summary>
         /// Implicit conversion from string to SaveKey.

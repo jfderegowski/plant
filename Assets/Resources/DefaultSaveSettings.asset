@@ -18,10 +18,11 @@ MonoBehaviour:
       hasValue: 0
     _jsonCustomSettings:
       value:
-        TypeNameHandling: 0
+        TypeNameHandling: 3
         Formatting: 1
-        WriteComments: 1
-        WriteCommentPosition: 0
+        _writeComment:
+          value: 0
+          hasValue: 1
         _fileComment:
           value:
             _title: SaveData Variable made by fefek5

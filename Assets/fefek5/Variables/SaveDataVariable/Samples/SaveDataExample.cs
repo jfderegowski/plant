@@ -1,3 +1,4 @@
+using System;
 using fefek5.Variables.SaveDataVariable.Runtime;
 using fefek5.Variables.SaveDataVariable.Runtime.Settings;
 using fefek5.Variables.SerializableGuidVariable.Runtime;
@@ -56,6 +57,45 @@ namespace fefek5.Variables.SaveDataVariable.Samples
             return;
             
             void OnAfterLoad() => betterSaveData.Save(Application.persistentDataPath + "/betterSaveDataLoad.sav");
+        }
+
+        [Button]
+        public void TestArrayGetters()
+        {
+            var key1 = "StringKey";
+            var key2 = SerializableGuid.NewGuid().ToHexString();
+            var key3 = Guid.NewGuid();
+            var key4 = SaveKey.RandomKey;
+            
+            var saveData = new SaveData();
+
+            saveData[key1] = 1;
+            saveData[key2] = 2;
+            saveData[key3] = 3;
+            saveData[key4] = 4;
+            
+            var path = Application.persistentDataPath + "/testSaveDataThisGetters.sav";
+            
+            saveData.Save(path);
+            
+            saveData.Load(path, OnLoad);
+            
+            return;
+            
+            void OnLoad()
+            {
+                Debug.Log($"Key1 - " +
+                          $"Value : {saveData[key1]}");
+                
+                Debug.Log($"Key2 - " +
+                          $"Value : {saveData[key2]}");
+                
+                Debug.Log($"Key3 - " +
+                          $"Value : {saveData[key3]}");
+                
+                Debug.Log($"Key4 - " +
+                          $"Value : {saveData[key4]}");
+            }
         }
     }
 }

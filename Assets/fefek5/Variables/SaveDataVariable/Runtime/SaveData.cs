@@ -50,6 +50,47 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
 
         /// <summary>
         /// Get value from Data by StringKey
+        /// If key not found, default value will be returned but the key will be NOT added to Data
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        /// <returns>Value that will be found in Data or default value</returns>
+        public T GetKey<T>(string saveKey, T defaultValue) => Data.GetAs(saveKey, defaultValue);
+
+        /// <summary>
+        /// Get value from Data by StringKey
+        /// If key not found, default value will be returned but the key will be NOT added to Data
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        /// <returns>Value that will be found in Data or default value</returns>
+        public T GetKey<T>(Guid saveKey, T defaultValue) => Data.GetAs(saveKey, defaultValue);
+        
+        /// <summary>
+        /// Get value from Data by StringKey
+        /// If key not found, default value will be returned but the key will be NOT added to Data
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        /// <returns>Value that will be found in Data or default value</returns>
+        public T GetKey<T>(SerializableGuid saveKey, T defaultValue) => Data.GetAs(saveKey, defaultValue);
+
+        /// <summary>
+        /// Get value from Data by StringKey
+        /// If key not found, default value will be returned but the key will be NOT added to Data
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        /// <returns>Value that will be found in Data or default value</returns>
+        public T GetKey<T>(SaveKey saveKey, T defaultValue) => Data.GetAs(saveKey, defaultValue);
+
+        /// <summary>
+        /// Get value from Data by StringKey
+        /// If key not found, default value will be out but the key will be NOT added to Data
         /// </summary>
         /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="defaultValue">Default value that will be returned if key is not found</param>
@@ -58,73 +99,78 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <returns>This instance of SaveData</returns>
         public SaveData GetKey<T>(string saveKey, T defaultValue, out T value)
         {
-            value = this[saveKey] is T tValue ? tValue : defaultValue;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Get value from Data by SerializableGuid
-        /// </summary>
-        /// <param name="key">Key for searching in Data</param>
-        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
-        /// <param name="value">The value that will be found in Data or default value</param>
-        /// <typeparam name="T">Type of value</typeparam>
-        /// <returns>This instance of SaveData</returns>
-        public SaveData GetKey<T>(SerializableGuid key, T defaultValue, out T value)
-        {
-            value = this[key] is T tValue ? tValue : defaultValue;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Get value from Data by SaveKey
-        /// </summary>
-        /// <param name="key">Key for searching in Data</param>
-        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
-        /// <param name="value">The value that will be found in Data or default value</param>
-        /// <typeparam name="T">Type of value</typeparam>
-        /// <returns>This instance of SaveData</returns>
-        public SaveData GetKey<T>(SaveKey key, T defaultValue, out T value)
-        {
-            value = this[key] is T tValue ? tValue : defaultValue;
-            
+            value = Data.GetAs(saveKey, defaultValue);
             return this;
         }
         
         /// <summary>
         /// Get value from Data by StringKey
+        /// If key not found, default value will be out but the key will be NOT added to Data
         /// </summary>
-        /// <param name="key">Key for searching in Data</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
+        /// <param name="value">The value that will be found in Data or default value</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        /// <returns>This instance of SaveData</returns>
+        public SaveData GetKey<T>(Guid saveKey, T defaultValue, out T value)
+        {
+            value = Data.GetAs(saveKey, defaultValue);
+            return this;
+        }
+        
+        /// <summary>
+        /// Get value from Data by SerializableGuid
+        /// If key not found, default value will be out but the key will be NOT added to Data
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
+        /// <param name="value">The value that will be found in Data or default value</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        /// <returns>This instance of SaveData</returns>
+        public SaveData GetKey<T>(SerializableGuid saveKey, T defaultValue, out T value)
+        {
+            value = Data.GetAs(saveKey, defaultValue);
+            return this;
+        }
+        
+        /// <summary>
+        /// Get value from Data by SaveKey
+        /// If key not found, default value will be out but the key will be NOT added to Data
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
+        /// <param name="value">The value that will be found in Data or default value</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        /// <returns>This instance of SaveData</returns>
+        public SaveData GetKey<T>(SaveKey saveKey, T defaultValue, out T value)
+        {
+            value = Data.GetAs(saveKey, defaultValue);
+            return this;
+        }
+        
+        /// <summary>
+        /// Get value from Data by StringKey
+        /// If key not found, default value will be out but the key will be NOT added to Data
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">The value that will be found in Data or default value</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>True if key is found, otherwise false</returns>
-        public bool TryGetKey<T>(string key, out T value)
+        public bool TryGetKey<T>(string saveKey, out T value)
         {
-            if (SerializableGuid.IsHexString(key))
-                return TryGetKey(SerializableGuid.FromHexString(key), out value);
-
-            foreach (var saveKey in Data.Keys)
+            if (IsKeyExist(saveKey))
             {
-                if (saveKey != key) continue;
-
-                if (Data[saveKey] is T tValue)
-                {
-                    value = tValue;
-                
-                    return true;
-                }
-                
-                break;
+                value = Data.GetAs(saveKey, default(T));
+                return true;
             }
-            
+
             value = default;
             return false;
         }
         
         /// <summary>
         /// Get value from Data by SerializableGuid
+        /// If key not found, default value will be out but the key will be NOT added to Data
         /// </summary>
         /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">The value that will be found in Data or default value</param>
@@ -132,27 +178,19 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <returns>True if key is found, otherwise false</returns>
         public bool TryGetKey<T>(SerializableGuid saveKey, out T value)
         {
-            foreach (var key in Data.Keys)
+            if (IsKeyExist(saveKey))
             {
-                if (key != saveKey) continue;
-
-                if (Data[key] is T tValue)
-                {
-                    value = tValue;
-                
-                    return true;
-                }
-                
-                break;
+                value = Data.GetAs(saveKey, default(T));
+                return true;
             }
 
             value = default;
-
             return false;
         }
         
         /// <summary>
         /// Get value from Data by SerializableGuid
+        /// If key not found, default value will be out but the key will be NOT added to Data
         /// </summary>
         /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">The value that will be found in Data or default value</param>
@@ -160,9 +198,9 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <returns>True if key is found, otherwise false</returns>
         public bool TryGetKey<T>(SaveKey saveKey, out T value)
         {
-            if (Data.TryGetValue(saveKey, out var outValue) && outValue is T tValue)
+            if (IsKeyExist(saveKey))
             {
-                value = tValue;
+                value = Data.GetAs(saveKey, default(T));
                 return true;
             }
 
@@ -170,42 +208,43 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
             return false;
         }
 
-        public object this[string saveKey]
-        {
-            get
-            {
-                if (SerializableGuid.IsHexString(saveKey))
-                    return this[SerializableGuid.FromHexString(saveKey)];
-                
-                foreach (var key in Data.Keys)
-                {
-                    if (key != saveKey) continue;
-                    
-                    return Data[key];
-                }
-
-                return null;
-            }
-        }
-        
-        public object this[SerializableGuid saveKey]
-        {
-            get
-            {
-                foreach (var key in Data.Keys)
-                {
-                    if (key != saveKey) continue;
-                    
-                    return Data[key];
-                }
-
-                return null;
-            }
-        }
-        
+        /// <summary>
+        /// Get value from Data by StringKey
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
         public object this[SaveKey saveKey]
         {
-            get => Data.GetValueOrDefault(saveKey);
+            get => Data[saveKey];
+            set => Data[saveKey] = value;
+        }
+        
+        /// <summary>
+        /// Get value from Data by StringKey
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        public object this[Guid saveKey]
+        {
+            get => Data[saveKey];
+            set => Data[saveKey] = value;
+        }
+        
+        /// <summary>
+        /// Get value from Data by StringKey
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        public object this[SerializableGuid saveKey]
+        {
+            get => Data[saveKey];
+            set => Data[saveKey] = value;
+        }
+        
+        /// <summary>
+        /// Get value from Data by StringKey
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        public object this[string saveKey]
+        {
+            get => Data[saveKey];
             set => Data[saveKey] = value;
         }
 
@@ -214,68 +253,50 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         #region Setters
 
         /// <summary>
-        /// Set value to Data by StringKey
+        /// Set value to Data by string
         /// </summary>
-        /// <param name="key">Key for searching in Data</param>
+        /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">Value to be set</param>
         /// <returns>This instance of SaveData</returns>
-        public SaveData SetKey(string key, object value)
+        public SaveData SetKey(string saveKey, object value)
         {
-            if (SerializableGuid.IsHexString(key))
-                return SetKey(SerializableGuid.FromHexString(key), value);
-
-            var foundedSaveKey = SaveKey.Empty;
-            foreach (var saveKey in Data.Keys)
-            {
-                if (saveKey != key) continue;
-                foundedSaveKey = saveKey;
-                break;
-            }
-
-            if (foundedSaveKey.IsEmpty()) 
-                foundedSaveKey = new SaveKey(key);
-            
-            Data[foundedSaveKey] = value;
-
+            Data[saveKey] = value;
             return this;
         }
         
         /// <summary>
-        /// Set value to Data by StringKey
+        /// Set value to Data by SerializableGuid
         /// </summary>
-        /// <param name="key">Key for searching in Data</param>
+        /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">Value to be set</param>
         /// <returns>This instance of SaveData</returns>
-        public SaveData SetKey(SerializableGuid key, object value)
+        public SaveData SetKey(SerializableGuid saveKey, object value)
         {
-            var foundedSaveKey = SaveKey.Empty;
-            
-            foreach (var saveKey in Data.Keys)
-            {
-                if (saveKey != key) continue;
-                
-                foundedSaveKey = saveKey;
-                break;
-            }
-
-            if (foundedSaveKey.IsEmpty()) 
-                foundedSaveKey = new SaveKey(key);
-            
-            Data[foundedSaveKey] = value;
-
+            Data[saveKey] = value;
             return this;
         }
         
         /// <summary>
-        /// Set value to Data by StringKey
+        /// Set value to Data by Guid
         /// </summary>
-        /// <param name="key">Key for searching in Data</param>
+        /// <param name="saveKey"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public SaveData SetKey(Guid saveKey, object value)
+        {
+            Data[saveKey] = value;
+            return this;
+        }
+        
+        /// <summary>
+        /// Set value to Data by SaveKey
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">Value to be set</param>
         /// <returns>This instance of SaveData</returns>
-        public SaveData SetKey(SaveKey key, object value)
+        public SaveData SetKey(SaveKey saveKey, object value)
         {
-            Data[key] = value;
-
+            Data[saveKey] = value;
             return this;
         }
 
@@ -286,77 +307,66 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <summary>
         /// Check if key exist in Data
         /// </summary>
-        /// <param name="key">Key for searching in Data</param>
+        /// <param name="saveKey">Key for searching in Data</param>
         /// <returns>True if key exist, otherwise false</returns>
-        public bool IsKeyExist(string key)
-        {
-            if (SerializableGuid.IsHexString(key))
-                return IsKeyExist(SerializableGuid.FromHexString(key));
-
-            foreach (var k in Data.Keys)
-                if (k.StringKey == key) return true;
-            
-            return false;
-        }
+        public bool IsKeyExist(string saveKey) => Data.ContainsKey(saveKey);
 
         /// <summary>
         /// Check if key exist in Data
         /// </summary>
-        /// <param name="key">Key for searching in Data</param>
+        /// <param name="saveKey">Key for searching in Data</param>
         /// <returns>True if key exist, otherwise false</returns>
-        public bool IsKeyExist(SerializableGuid key)
-        {
-            foreach (var k in Data.Keys)
-                if (k.Key == key) return true;
-            
-            return false;
-        }
-
+        public bool IsKeyExist(SerializableGuid saveKey) => Data.ContainsKey(saveKey);
+        
+        /// <summary>
+        /// Check if saveKey exist in Data
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <returns>True if key exist, otherwise false</returns>
+        public bool IsKeyExist(Guid saveKey) => Data.ContainsKey(saveKey);
+        
         /// <summary>
         /// Check if key exist in Data
         /// </summary>
-        /// <param name="key">Key for searching in Data</param>
+        /// <param name="saveKey">Key for searching in Data</param>
         /// <returns>True if key exist, otherwise false</returns>
-        public bool IsKeyExist(SaveKey key) => Data.ContainsKey(key);
+        public bool IsKeyExist(SaveKey saveKey) => Data.ContainsKey(saveKey);
         
         /// <summary>
         /// Remove key from Data
         /// </summary>
-        /// <param name="key">Key to be removed</param>
-        public void RemoveKey(string key)
+        /// <param name="saveKey">Key to be removed</param>
+        public void RemoveKey(string saveKey)
         {
-            if (SerializableGuid.IsHexString(key))
-                RemoveKey(SerializableGuid.FromHexString(key));
-            else
-                foreach (var saveKey in Data.Keys)
-                {
-                    if (saveKey.StringKey != key) continue;
-                    
-                    Data.Remove(saveKey);
-                    break;
-                }
+            if (IsKeyExist(saveKey)) Data.Remove(saveKey);
         }
         
         /// <summary>
         /// Remove key from Data
         /// </summary>
-        /// <param name="key">Key to be removed</param>
-        public void RemoveKey(SerializableGuid key)
+        /// <param name="saveKey">Key to be removed</param>
+        public void RemoveKey(SerializableGuid saveKey)
         {
-            foreach (var saveKey in Data.Keys)
-            {
-                if (saveKey.Key != key) continue;
-                
-                Data.Remove(saveKey);
-                break;
-            }
+            if (IsKeyExist(saveKey)) Data.Remove(saveKey);
         }
         
         /// <summary>
-        /// Remove key from Data
+        /// Remove saveKey from Data
         /// </summary>
-        /// <param name="key">Key to be removed</param>
-        public void RemoveKey(SaveKey key) => Data.Remove(key);
+        /// <param name="saveKey">Key to be removed</param>
+        public void RemoveKey(Guid saveKey)
+        {
+            if (IsKeyExist(saveKey)) Data.Remove(saveKey);
+        }
+        
+        /// <summary>
+        /// Remove saveKey from Data
+        /// </summary>
+        /// <param name="saveKey">Key to be removed</param>
+        public void RemoveKey(SaveKey saveKey)
+        {
+            if (IsKeyExist(saveKey)) Data.Remove(saveKey);
+        }
 
         #endregion
 
