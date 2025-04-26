@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using fefek5.Common.Runtime.Extensions;
 using fefek5.Systems.EncryptionSystem;
-using fefek5.Variables.HasValueVariable.Runtime;
 using fefek5.Variables.SaveDataVariable.Runtime.Settings;
 using fefek5.Variables.SerializableGuidVariable.Runtime;
 using Newtonsoft.Json;
@@ -18,12 +17,16 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
     [Serializable]
     public class SaveData
     {
+        #region Properties
+
         /// <summary>
         /// Data that will be serialized to save file
         /// [SaveKey] - Is a key that contains string key and SerializableGuid key
         /// [object] - Is a value that will be saved
         /// </summary>
         public Dictionary<SaveKey, object> Data { get; private set; }
+
+        #endregion
 
         #region Constructors
 
@@ -49,7 +52,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         #region Getters
 
         /// <summary>
-        /// Get value from Data by StringKey
+        /// Get value from Data by string
         /// If key not found, default value will be returned but the key will be NOT added to Data
         /// </summary>
         /// <param name="saveKey">Key for searching in Data</param>
@@ -59,7 +62,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         public T GetKey<T>(string saveKey, T defaultValue) => Data.GetAs(saveKey, defaultValue);
 
         /// <summary>
-        /// Get value from Data by StringKey
+        /// Get value from Data by Guid
         /// If key not found, default value will be returned but the key will be NOT added to Data
         /// </summary>
         /// <param name="saveKey">Key for searching in Data</param>
@@ -69,7 +72,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         public T GetKey<T>(Guid saveKey, T defaultValue) => Data.GetAs(saveKey, defaultValue);
         
         /// <summary>
-        /// Get value from Data by StringKey
+        /// Get value from Data by SerializableGuid
         /// If key not found, default value will be returned but the key will be NOT added to Data
         /// </summary>
         /// <param name="saveKey">Key for searching in Data</param>
@@ -79,7 +82,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         public T GetKey<T>(SerializableGuid saveKey, T defaultValue) => Data.GetAs(saveKey, defaultValue);
 
         /// <summary>
-        /// Get value from Data by StringKey
+        /// Get value from Data by SaveKey
         /// If key not found, default value will be returned but the key will be NOT added to Data
         /// </summary>
         /// <param name="saveKey">Key for searching in Data</param>
@@ -89,7 +92,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         public T GetKey<T>(SaveKey saveKey, T defaultValue) => Data.GetAs(saveKey, defaultValue);
 
         /// <summary>
-        /// Get value from Data by StringKey
+        /// Get value from Data by string
         /// If key not found, default value will be out but the key will be NOT added to Data
         /// </summary>
         /// <param name="saveKey">Key for searching in Data</param>
@@ -104,7 +107,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         }
         
         /// <summary>
-        /// Get value from Data by StringKey
+        /// Get value from Data by Guid
         /// If key not found, default value will be out but the key will be NOT added to Data
         /// </summary>
         /// <param name="saveKey">Key for searching in Data</param>
@@ -149,7 +152,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         }
         
         /// <summary>
-        /// Get value from Data by StringKey
+        /// Get value from Data by string
         /// If key not found, default value will be out but the key will be NOT added to Data
         /// </summary>
         /// <param name="saveKey">Key for searching in Data</param>
@@ -157,6 +160,25 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>True if key is found, otherwise false</returns>
         public bool TryGetKey<T>(string saveKey, out T value)
+        {
+            if (IsKeyExist(saveKey))
+            {
+                value = Data.GetAs(saveKey, default(T));
+                return true;
+            }
+
+            value = default;
+            return false;
+        }
+        
+        /// <summary>
+        /// Get value from Data by Guid
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="value">The value that will be found in Data or default value</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        /// <returns>True if key is found, otherwise false</returns>
+        public bool TryGetKey<T>(Guid saveKey, out T value)
         {
             if (IsKeyExist(saveKey))
             {
@@ -206,46 +228,6 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
 
             value = default;
             return false;
-        }
-
-        /// <summary>
-        /// Get value from Data by StringKey
-        /// </summary>
-        /// <param name="saveKey">Key for searching in Data</param>
-        public object this[SaveKey saveKey]
-        {
-            get => Data[saveKey];
-            set => Data[saveKey] = value;
-        }
-        
-        /// <summary>
-        /// Get value from Data by StringKey
-        /// </summary>
-        /// <param name="saveKey">Key for searching in Data</param>
-        public object this[Guid saveKey]
-        {
-            get => Data[saveKey];
-            set => Data[saveKey] = value;
-        }
-        
-        /// <summary>
-        /// Get value from Data by StringKey
-        /// </summary>
-        /// <param name="saveKey">Key for searching in Data</param>
-        public object this[SerializableGuid saveKey]
-        {
-            get => Data[saveKey];
-            set => Data[saveKey] = value;
-        }
-        
-        /// <summary>
-        /// Get value from Data by StringKey
-        /// </summary>
-        /// <param name="saveKey">Key for searching in Data</param>
-        public object this[string saveKey]
-        {
-            get => Data[saveKey];
-            set => Data[saveKey] = value;
         }
 
         #endregion
@@ -302,6 +284,50 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
 
         #endregion
 
+        #region Indexers
+
+        /// <summary>
+        /// Get value from Data by string
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        public object this[string saveKey]
+        {
+            get => Data[saveKey];
+            set => Data[saveKey] = value;
+        }
+
+        /// <summary>
+        /// Get value from Data by Guid
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        public object this[Guid saveKey]
+        {
+            get => Data[saveKey];
+            set => Data[saveKey] = value;
+        }
+
+        /// <summary>
+        /// Get value from Data by SerializableGuid
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        public object this[SerializableGuid saveKey]
+        {
+            get => Data[saveKey];
+            set => Data[saveKey] = value;
+        }
+
+        /// <summary>
+        /// Get value from Data by SaveKey
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        public object this[SaveKey saveKey]
+        {
+            get => Data[saveKey];
+            set => Data[saveKey] = value;
+        }
+
+        #endregion
+
         #region Helpers
         
         /// <summary>
@@ -331,7 +357,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="saveKey">Key for searching in Data</param>
         /// <returns>True if key exist, otherwise false</returns>
         public bool IsKeyExist(SaveKey saveKey) => Data.ContainsKey(saveKey);
-        
+
         /// <summary>
         /// Remove key from Data
         /// </summary>
@@ -340,7 +366,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         {
             if (IsKeyExist(saveKey)) Data.Remove(saveKey);
         }
-        
+
         /// <summary>
         /// Remove key from Data
         /// </summary>
