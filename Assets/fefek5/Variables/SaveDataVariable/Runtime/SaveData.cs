@@ -230,8 +230,6 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
             return false;
         }
 
-        #region GetKeyFromFile
-
         /// <summary>
         /// Get value from file by string
         /// Note! That this method is expensive (Deserialize Json in every call) and should be used only when needed
@@ -383,8 +381,6 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
                 onGetKey?.Invoke(value);
             }
         }
-
-        #endregion
         
         #endregion
 
@@ -401,19 +397,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
             Data[saveKey] = value;
             return this;
         }
-        
-        /// <summary>
-        /// Set value to Data by SerializableGuid
-        /// </summary>
-        /// <param name="saveKey">Key for searching in Data</param>
-        /// <param name="value">Value to be set</param>
-        /// <returns>This instance of SaveData</returns>
-        public SaveData SetKey(SerializableGuid saveKey, object value)
-        {
-            Data[saveKey] = value;
-            return this;
-        }
-        
+
         /// <summary>
         /// Set value to Data by Guid
         /// </summary>
@@ -425,7 +409,19 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
             Data[saveKey] = value;
             return this;
         }
-        
+
+        /// <summary>
+        /// Set value to Data by SerializableGuid
+        /// </summary>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="value">Value to be set</param>
+        /// <returns>This instance of SaveData</returns>
+        public SaveData SetKey(SerializableGuid saveKey, object value)
+        {
+            Data[saveKey] = value;
+            return this;
+        }
+
         /// <summary>
         /// Set value to Data by SaveKey
         /// </summary>
@@ -436,6 +432,150 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         {
             Data[saveKey] = value;
             return this;
+        }
+        
+        /// <summary>
+        /// Set value to Data by string
+        /// Note! That this method is expensive (Deserialize and Serialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="value">Value to be set</param>
+        /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        public void SetKey(string filePath, string saveKey, object value, Action onSetKey) => 
+            SetKey(filePath, SaveSettings.Default, saveKey, value, onSetKey);
+
+        /// <summary>
+        /// Set value to Data by string
+        /// Note! That this method is expensive (Deserialize and Serialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveSettings">Settings for saving</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="value">Value to be set</param>
+        /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        public void SetKey(string filePath, SaveSettings saveSettings, string saveKey, object value, Action onSetKey)
+        {
+            var tmpSaveData = new SaveData();
+            
+            tmpSaveData.Load(filePath, saveSettings, OnLoad);
+            
+            return;
+
+            void OnLoad()
+            {
+                tmpSaveData.SetKey(saveKey, value);
+                
+                tmpSaveData.Save(filePath, saveSettings, onSetKey);
+            }
+        }
+        
+        /// <summary>
+        /// Set value to Data by Guid
+        /// Note! That this method is expensive (Deserialize and Serialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="value">Value to be set</param>
+        /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        public void SetKey(string filePath, Guid saveKey, object value, Action onSetKey) => 
+            SetKey(filePath, SaveSettings.Default, saveKey, value, onSetKey);
+        
+        /// <summary>
+        /// Set value to Data by Guid
+        /// Note! That this method is expensive (Deserialize and Serialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveSettings">Settings for saving</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="value">Value to be set</param>
+        /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        public void SetKey(string filePath, SaveSettings saveSettings, Guid saveKey, object value, Action onSetKey)
+        {
+            var tmpSaveData = new SaveData();
+            
+            tmpSaveData.Load(filePath, saveSettings, OnLoad);
+            
+            return;
+
+            void OnLoad()
+            {
+                tmpSaveData.SetKey(saveKey, value);
+                
+                tmpSaveData.Save(filePath, saveSettings, onSetKey);
+            }
+        }
+        
+        /// <summary>
+        /// Set value to Data by SerializableGuid
+        /// Note! That this method is expensive (Deserialize and Serialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="value">Value to be set</param>
+        /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        public void SetKey(string filePath, SerializableGuid saveKey, object value, Action onSetKey) => 
+            SetKey(filePath, SaveSettings.Default, saveKey, value, onSetKey);
+        
+        /// <summary>
+        /// Set value to Data by SerializableGuid
+        /// Note! That this method is expensive (Deserialize and Serialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveSettings">Settings for saving</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="value">Value to be set</param>
+        /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        public void SetKey(string filePath, SaveSettings saveSettings, SerializableGuid saveKey, object value, Action onSetKey)
+        {
+            var tmpSaveData = new SaveData();
+            
+            tmpSaveData.Load(filePath, saveSettings, OnLoad);
+            
+            return;
+
+            void OnLoad()
+            {
+                tmpSaveData.SetKey(saveKey, value);
+                
+                tmpSaveData.Save(filePath, saveSettings, onSetKey);
+            }
+        }
+        
+        /// <summary>
+        /// Set value to Data by SaveKey
+        /// Note! That this method is expensive (Deserialize and Serialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="value">Value to be set</param>
+        /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        public void SetKey(string filePath, SaveKey saveKey, object value, Action onSetKey) => 
+            SetKey(filePath, SaveSettings.Default, saveKey, value, onSetKey);
+        
+        /// <summary>
+        /// Set value to Data by SaveKey
+        /// Note! That this method is expensive (Deserialize and Serialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveSettings">Settings for saving</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="value">Value to be set</param>
+        /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        public void SetKey(string filePath, SaveSettings saveSettings, SaveKey saveKey, object value, Action onSetKey)
+        {
+            var tmpSaveData = new SaveData();
+            
+            tmpSaveData.Load(filePath, saveSettings, OnLoad);
+            
+            return;
+
+            void OnLoad()
+            {
+                tmpSaveData.SetKey(saveKey, value);
+                
+                tmpSaveData.Save(filePath, saveSettings, onSetKey);
+            }
         }
 
         #endregion
