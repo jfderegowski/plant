@@ -230,6 +230,162 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
             return false;
         }
 
+        #region GetKeyFromFile
+
+        /// <summary>
+        /// Get value from file by string
+        /// Note! That this method is expensive (Deserialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
+        /// <param name="onGetKey">Action that will be invoked after load completion</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        public void GetKey<T>(string filePath, string saveKey, T defaultValue, Action<T> onGetKey) => 
+            GetKey(filePath, SaveSettings.Default, saveKey, defaultValue, onGetKey);
+
+        /// <summary>
+        /// Get value from file by string
+        /// Note! That this method is expensive (Deserialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveSettings">Settings for loading</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
+        /// <param name="onGetKey">Action that will be invoked after load completion</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        public void GetKey<T>(string filePath, SaveSettings saveSettings, string saveKey, T defaultValue, Action<T> onGetKey)
+        {
+            var tmpSaveData = new SaveData();
+            
+            tmpSaveData.Load(filePath, saveSettings, OnLoad);
+            
+            return;
+
+            void OnLoad()
+            {
+                tmpSaveData.GetKey(saveKey, defaultValue, out var value);
+                
+                onGetKey?.Invoke(value);
+            }
+        }
+        
+        /// <summary>
+        /// Get value from file by Guid
+        /// Note! That this method is expensive (Deserialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
+        /// <param name="onGetKey">Action that will be invoked after load completion</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        public void GetKey<T>(string filePath, Guid saveKey, T defaultValue, Action<T> onGetKey) => 
+            GetKey(filePath, SaveSettings.Default, saveKey, defaultValue, onGetKey);
+        
+        /// <summary>
+        /// Get value from file by Guid
+        /// Note! That this method is expensive (Deserialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveSettings">Settings for loading</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
+        /// <param name="onGetKey">Action that will be invoked after load completion</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        public void GetKey<T>(string filePath, SaveSettings saveSettings, Guid saveKey, T defaultValue, Action<T> onGetKey)
+        {
+            var tmpSaveData = new SaveData();
+            
+            tmpSaveData.Load(filePath, saveSettings, OnLoad);
+            
+            return;
+
+            void OnLoad()
+            {
+                tmpSaveData.GetKey(saveKey, defaultValue, out var value);
+                
+                onGetKey?.Invoke(value);
+            }
+        }
+        
+        /// <summary>
+        /// Get value from file by SerializableGuid
+        /// Note! That this method is expensive (Deserialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
+        /// <param name="onGetKey">Action that will be invoked after load completion</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        public void GetKey<T>(string filePath, SerializableGuid saveKey, T defaultValue, Action<T> onGetKey) => 
+            GetKey(filePath, SaveSettings.Default, saveKey, defaultValue, onGetKey);
+        
+        /// <summary>
+        /// Get value from file by SerializableGuid
+        /// Note! That this method is expensive (Deserialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveSettings">Settings for loading</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
+        /// <param name="onGetKey">Action that will be invoked after load completion</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        public void GetKey<T>(string filePath, SaveSettings saveSettings, SerializableGuid saveKey, T defaultValue, Action<T> onGetKey)
+        {
+            var tmpSaveData = new SaveData();
+            
+            tmpSaveData.Load(filePath, saveSettings, OnLoad);
+            
+            return;
+
+            void OnLoad()
+            {
+                tmpSaveData.GetKey(saveKey, defaultValue, out var value);
+                
+                onGetKey?.Invoke(value);
+            }
+        }
+        
+        /// <summary>
+        /// Get value from file by SaveKey
+        /// Note! That this method is expensive (Deserialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
+        /// <param name="onGetKey">Action that will be invoked after load completion</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        public void GetKey<T>(string filePath, SaveKey saveKey, T defaultValue, Action<T> onGetKey) => 
+            GetKey(filePath, SaveSettings.Default, saveKey, defaultValue, onGetKey);
+        
+        /// <summary>
+        /// Get value from file by SaveKey
+        /// Note! That this method is expensive (Deserialize Json in every call) and should be used only when needed
+        /// </summary>
+        /// <param name="filePath">The path to the file</param>
+        /// <param name="saveSettings">Settings for loading</param>
+        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="defaultValue">Default value that will be returned if key is not found</param>
+        /// <param name="onGetKey">Action that will be invoked after load completion</param>
+        /// <typeparam name="T">Type of value</typeparam>
+        public void GetKey<T>(string filePath, SaveSettings saveSettings, SaveKey saveKey, T defaultValue, Action<T> onGetKey)
+        {
+            var tmpSaveData = new SaveData();
+            
+            tmpSaveData.Load(filePath, saveSettings, OnLoad);
+            
+            return;
+
+            void OnLoad()
+            {
+                tmpSaveData.GetKey(saveKey, defaultValue, out var value);
+                
+                onGetKey?.Invoke(value);
+            }
+        }
+
+        #endregion
+        
         #endregion
 
         #region Setters
@@ -396,7 +552,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
 
         #endregion
 
-        #region Save | Load
+        #region Save
         
         /// <summary>
         /// Save data to file
@@ -453,7 +609,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
 
                     // Delete excess files
                     if (saveSettings.UsedFileLimit)
-                        DeleteExcessFiles(directoryPath, saveSettings.FileLimit);
+                        DeleteExcessFiles(directoryPath, "*sav", saveSettings.FileLimit);
 
                     Debug.Log($"[SAVE-DATA] Saved to file: {path} "
                               + $"{directoryPath.ToFileLink("[Folder]")} "
@@ -473,7 +629,11 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
                 Debug.LogError(e);
             }
         }
-        
+
+        #endregion
+
+        #region Load
+
         /// <summary>
         /// Load data from file
         /// </summary>
@@ -523,8 +683,8 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
                         jsonText = jsonText.Decrypt(password, salt, initVector);
                     }
 
-                    var saveData = !string.IsNullOrEmpty(jsonText)
-                        ? JsonConvert.DeserializeObject<SaveData>(jsonText, jsonSerializerSettings)
+                    var saveData = !jsonText.IsBlank()
+                        ? FromJson(jsonText, jsonSerializerSettings)
                         : new SaveData();
 
                     Data = saveData.Data;
@@ -551,19 +711,22 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         #endregion
 
         #region File Management
-        
+
         /// <summary>
         /// Delete excess files in folder
         /// </summary>
         /// <param name="folderPath">Path to folder</param>
+        /// <param name="searchPattern">Search pattern for files (for example: *.sav)</param>
         /// <param name="fileLimit">Limit of files in folder</param>
-        public static void DeleteExcessFiles(string folderPath, int fileLimit)
+        public static void DeleteExcessFiles(string folderPath, string searchPattern, int fileLimit)
         {
             if (fileLimit <= 0) return;
 
-            var saveFiles = GetSaveFiles(folderPath).SortOldestFirst().ToArray();
+            var saveFiles = GetFiles(folderPath, searchPattern).SortOldestFirst().ToArray();
             var filesToDelete = saveFiles.Length - fileLimit;
 
+            if (filesToDelete <= 0) return;
+            
             for (var i = 0; i < filesToDelete; i++)
                 saveFiles[i].Delete();
         }
@@ -572,10 +735,11 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// Get save files from folder
         /// </summary>
         /// <param name="folderPath">Path to folder</param>
+        /// <param name="searchPattern"></param>
         /// <returns>Array of save files</returns>
-        public static FileInfo[] GetSaveFiles(string folderPath) =>
-            Directory.Exists(folderPath)
-                ? new DirectoryInfo(folderPath).GetFiles("*.sav", SearchOption.AllDirectories)
+        public static FileInfo[] GetFiles(string folderPath, string searchPattern) =>
+            !folderPath.IsBlank() && !searchPattern.IsBlank() && Directory.Exists(folderPath)
+                ? new DirectoryInfo(folderPath).GetFiles(searchPattern, SearchOption.AllDirectories)
                 : null;
 
         #endregion
@@ -612,6 +776,47 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <returns>Json string</returns>
         public string ToJson(JsonSerializerSettings jsonSerializerSettings) =>
             JsonConvert.SerializeObject(new SaveData(this), jsonSerializerSettings);
+
+        #endregion
+
+        #region FromJson
+
+        /// <summary>
+        /// Convert Json string to SaveData
+        /// </summary>
+        /// <param name="json">Json string</param>
+        /// <returns>SaveData</returns>
+        public SaveData FromJson(string json) => FromJson(json, SaveSettings.Default);
+        
+        /// <summary>
+        /// Convert Json string to SaveData
+        /// </summary>
+        /// <param name="jsonString">Json string</param>
+        /// <param name="saveSettings">Settings for deserialization</param>
+        /// <returns>SaveData</returns>
+        public SaveData FromJson(string jsonString, SaveSettings saveSettings) =>
+            saveSettings.UseJsonCustomSettings
+                ? FromJson(jsonString, saveSettings.JsonCustomSettings)
+                : FromJson(jsonString, new JsonSerializerSettings());
+
+        /// <summary>
+        /// Convert Json string to SaveData
+        /// </summary>
+        /// <param name="jsonString">Json string</param>
+        /// <param name="jsonSettings">Settings for deserialization</param>
+        /// <returns>SaveData</returns>
+        public SaveData FromJson(string jsonString, JsonSettings jsonSettings) =>
+            FromJson(jsonString, jsonSettings.JsonSerializerSettings);
+            
+        
+        /// <summary>
+        /// Convert Json string to SaveData
+        /// </summary>
+        /// <param name="jsonString">Json string</param>
+        /// <param name="jsonSerializerSettings">Settings for deserialization</param>
+        /// <returns>SaveData</returns>
+        public SaveData FromJson(string jsonString, JsonSerializerSettings jsonSerializerSettings) => 
+            JsonConvert.DeserializeObject<SaveData>(jsonString, jsonSerializerSettings);
 
         #endregion
     }

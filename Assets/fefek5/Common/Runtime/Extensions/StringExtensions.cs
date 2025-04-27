@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace fefek5.Common.Runtime.Extensions
@@ -7,25 +8,28 @@ namespace fefek5.Common.Runtime.Extensions
     public static class StringExtensions
     {
         /// <summary>
+        /// Checks if a string contains null, empty or white space
+        /// </summary>
+        /// <param name="val">Text</param>
+        /// <returns>True if the string is null, empty or white space</returns>
+        public static bool IsBlank([NotNullWhen(false)] this string val) =>
+            val.IsNullOrWhiteSpace() || val.IsNullOrEmpty();
+
+        /// <summary>
         /// Checks if a string is Null or white space
         /// </summary>
         /// <param name="val">Text</param>
         /// <returns>True if the string is null or white space</returns>
-        public static bool IsNullOrWhiteSpace(this string val) => string.IsNullOrWhiteSpace(val);
+        public static bool IsNullOrWhiteSpace([NotNullWhen(false)] this string val) => 
+            string.IsNullOrWhiteSpace(val);
 
         /// <summary>
         /// Checks if a string is Null or empty
         /// </summary>
         /// <param name="value">Text</param>
         /// <returns>True if the string is null or empty</returns>
-        public static bool IsNullOrEmpty(this string value) => string.IsNullOrEmpty(value);
-
-        /// <summary>
-        /// Checks if a string contains null, empty or white space
-        /// </summary>
-        /// <param name="val">Text</param>
-        /// <returns>True if the string is null, empty or white space</returns>
-        public static bool IsBlank(this string val) => val.IsNullOrWhiteSpace() || val.IsNullOrEmpty();
+        public static bool IsNullOrEmpty([NotNullWhen(false)] this string value) => 
+            string.IsNullOrEmpty(value);
 
         /// <summary>
         /// Checks if a string is null and returns an empty string if it is
