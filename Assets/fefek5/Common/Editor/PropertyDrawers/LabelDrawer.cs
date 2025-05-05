@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace fefek5.Common.Editor.PropertyDrawers
 {
-    [CustomPropertyDrawer(typeof(LabelAttribute))]
+    [CustomPropertyDrawer(typeof(LabelAttribute), true)]
     public class LabelDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)

@@ -1,101 +1,136 @@
 using System;
+using System.Collections.Generic;
 using fefek5.Variables.SaveDataVariable.Runtime;
-using fefek5.Variables.SaveDataVariable.Runtime.Settings;
-using fefek5.Variables.SerializableGuidVariable.Runtime;
-using Sirenix.OdinInspector;
+using fefek5.Variables.SaveDataVariable.Runtime.Serializable;
 using UnityEngine;
 
 namespace fefek5.Variables.SaveDataVariable.Samples
 {
+    [ExecuteAlways]
     public class SaveDataExample : MonoBehaviour
     {
-        [SerializeField] private SerializableGuid _guid = SerializableGuid.NewGuid();
+        #region NestedTypes
         
-        [SerializeField] private SaveKey _saveKey = SaveKey.RandomKey;
-        
-        [Button]
-        public void TestSave()
+        [Serializable]
+        public struct ExampleStruct
         {
-            var betterSaveData = new SaveData();
-            betterSaveData.SetKey(SaveKey.RandomKey, 1)
-                .SetKey(SaveKey.RandomKey.SetComment("This is 2"), 2)
-                .SetKey(SaveKey.RandomKey, 3)
-                .SetKey(SaveKey.RandomKey, Vector3Int.zero)
-                .SetKey(SaveKey.RandomKey, Vector3Int.zero);
-        
-            var key1 = SaveKey.RandomKey.SetComment("This is for key 1");
-            betterSaveData.GetKey(key1, new SaveData(), out var betterSaveData1);
-            betterSaveData1.SetKey(SaveKey.RandomKey, 4)
-                .SetKey(SaveKey.RandomKey, 5)
-                .SetKey(SaveKey.RandomKey, 6);
-        
-            var key2 = SaveKey.RandomKey.SetComment("This is for key 2");
-            betterSaveData1.GetKey(key2, new SaveData(), out var betterSaveData2);
-            betterSaveData2.SetKey(SaveKey.RandomKey.SetComment("This is 7"), 7)
-                .SetKey(SaveKey.RandomKey.SetComment("This is 8"), 8)
-                .SetKey(SaveKey.RandomKey, 9)
-                .SetKey(SaveKey.RandomKey, Vector3Int.one);
-            
-            betterSaveData1.SetKey(key2, betterSaveData2);
-            betterSaveData.SetKey(key1, betterSaveData1)
-                .SetKey(SaveKey.RandomKey, 10)
-                .SetKey(SaveKey.RandomKey, 11)
-                .SetKey(SaveKey.RandomKey, 12)
-                .SetKey(SaveKey.RandomKey, Vector3Int.one)
-                .SetKey(SaveKey.RandomKey, Vector3Int.zero)
-                .SetKey(SaveKey.RandomKey, "After BetterSaveData");
-            
-            betterSaveData.Save(Application.persistentDataPath + "/betterSaveData.sav");
+            public string ExampleString;
+            public int ExampleInt;
+            public float ExampleFloat;
+            public bool ExampleBool;
+            public Vector3 ExampleVector3;
+            public Quaternion ExampleQuaternion;
+            public Color ExampleColor;
+            public Vector2 ExampleVector2;
+            public Vector4 ExampleVector4;
         }
         
-        [Button]
-        public void TestLoad()
+        private enum ExampleEnum
         {
-            var betterSaveData = new SaveData();
-            betterSaveData.Load(Application.persistentDataPath + "/betterSaveData.sav", onLoad: OnAfterLoad);
-            
-            return;
-            
-            void OnAfterLoad() => betterSaveData.Save(Application.persistentDataPath + "/betterSaveDataLoad.sav");
+            ExampleOption1,
+            ExampleOption2,
+            ExampleOption3
+        }
+        
+        [Flags]
+        private enum ExampleEnumFlags
+        {
+            ExampleOption1 = 1 << 0,
+            ExampleOption2 = 1 << 1,
+            ExampleOption3 = 1 << 2,
         }
 
-        [Button]
-        public void TestArrayGetters()
-        {
-            var key1 = "StringKey";
-            var key2 = SerializableGuid.NewGuid().ToHexString();
-            var key3 = Guid.NewGuid();
-            var key4 = SaveKey.RandomKey;
-            
-            var saveData = new SaveData();
+        #endregion
+        
+        public string SaveFilePath => $"{Application.persistentDataPath}/{_saveFilePath}";
+        
+        [SerializeField] private SaveData _saveData;
+        
+        [Tooltip("{Application.persistentDataPath}/{_saveFilePath}")]
+        [SerializeField] private string _saveFilePath = "ExampleSaveData.sav";
 
-            saveData[key1] = 1;
-            saveData[key2] = 2;
-            saveData[key3] = 3;
-            saveData[key4] = 4;
+        [SerializeField] private ExampleStruct _exampleStruct = new() {
+            ExampleString = "ExampleString",
+            ExampleInt = 1,
+            ExampleFloat = 1.1f,
+            ExampleBool = true,
+            ExampleVector3 = Vector3.one,
+            ExampleQuaternion = Quaternion.identity,
+            ExampleColor = Color.white,
+            ExampleVector2 = Vector2.one,
+            ExampleVector4 = Vector4.one
+        };
+        [SerializeField] private ExampleEnum _exampleEnum = ExampleEnum.ExampleOption1;
+        [SerializeField] private ExampleEnumFlags _exampleEnumFlags = ExampleEnumFlags.ExampleOption1;
+        [SerializeField] private string _exampleString = "ExampleString";
+        [SerializeField] private int _exampleInt = 1;
+        [SerializeField] private float _exampleFloat = 1.1f;
+        [SerializeField] private bool _exampleBool = true;
+        [SerializeField] private Vector3 _exampleVector3 = Vector3.one;
+        [SerializeField] private Quaternion _exampleQuaternion = Quaternion.identity;
+        [SerializeField] private Color _exampleColor = Color.yellow;
+        [SerializeField] private Vector2 _exampleVector2 = Vector2.one;
+        [SerializeField] private Vector4 _exampleVector4 = Vector4.one;
+        [SerializeField] private List<string> _exampleList = new() { "Daniela", "have", "a dog" };
+        [SerializeField] private Transform _exampleTransform;
+
+        private void Reset()
+        {
+            _exampleTransform = transform;
+        }
+
+        private void OnValidate()
+        {
+            if (!_exampleTransform) _exampleTransform = transform;
+        }
+
+        [ContextMenu("Save")]
+        public void Save()
+        {
+            _saveData
+                .SetKey("ExampleStruct", _exampleStruct)
+                .SetKey("ExampleEnum", _exampleEnum)
+                .SetKey("ExampleEnumFlags", _exampleEnumFlags)
+                .SetKey("ExampleString", _exampleString)
+                .SetKey("ExampleInt", _exampleInt)
+                .SetKey("ExampleFloat", _exampleFloat)
+                .SetKey("ExampleBool", _exampleBool)
+                .SetKey("ExampleVector3", _exampleVector3)
+                .SetKey("ExampleQuaternion", _exampleQuaternion)
+                .SetKey("ExampleColor", _exampleColor)
+                .SetKey("ExampleVector2", _exampleVector2)
+                .SetKey("ExampleVector4", _exampleVector4)
+                .SetKey("ExampleList", _exampleList)
+                .SetKey("ExampleTransform", _exampleTransform);
             
-            var path = Application.persistentDataPath + "/testSaveDataThisGetters.sav";
+            _saveData.Save(SaveFilePath);
+        }
+
+        [ContextMenu("Load")]
+        public void Load()
+        {
+            _saveData.Load(SaveFilePath, SetValues);
+        }
+
+        private void SetValues()
+        {
+            _saveData
+                .GetKey("ExampleStruct", new ExampleStruct(), out _exampleStruct)
+                .GetKey("ExampleEnum", ExampleEnum.ExampleOption1, out _exampleEnum)
+                .GetKey("ExampleEnumFlags", ExampleEnumFlags.ExampleOption1, out _exampleEnumFlags)
+                .GetKey("ExampleString", string.Empty, out _exampleString)
+                .GetKey("ExampleInt", 0, out _exampleInt)
+                .GetKey("ExampleFloat", 0f, out _exampleFloat)
+                .GetKey("ExampleBool", false, out _exampleBool)
+                .GetKey("ExampleVector3", Vector3.zero, out _exampleVector3)
+                .GetKey("ExampleQuaternion", Quaternion.identity, out _exampleQuaternion)
+                .GetKey("ExampleColor", Color.white, out _exampleColor)
+                .GetKey("ExampleVector2", Vector2.zero, out _exampleVector2)
+                .GetKey("ExampleVector4", Vector4.zero, out _exampleVector4)
+                .GetKey("ExampleList", new List<string>(), out _exampleList)
+                .GetKey("ExampleTransform", _exampleTransform.ToSerializeTransform(), out var serializeTransform);
             
-            saveData.Save(path);
-            
-            saveData.Load(path, OnLoad);
-            
-            return;
-            
-            void OnLoad()
-            {
-                Debug.Log($"Key1 - " +
-                          $"Value : {saveData[key1]}");
-                
-                Debug.Log($"Key2 - " +
-                          $"Value : {saveData[key2]}");
-                
-                Debug.Log($"Key3 - " +
-                          $"Value : {saveData[key3]}");
-                
-                Debug.Log($"Key4 - " +
-                          $"Value : {saveData[key4]}");
-            }
+            _exampleTransform.FromSerializeTransform(serializeTransform);
         }
     }
 }

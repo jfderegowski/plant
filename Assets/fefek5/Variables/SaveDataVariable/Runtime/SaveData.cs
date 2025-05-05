@@ -392,6 +392,17 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">Value to be set</param>
         /// <returns>This instance of SaveData</returns>
+        /// <example>Example of setting current position to <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private string _saveKey;
+        ///  
+        /// private void SetCurrentPosition()
+        /// {
+        ///     _saveData.SetKey(_saveKey, transform.position);
+        /// }
+        /// </code>
+        /// </example>
         public SaveData SetKey(string saveKey, object value)
         {
             Data[saveKey] = value;
@@ -403,7 +414,18 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// </summary>
         /// <param name="saveKey"></param>
         /// <param name="value"></param>
-        /// <returns></returns>
+        /// <returns>This instance of SaveData</returns>
+        /// <example>Example of setting current position to <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private Guid _saveKey;
+        ///  
+        /// private void SetCurrentPosition()
+        /// {
+        ///     _saveData.SetKey(_saveKey, transform.position);
+        /// }
+        /// </code>
+        /// </example>
         public SaveData SetKey(Guid saveKey, object value)
         {
             Data[saveKey] = value;
@@ -416,6 +438,17 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">Value to be set</param>
         /// <returns>This instance of SaveData</returns>
+        /// <example>Example of setting current position to <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SerializableGuid _saveKey;
+        ///  
+        /// private void SetCurrentPosition()
+        /// {
+        ///     _saveData.SetKey(_saveKey, transform.position);
+        /// }
+        /// </code>
+        /// </example>
         public SaveData SetKey(SerializableGuid saveKey, object value)
         {
             Data[saveKey] = value;
@@ -428,6 +461,17 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">Value to be set</param>
         /// <returns>This instance of SaveData</returns>
+        /// <example>Example of setting current position to <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SaveKey _saveKey;
+        ///  
+        /// private void SetCurrentPosition()
+        /// {
+        ///     _saveData.SetKey(_saveKey, transform.position);
+        /// }
+        /// </code>
+        /// </example>
         public SaveData SetKey(SaveKey saveKey, object value)
         {
             Data[saveKey] = value;
@@ -442,6 +486,23 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">Value to be set</param>
         /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        /// <example>Example of setting current position to <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private string _saveKey;
+        /// private string _saveFilePath;
+        ///  
+        /// private void SetCurrentPosition()
+        /// {
+        ///     _saveData.SetKey(_saveFilePath, _saveKey, transform.position, OnSetKey);
+        /// }
+        ///  
+        /// private void OnSetKey()
+        /// {
+        ///     Debug.Log("[Alert] Position saved");
+        /// }
+        /// </code>
+        /// </example>
         public void SetKey(string filePath, string saveKey, object value, Action onSetKey) => 
             SetKey(filePath, SaveSettings.Default, saveKey, value, onSetKey);
 
@@ -454,6 +515,24 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">Value to be set</param>
         /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        /// <example>Example of setting current position to <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private string _saveKey;
+        /// private string _saveFilePath;
+        /// private SaveSettings _saveSettings
+        ///  
+        /// private void SetCurrentPosition()
+        /// {
+        ///     _saveData.SetKey(_saveFilePath, _saveSettings, _saveKey, transform.position, OnSetKey);
+        /// }
+        ///  
+        /// private void OnSetKey()
+        /// {
+        ///     Debug.Log("[Alert] Position saved");
+        /// }
+        /// </code>
+        /// </example>
         public void SetKey(string filePath, SaveSettings saveSettings, string saveKey, object value, Action onSetKey)
         {
             var tmpSaveData = new SaveData();
@@ -475,9 +554,26 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// Note! That this method is expensive (Deserialize and Serialize Json in every call) and should be used only when needed
         /// </summary>
         /// <param name="filePath">The path to the file</param>
-        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="saveKey"><see cref="Guid"/> Save key for searching in Data</param>
         /// <param name="value">Value to be set</param>
         /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        /// <example>Example of setting current position to <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private Guid _saveKey;
+        /// private string _saveFilePath;
+        ///  
+        /// private void SetCurrentPosition()
+        /// {
+        ///     _saveData.SetKey(_saveFilePath, _saveKey, transform.position, OnSetKey);
+        /// }
+        ///  
+        /// private void OnSetKey()
+        /// {
+        ///     Debug.Log("[Alert] Position saved");
+        /// }
+        /// </code>
+        /// </example>
         public void SetKey(string filePath, Guid saveKey, object value, Action onSetKey) => 
             SetKey(filePath, SaveSettings.Default, saveKey, value, onSetKey);
         
@@ -490,6 +586,24 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">Value to be set</param>
         /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        /// <example>Example of setting current position to <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private Guid _saveKey;
+        /// private string _saveFilePath;
+        /// private SaveSettings _saveSettings
+        ///  
+        /// private void SetCurrentPosition()
+        /// {
+        ///     _saveData.SetKey(_saveFilePath, _saveSettings, _saveKey, transform.position, OnSetKey);
+        /// }
+        ///  
+        /// private void OnSetKey()
+        /// {
+        ///     Debug.Log("[Alert] Position saved");
+        /// }
+        /// </code>
+        /// </example>
         public void SetKey(string filePath, SaveSettings saveSettings, Guid saveKey, object value, Action onSetKey)
         {
             var tmpSaveData = new SaveData();
@@ -511,9 +625,26 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// Note! That this method is expensive (Deserialize and Serialize Json in every call) and should be used only when needed
         /// </summary>
         /// <param name="filePath">The path to the file</param>
-        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="saveKey"><see cref="SerializableGuid"/> Save key for searching in Data</param>
         /// <param name="value">Value to be set</param>
-        /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        /// <param name="onSetKey"><see cref="Action"/> Callback that will be invoked after save completion</param>
+        /// <example>Example of setting current position to <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SerializableGuid _saveKey;
+        /// private string _saveFilePath;
+        ///  
+        /// private void SetCurrentPosition()
+        /// {
+        ///     _saveData.SetKey(_saveFilePath, _saveKey, transform.position, OnSetKey);
+        /// }
+        ///  
+        /// private void OnSetKey()
+        /// {
+        ///     Debug.Log("[Alert] Position saved");
+        /// }
+        /// </code>
+        /// </example>
         public void SetKey(string filePath, SerializableGuid saveKey, object value, Action onSetKey) => 
             SetKey(filePath, SaveSettings.Default, saveKey, value, onSetKey);
         
@@ -526,6 +657,24 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">Value to be set</param>
         /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        /// <example>Example of setting current position to <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SerializableGuid _saveKey;
+        /// private string _saveFilePath;
+        /// private SaveSettings _saveSettings
+        ///  
+        /// private void SetCurrentPosition()
+        /// {
+        ///     _saveData.SetKey(_saveFilePath, _saveSettings, _saveKey, transform.position, OnSetKey);
+        /// }
+        ///  
+        /// private void OnSetKey()
+        /// {
+        ///     Debug.Log("[Alert] Position saved");
+        /// }
+        /// </code>
+        /// </example>
         public void SetKey(string filePath, SaveSettings saveSettings, SerializableGuid saveKey, object value, Action onSetKey)
         {
             var tmpSaveData = new SaveData();
@@ -547,9 +696,26 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// Note! That this method is expensive (Deserialize and Serialize Json in every call) and should be used only when needed
         /// </summary>
         /// <param name="filePath">The path to the file</param>
-        /// <param name="saveKey">Key for searching in Data</param>
+        /// <param name="saveKey"><see cref="SaveKey"/> Save key for searching in Data</param>
         /// <param name="value">Value to be set</param>
-        /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        /// <param name="onSetKey"><see cref="Action"/> Callback that will be invoked after save completion</param>
+        /// <example>Example of setting current position to <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SaveKey _saveKey;
+        /// private string _saveFilePath;
+        ///  
+        /// private void SetCurrentPosition()
+        /// {
+        ///     _saveData.SetKey(_saveFilePath, _saveKey, transform.position, OnSetKey);
+        /// }
+        ///  
+        /// private void OnSetKey()
+        /// {
+        ///     Debug.Log("[Alert] Position saved");
+        /// }
+        /// </code>
+        /// </example>
         public void SetKey(string filePath, SaveKey saveKey, object value, Action onSetKey) => 
             SetKey(filePath, SaveSettings.Default, saveKey, value, onSetKey);
         
@@ -562,6 +728,24 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="saveKey">Key for searching in Data</param>
         /// <param name="value">Value to be set</param>
         /// <param name="onSetKey">Callback that will be invoked after save completion</param>
+        /// <example>Example of setting current position to <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SaveKey _saveKey;
+        /// private string _saveFilePath;
+        /// private SaveSettings _saveSettings
+        ///  
+        /// private void SetCurrentPosition()
+        /// {
+        ///     _saveData.SetKey(_saveFilePath, _saveSettings, _saveKey, transform.position, OnSetKey);
+        /// }
+        ///  
+        /// private void OnSetKey()
+        /// {
+        ///     Debug.Log("[Alert] Position saved");
+        /// }
+        /// </code>
+        /// </example>
         public void SetKey(string filePath, SaveSettings saveSettings, SaveKey saveKey, object value, Action onSetKey)
         {
             var tmpSaveData = new SaveData();
@@ -849,40 +1033,6 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         }
 
         #endregion
-
-        #region File Management
-
-        /// <summary>
-        /// Delete excess files in folder
-        /// </summary>
-        /// <param name="folderPath">Path to folder</param>
-        /// <param name="searchPattern">Search pattern for files (for example: *.sav)</param>
-        /// <param name="fileLimit">Limit of files in folder</param>
-        public static void DeleteExcessFiles(string folderPath, string searchPattern, int fileLimit)
-        {
-            if (fileLimit <= 0) return;
-
-            var saveFiles = GetFiles(folderPath, searchPattern).SortOldestFirst().ToArray();
-            var filesToDelete = saveFiles.Length - fileLimit;
-
-            if (filesToDelete <= 0) return;
-            
-            for (var i = 0; i < filesToDelete; i++)
-                saveFiles[i].Delete();
-        }
-
-        /// <summary>
-        /// Get save files from folder
-        /// </summary>
-        /// <param name="folderPath">Path to folder</param>
-        /// <param name="searchPattern"></param>
-        /// <returns>Array of save files</returns>
-        public static FileInfo[] GetFiles(string folderPath, string searchPattern) =>
-            !folderPath.IsBlank() && !searchPattern.IsBlank() && Directory.Exists(folderPath)
-                ? new DirectoryInfo(folderPath).GetFiles(searchPattern, SearchOption.AllDirectories)
-                : null;
-
-        #endregion
         
         #region ToJson
 
@@ -957,6 +1107,40 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <returns>SaveData</returns>
         public SaveData FromJson(string jsonString, JsonSerializerSettings jsonSerializerSettings) => 
             JsonConvert.DeserializeObject<SaveData>(jsonString, jsonSerializerSettings);
+
+        #endregion
+        
+        #region File Management
+
+        /// <summary>
+        /// Delete excess files in folder
+        /// </summary>
+        /// <param name="folderPath">Path to folder</param>
+        /// <param name="searchPattern">Search pattern for files (for example: *.sav)</param>
+        /// <param name="fileLimit">Limit of files in folder</param>
+        public static void DeleteExcessFiles(string folderPath, string searchPattern, int fileLimit)
+        {
+            if (fileLimit <= 0) return;
+
+            var saveFiles = GetFiles(folderPath, searchPattern).SortOldestFirst().ToArray();
+            var filesToDelete = saveFiles.Length - fileLimit;
+
+            if (filesToDelete <= 0) return;
+            
+            for (var i = 0; i < filesToDelete; i++)
+                saveFiles[i].Delete();
+        }
+
+        /// <summary>
+        /// Get save files from folder
+        /// </summary>
+        /// <param name="folderPath">Path to folder</param>
+        /// <param name="searchPattern"></param>
+        /// <returns>Array of save files</returns>
+        public static FileInfo[] GetFiles(string folderPath, string searchPattern) =>
+            !folderPath.IsBlank() && !searchPattern.IsBlank() && Directory.Exists(folderPath)
+                ? new DirectoryInfo(folderPath).GetFiles(searchPattern, SearchOption.AllDirectories)
+                : null;
 
         #endregion
     }

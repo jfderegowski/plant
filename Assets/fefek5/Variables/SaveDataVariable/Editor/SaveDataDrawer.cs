@@ -11,63 +11,35 @@ namespace fefek5.Variables.SaveDataVariable.Editor
     {
         public override VisualElement CreatePropertyGUI(SerializedProperty property)
         {
-            // Główny kontener poziomy
-            var container = new VisualElement {
+            var showButton = new Button(OnButtonShowClick) {
+                text = $"Show {property.displayName}",
                 style = {
-                    flexDirection = FlexDirection.Row,
-                    alignItems = Align.Center,
-                    flexGrow = 1,
-                    height = 24,
-                    marginBottom = 2
+                    marginRight = -2
                 }
             };
 
-            // Etykieta z nazwą właściwości
-            var label = new Label(property.displayName) {
-                style = {
-                    minWidth = 150,
-                    width = 150,
-                    unityTextAlign = TextAnchor.MiddleLeft,
-                    marginRight = 5
-                }
-            };
+            UpdateButtonState();
 
-            // Przycisk do wyświetlania danych
-            var showButton = new Button(() => {
+            showButton.TrackPropertyValue(property, _ => UpdateButtonState());
+
+            return showButton;
+
+            void OnButtonShowClick()
+            {
                 property.serializedObject.Update();
                 var saveData = fieldInfo.GetValue(property.serializedObject.targetObject) as SaveData;
                 if (saveData != null) 
                     SaveDataViewerWindow.ShowWindow(saveData.ToJson());
-            }) {
-                text = "Show",
-                style = {
-                    height = 20,
-                    minWidth = 60,
-                    flexGrow = 1,
-                    marginLeft = 5,
-                    unityTextAlign = TextAnchor.MiddleCenter
-                }
-            };
-
-            // Funkcja aktualizująca stan przycisku
+            }
+            
             void UpdateButtonState()
             {
                 property.serializedObject.Update();
+                
                 var saveData = fieldInfo.GetValue(property.serializedObject.targetObject) as SaveData;
+                
                 showButton.SetEnabled(saveData != null);
             }
-
-            // Inicjalna aktualizacja stanu
-            UpdateButtonState();
-
-            // Automatyczne śledzenie zmian właściwości
-            container.TrackPropertyValue(property, _ => UpdateButtonState());
-
-            // Składanie UI
-            container.Add(label);
-            container.Add(showButton);
-
-            return container;
         }
     }
 }

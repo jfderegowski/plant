@@ -90,7 +90,22 @@ namespace fefek5.Variables.SaveDataVariable.Runtime.Settings
             Converters = Converters
         };
 
-        private JsonConverter[] Converters => new JsonConverter[] { new SaveDataConverter(this) };
+        private JsonConverter[] Converters => new JsonConverter[] {
+            // Converter for SaveData Variable
+            new SaveDataConverter(this),
+            
+            // Converters for Unity types
+            new Color32Converter(),
+            new ColorConverter(),
+            new Matrix4x4Converter(),
+            new QuaternionConverter(),
+            new Vector2Converter(),
+            new Vector2IntConverter(),
+            new Vector3Converter(),
+            new Vector3IntConverter(),
+            new Vector4Converter(),
+            new TransformConverter()
+        };
 
         [Header("Json")]
         public TypeNameHandling TypeNameHandling = TypeNameHandling.None;
