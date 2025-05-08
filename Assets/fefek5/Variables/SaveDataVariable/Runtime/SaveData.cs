@@ -21,9 +21,33 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
 
         /// <summary>
         /// Data that will be serialized to save file
-        /// [SaveKey] - Is a key that contains string key and SerializableGuid key
+        /// [<see cref="SaveKey"/>] - Is a key that contains string key and SerializableGuid key
         /// [object] - Is a value that will be saved
         /// </summary>
+        /// <example>Example of how to get a value
+        /// <code>
+        /// private SaveData _saveData;
+        ///  
+        /// // Get or set position using string key
+        /// _saveData.Data["Position"] = transform.position;
+        /// transform.position = _saveData.Data["Position"] as Vector3
+        ///  
+        /// // Get or set position using Guid key
+        /// var guid = Guid.NewGuid();
+        /// _saveData.Data[guid] = transform.position;
+        /// transform.position = _saveData.Data[guid] as Vector3
+        ///  
+        /// // Get or set position using SerializableGuid key
+        /// var serializableGuid = SerializableGuid.NewGuid();
+        /// _saveData.Data[serializableGuid] = transform.position;
+        /// transform.position = _saveData.Data[serializableGuid] as Vector3
+        ///
+        /// // Get or set position using SaveKey key
+        /// var saveKey = SaveKey.NewKey();
+        /// _saveData.Data[saveKey] = transform.position;
+        /// transform.position = _saveData.Data[saveKey] as Vector3
+        /// </code>
+        /// </example>
         public Dictionary<SaveKey, object> Data { get; private set; }
 
         #endregion
@@ -59,6 +83,17 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="defaultValue">Default value that will be returned if key is not found</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>Value that will be found in Data or default value</returns>
+        /// <example>Example of getting position from <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private string _saveKey;
+        ///  
+        /// private Vector3 GetPositionFromSaveData()
+        /// {
+        ///     return _saveData.GetKey(_saveKey, Vector3.zero);
+        /// }
+        /// </code>
+        /// </example>
         public T GetKey<T>(string saveKey, T defaultValue) => Data.GetAs(saveKey, defaultValue);
 
         /// <summary>
@@ -69,6 +104,17 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="defaultValue">Default value that will be returned if key is not found</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>Value that will be found in Data or default value</returns>
+        /// <example>Example of getting position from <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private Guid _saveKey;
+        ///  
+        /// private Vector3 GetPositionFromSaveData()
+        /// {
+        ///     return _saveData.GetKey(_saveKey, Vector3.zero);
+        /// }
+        /// </code>
+        /// </example>
         public T GetKey<T>(Guid saveKey, T defaultValue) => Data.GetAs(saveKey, defaultValue);
         
         /// <summary>
@@ -79,6 +125,17 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="defaultValue">Default value that will be returned if key is not found</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>Value that will be found in Data or default value</returns>
+        /// <example>Example of getting position from <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SerializableGuid _saveKey;
+        ///  
+        /// private Vector3 GetPositionFromSaveData()
+        /// {
+        ///     return _saveData.GetKey(_saveKey, Vector3.zero);
+        /// }
+        /// </code>
+        /// </example>
         public T GetKey<T>(SerializableGuid saveKey, T defaultValue) => Data.GetAs(saveKey, defaultValue);
 
         /// <summary>
@@ -89,6 +146,17 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="defaultValue">Default value that will be returned if key is not found</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>Value that will be found in Data or default value</returns>
+        /// <example>Example of getting position from <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SaveKey _saveKey;
+        ///  
+        /// private Vector3 GetPositionFromSaveData()
+        /// {
+        ///     return _saveData.GetKey(_saveKey, Vector3.zero);
+        /// }
+        /// </code>
+        /// </example>
         public T GetKey<T>(SaveKey saveKey, T defaultValue) => Data.GetAs(saveKey, defaultValue);
 
         /// <summary>
@@ -100,6 +168,19 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="value">The value that will be found in Data or default value</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>This instance of SaveData</returns>
+        /// <example>Example of getting position from <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private string _saveKey;
+        ///  
+        /// private Vector3 GetPositionFromSaveData()
+        /// {
+        ///     _saveData.GetKey(_saveKey, Vector3.zero, out var position);
+        ///   
+        ///     return position;
+        /// }
+        /// </code>
+        /// </example>
         public SaveData GetKey<T>(string saveKey, T defaultValue, out T value)
         {
             value = Data.GetAs(saveKey, defaultValue);
@@ -115,6 +196,19 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="value">The value that will be found in Data or default value</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>This instance of SaveData</returns>
+        /// <example>Example of getting position from <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private Guid _saveKey;
+        ///  
+        /// private Vector3 GetPositionFromSaveData()
+        /// {
+        ///     _saveData.GetKey(_saveKey, Vector3.zero, out var position);
+        ///   
+        ///     return position;
+        /// }
+        /// </code>
+        /// </example>
         public SaveData GetKey<T>(Guid saveKey, T defaultValue, out T value)
         {
             value = Data.GetAs(saveKey, defaultValue);
@@ -130,6 +224,19 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="value">The value that will be found in Data or default value</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>This instance of SaveData</returns>
+        /// <example>Example of getting position from <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SerializableGuid _saveKey;
+        ///  
+        /// private Vector3 GetPositionFromSaveData()
+        /// {
+        ///     _saveData.GetKey(_saveKey, Vector3.zero, out var position);
+        ///   
+        ///     return position;
+        /// }
+        /// </code>
+        /// </example>
         public SaveData GetKey<T>(SerializableGuid saveKey, T defaultValue, out T value)
         {
             value = Data.GetAs(saveKey, defaultValue);
@@ -145,6 +252,19 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="value">The value that will be found in Data or default value</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>This instance of SaveData</returns>
+        /// <example>Example of getting position from <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SaveKey _saveKey;
+        ///  
+        /// private Vector3 GetPositionFromSaveData()
+        /// {
+        ///     _saveData.GetKey(_saveKey, Vector3.zero, out var position);
+        ///   
+        ///     return position;
+        /// }
+        /// </code>
+        /// </example>
         public SaveData GetKey<T>(SaveKey saveKey, T defaultValue, out T value)
         {
             value = Data.GetAs(saveKey, defaultValue);
@@ -159,6 +279,22 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="value">The value that will be found in Data or default value</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>True if key is found, otherwise false</returns>
+        /// <example>Example of getting position from <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private string _saveKey;
+        ///  
+        /// private Vector3 GetPositionFromSaveData()
+        /// {
+        ///     if (_saveData.TryGetKey(_saveKey, Vector3.zero, out var position))
+        ///     {
+        ///         return position;
+        ///     }
+        ///   
+        ///     return Vector3.zero;
+        /// }
+        /// </code>
+        /// </example>
         public bool TryGetKey<T>(string saveKey, out T value)
         {
             if (IsKeyExist(saveKey))
@@ -178,6 +314,22 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="value">The value that will be found in Data or default value</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>True if key is found, otherwise false</returns>
+        /// <example>Example of getting position from <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private Guid _saveKey;
+        ///  
+        /// private Vector3 GetPositionFromSaveData()
+        /// {
+        ///     if (_saveData.TryGetKey(_saveKey, Vector3.zero, out var position))
+        ///     {
+        ///         return position;
+        ///     }
+        ///   
+        ///     return Vector3.zero;
+        /// }
+        /// </code>
+        /// </example>
         public bool TryGetKey<T>(Guid saveKey, out T value)
         {
             if (IsKeyExist(saveKey))
@@ -198,6 +350,22 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="value">The value that will be found in Data or default value</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>True if key is found, otherwise false</returns>
+        /// <example>Example of getting position from <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SerializableGuid _saveKey;
+        ///  
+        /// private Vector3 GetPositionFromSaveData()
+        /// {
+        ///     if (_saveData.TryGetKey(_saveKey, Vector3.zero, out var position))
+        ///     {
+        ///         return position;
+        ///     }
+        ///   
+        ///     return Vector3.zero;
+        /// }
+        /// </code>
+        /// </example>
         public bool TryGetKey<T>(SerializableGuid saveKey, out T value)
         {
             if (IsKeyExist(saveKey))
@@ -218,6 +386,22 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="value">The value that will be found in Data or default value</param>
         /// <typeparam name="T">Type of value</typeparam>
         /// <returns>True if key is found, otherwise false</returns>
+        /// <example>Example of getting position from <see cref="SaveData"/>
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SaveKey _saveKey;
+        ///  
+        /// private Vector3 GetPositionFromSaveData()
+        /// {
+        ///     if (_saveData.TryGetKey(_saveKey, Vector3.zero, out var position))
+        ///     {
+        ///         return position;
+        ///     }
+        ///   
+        ///     return Vector3.zero;
+        /// }
+        /// </code>
+        /// </example>
         public bool TryGetKey<T>(SaveKey saveKey, out T value)
         {
             if (IsKeyExist(saveKey))
@@ -239,6 +423,23 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="defaultValue">Default value that will be returned if key is not found</param>
         /// <param name="onGetKey">Action that will be invoked after load completion</param>
         /// <typeparam name="T">Type of value</typeparam>
+        /// <example>Example of getting position from <see cref="SaveData"/> directly from file
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SaveKey _saveKey;
+        /// private string _saveFilePath;
+        ///  
+        /// private void GetPositionFromSaveData()
+        /// {
+        ///     _saveData.GetKey(_saveFilePath, _saveKey, Vector3.zero, OnGetKey);
+        /// }
+        ///  
+        /// private void OnGetKey(Vector3 position)
+        /// {
+        ///     transform.position = position;
+        /// }
+        /// </code>
+        /// </example>
         public void GetKey<T>(string filePath, string saveKey, T defaultValue, Action<T> onGetKey) => 
             GetKey(filePath, SaveSettings.Default, saveKey, defaultValue, onGetKey);
 
@@ -252,6 +453,24 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="defaultValue">Default value that will be returned if key is not found</param>
         /// <param name="onGetKey">Action that will be invoked after load completion</param>
         /// <typeparam name="T">Type of value</typeparam>
+        /// <example>Example of getting position from <see cref="SaveData"/> directly from file
+        /// <code>
+        /// private SaveData _saveData;
+        /// private string _saveKey;
+        /// private string _saveFilePath;
+        /// private SaveSettings _saveSettings
+        ///  
+        /// private void GetPositionFromSaveData()
+        /// {
+        ///     _saveData.GetKey(_saveFilePath, _saveSettings, _saveKey, Vector3.zero, OnGetKey);
+        /// }
+        ///  
+        /// private void OnGetKey(Vector3 position)
+        /// {
+        ///     transform.position = position;
+        /// }
+        /// </code>
+        /// </example>
         public void GetKey<T>(string filePath, SaveSettings saveSettings, string saveKey, T defaultValue, Action<T> onGetKey)
         {
             var tmpSaveData = new SaveData();
@@ -277,6 +496,23 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="defaultValue">Default value that will be returned if key is not found</param>
         /// <param name="onGetKey">Action that will be invoked after load completion</param>
         /// <typeparam name="T">Type of value</typeparam>
+        /// <example>Example of getting position from <see cref="SaveData"/> directly from file
+        /// <code>
+        /// private SaveData _saveData;
+        /// private Guid _saveKey;
+        /// private string _saveFilePath;
+        ///  
+        /// private void GetPositionFromSaveData()
+        /// {
+        ///     _saveData.GetKey(_saveFilePath, _saveKey, Vector3.zero, OnGetKey);
+        /// }
+        ///  
+        /// private void OnGetKey(Vector3 position)
+        /// {
+        ///     transform.position = position;
+        /// }
+        /// </code>
+        /// </example>
         public void GetKey<T>(string filePath, Guid saveKey, T defaultValue, Action<T> onGetKey) => 
             GetKey(filePath, SaveSettings.Default, saveKey, defaultValue, onGetKey);
         
@@ -290,6 +526,24 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="defaultValue">Default value that will be returned if key is not found</param>
         /// <param name="onGetKey">Action that will be invoked after load completion</param>
         /// <typeparam name="T">Type of value</typeparam>
+        /// <example>Example of getting position from <see cref="SaveData"/> directly from file
+        /// <code>
+        /// private SaveData _saveData;
+        /// private Guid _saveKey;
+        /// private string _saveFilePath;
+        /// private SaveSettings _saveSettings
+        ///  
+        /// private void GetPositionFromSaveData()
+        /// {
+        ///     _saveData.GetKey(_saveFilePath, _saveSettings, _saveKey, Vector3.zero, OnGetKey);
+        /// }
+        ///  
+        /// private void OnGetKey(Vector3 position)
+        /// {
+        ///     transform.position = position;
+        /// }
+        /// </code>
+        /// </example>
         public void GetKey<T>(string filePath, SaveSettings saveSettings, Guid saveKey, T defaultValue, Action<T> onGetKey)
         {
             var tmpSaveData = new SaveData();
@@ -315,6 +569,23 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="defaultValue">Default value that will be returned if key is not found</param>
         /// <param name="onGetKey">Action that will be invoked after load completion</param>
         /// <typeparam name="T">Type of value</typeparam>
+        /// <example>Example of getting position from <see cref="SaveData"/> directly from file
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SerializableGuid _saveKey;
+        /// private string _saveFilePath;
+        ///  
+        /// private void GetPositionFromSaveData()
+        /// {
+        ///     _saveData.GetKey(_saveFilePath, _saveKey, Vector3.zero, OnGetKey);
+        /// }
+        ///  
+        /// private void OnGetKey(Vector3 position)
+        /// {
+        ///     transform.position = position;
+        /// }
+        /// </code>
+        /// </example>
         public void GetKey<T>(string filePath, SerializableGuid saveKey, T defaultValue, Action<T> onGetKey) => 
             GetKey(filePath, SaveSettings.Default, saveKey, defaultValue, onGetKey);
         
@@ -328,6 +599,24 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="defaultValue">Default value that will be returned if key is not found</param>
         /// <param name="onGetKey">Action that will be invoked after load completion</param>
         /// <typeparam name="T">Type of value</typeparam>
+        /// <example>Example of getting position from <see cref="SaveData"/> directly from file
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SerializableGuid _saveKey;
+        /// private string _saveFilePath;
+        /// private SaveSettings _saveSettings
+        ///  
+        /// private void GetPositionFromSaveData()
+        /// {
+        ///     _saveData.GetKey(_saveFilePath, _saveSettings, _saveKey, Vector3.zero, OnGetKey);
+        /// }
+        ///  
+        /// private void OnGetKey(Vector3 position)
+        /// {
+        ///     transform.position = position;
+        /// }
+        /// </code>
+        /// </example>
         public void GetKey<T>(string filePath, SaveSettings saveSettings, SerializableGuid saveKey, T defaultValue, Action<T> onGetKey)
         {
             var tmpSaveData = new SaveData();
@@ -353,6 +642,23 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="defaultValue">Default value that will be returned if key is not found</param>
         /// <param name="onGetKey">Action that will be invoked after load completion</param>
         /// <typeparam name="T">Type of value</typeparam>
+        /// <example>Example of getting position from <see cref="SaveData"/> directly from file
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SaveKey _saveKey;
+        /// private string _saveFilePath;
+        ///  
+        /// private void GetPositionFromSaveData()
+        /// {
+        ///     _saveData.GetKey(_saveFilePath, _saveKey, Vector3.zero, OnGetKey);
+        /// }
+        ///  
+        /// private void OnGetKey(Vector3 position)
+        /// {
+        ///     transform.position = position;
+        /// }
+        /// </code>
+        /// </example>
         public void GetKey<T>(string filePath, SaveKey saveKey, T defaultValue, Action<T> onGetKey) => 
             GetKey(filePath, SaveSettings.Default, saveKey, defaultValue, onGetKey);
         
@@ -366,6 +672,24 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <param name="defaultValue">Default value that will be returned if key is not found</param>
         /// <param name="onGetKey">Action that will be invoked after load completion</param>
         /// <typeparam name="T">Type of value</typeparam>
+        /// <example>Example of getting position from <see cref="SaveData"/> directly from file
+        /// <code>
+        /// private SaveData _saveData;
+        /// private SaveKey _saveKey;
+        /// private string _saveFilePath;
+        /// private SaveSettings _saveSettings
+        ///  
+        /// private void GetPositionFromSaveData()
+        /// {
+        ///     _saveData.GetKey(_saveFilePath, _saveSettings, _saveKey, Vector3.zero, OnGetKey);
+        /// }
+        ///  
+        /// private void OnGetKey(Vector3 position)
+        /// {
+        ///     transform.position = position;
+        /// }
+        /// </code>
+        /// </example>
         public void GetKey<T>(string filePath, SaveSettings saveSettings, SaveKey saveKey, T defaultValue, Action<T> onGetKey)
         {
             var tmpSaveData = new SaveData();

@@ -40,12 +40,12 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// <summary>
         /// Random key for the save data. It is using SerializableGuid.
         /// </summary>
-        public static SaveKey RandomKey => new(SerializableGuid.NewGuid());
-        
+        public static SaveKey RandomKey => NewKey();
+
         /// <summary>
         /// Empty key for the save data. It is a SerializableGuid.
         /// </summary>
-        public static SaveKey Empty => new(SerializableGuid.Empty);
+        public static SaveKey Empty => NewEmptyKey();
 
         #endregion
 
@@ -212,6 +212,22 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
             Comment.Set(string.Empty, false);
             return this;
         }
+
+        #endregion
+
+        #region Static Methods
+
+        /// <summary>
+        /// Create a new key for the save data. It will create a new key with a random Guid.
+        /// </summary>
+        /// <returns>The new key for the save data.</returns>
+        public static SaveKey NewKey() => new(SerializableGuid.NewGuid());
+        
+        /// <summary>
+        /// Create a new empty key for the save data. It will create a new key with an empty Guid.
+        /// </summary>
+        /// <returns>The new empty key for the save data.</returns>
+        public static SaveKey NewEmptyKey() => new(SerializableGuid.Empty);
 
         #endregion
 

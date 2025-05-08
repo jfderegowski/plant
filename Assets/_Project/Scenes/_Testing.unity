@@ -152,22 +152,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _saveFilePath: ExampleSaveData.sav
-  _saveKey:
-    Key:
-      Part1: 3941173625
-      Part2: 1294470066
-      Part3: 1613473186
-      Part4: 4191162346
-    StringKey:
-      value: 
-      hasValue: 0
-    Comment:
-      value: 
-      hasValue: 0
   _exampleStruct:
     ExampleString: ExampleString
     ExampleInt: 1
-    ExampleFloat: 5
+    ExampleFloat: 1.1
     ExampleBool: 1
     ExampleVector3: {x: 1, y: 1, z: 1}
     ExampleQuaternion: {x: 0, y: 0, z: 0, w: 1}
@@ -175,7 +163,7 @@ MonoBehaviour:
     ExampleVector2: {x: 1, y: 1}
     ExampleVector4: {x: 1, y: 1, z: 1, w: 1}
   _exampleEnum: 0
-  _exampleEnumFlags: 5
+  _exampleEnumFlags: 1
   _exampleString: ExampleString
   _exampleInt: 1
   _exampleFloat: 1.1
@@ -185,6 +173,10 @@ MonoBehaviour:
   _exampleColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _exampleVector2: {x: 1, y: 1}
   _exampleVector4: {x: 1, y: 1, z: 1, w: 1}
+  _exampleList:
+  - Daniela
+  - have
+  - a dog
   _exampleTransform: {fileID: 582613789}
 --- !u!65 &582613786
 BoxCollider:
