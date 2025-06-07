@@ -440,7 +440,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// }
         /// </code>
         /// </example>
-        public void GetKey<T>(string filePath, string saveKey, T defaultValue, Action<T> onGetKey) => 
+        public static void GetKey<T>(string filePath, string saveKey, T defaultValue, Action<T> onGetKey) => 
             GetKey(filePath, SaveSettings.Default, saveKey, defaultValue, onGetKey);
 
         /// <summary>
@@ -471,7 +471,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// }
         /// </code>
         /// </example>
-        public void GetKey<T>(string filePath, SaveSettings saveSettings, string saveKey, T defaultValue, Action<T> onGetKey)
+        public static void GetKey<T>(string filePath, SaveSettings saveSettings, string saveKey, T defaultValue, Action<T> onGetKey)
         {
             var tmpSaveData = new SaveData();
             
@@ -513,7 +513,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// }
         /// </code>
         /// </example>
-        public void GetKey<T>(string filePath, Guid saveKey, T defaultValue, Action<T> onGetKey) => 
+        public static void GetKey<T>(string filePath, Guid saveKey, T defaultValue, Action<T> onGetKey) => 
             GetKey(filePath, SaveSettings.Default, saveKey, defaultValue, onGetKey);
         
         /// <summary>
@@ -544,7 +544,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// }
         /// </code>
         /// </example>
-        public void GetKey<T>(string filePath, SaveSettings saveSettings, Guid saveKey, T defaultValue, Action<T> onGetKey)
+        public static void GetKey<T>(string filePath, SaveSettings saveSettings, Guid saveKey, T defaultValue, Action<T> onGetKey)
         {
             var tmpSaveData = new SaveData();
             
@@ -586,7 +586,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// }
         /// </code>
         /// </example>
-        public void GetKey<T>(string filePath, SerializableGuid saveKey, T defaultValue, Action<T> onGetKey) => 
+        public static void GetKey<T>(string filePath, SerializableGuid saveKey, T defaultValue, Action<T> onGetKey) => 
             GetKey(filePath, SaveSettings.Default, saveKey, defaultValue, onGetKey);
         
         /// <summary>
@@ -617,7 +617,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// }
         /// </code>
         /// </example>
-        public void GetKey<T>(string filePath, SaveSettings saveSettings, SerializableGuid saveKey, T defaultValue, Action<T> onGetKey)
+        public static void GetKey<T>(string filePath, SaveSettings saveSettings, SerializableGuid saveKey, T defaultValue, Action<T> onGetKey)
         {
             var tmpSaveData = new SaveData();
             
@@ -659,7 +659,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// }
         /// </code>
         /// </example>
-        public void GetKey<T>(string filePath, SaveKey saveKey, T defaultValue, Action<T> onGetKey) => 
+        public static void GetKey<T>(string filePath, SaveKey saveKey, T defaultValue, Action<T> onGetKey) => 
             GetKey(filePath, SaveSettings.Default, saveKey, defaultValue, onGetKey);
         
         /// <summary>
@@ -690,7 +690,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// }
         /// </code>
         /// </example>
-        public void GetKey<T>(string filePath, SaveSettings saveSettings, SaveKey saveKey, T defaultValue, Action<T> onGetKey)
+        public static void GetKey<T>(string filePath, SaveSettings saveSettings, SaveKey saveKey, T defaultValue, Action<T> onGetKey)
         {
             var tmpSaveData = new SaveData();
             
@@ -857,7 +857,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// }
         /// </code>
         /// </example>
-        public void SetKey(string filePath, SaveSettings saveSettings, string saveKey, object value, Action onSetKey)
+        public static void SetKey(string filePath, SaveSettings saveSettings, string saveKey, object value, Action onSetKey)
         {
             var tmpSaveData = new SaveData();
             
@@ -898,7 +898,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// }
         /// </code>
         /// </example>
-        public void SetKey(string filePath, Guid saveKey, object value, Action onSetKey) => 
+        public static void SetKey(string filePath, Guid saveKey, object value, Action onSetKey) => 
             SetKey(filePath, SaveSettings.Default, saveKey, value, onSetKey);
         
         /// <summary>
@@ -928,7 +928,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// }
         /// </code>
         /// </example>
-        public void SetKey(string filePath, SaveSettings saveSettings, Guid saveKey, object value, Action onSetKey)
+        public static void SetKey(string filePath, SaveSettings saveSettings, Guid saveKey, object value, Action onSetKey)
         {
             var tmpSaveData = new SaveData();
             
@@ -969,7 +969,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// }
         /// </code>
         /// </example>
-        public void SetKey(string filePath, SerializableGuid saveKey, object value, Action onSetKey) => 
+        public static void SetKey(string filePath, SerializableGuid saveKey, object value, Action onSetKey) => 
             SetKey(filePath, SaveSettings.Default, saveKey, value, onSetKey);
         
         /// <summary>
@@ -999,7 +999,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// }
         /// </code>
         /// </example>
-        public void SetKey(string filePath, SaveSettings saveSettings, SerializableGuid saveKey, object value, Action onSetKey)
+        public static void SetKey(string filePath, SaveSettings saveSettings, SerializableGuid saveKey, object value, Action onSetKey)
         {
             var tmpSaveData = new SaveData();
             
@@ -1040,7 +1040,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// }
         /// </code>
         /// </example>
-        public void SetKey(string filePath, SaveKey saveKey, object value, Action onSetKey) => 
+        public static void SetKey(string filePath, SaveKey saveKey, object value, Action onSetKey) => 
             SetKey(filePath, SaveSettings.Default, saveKey, value, onSetKey);
         
         /// <summary>
@@ -1070,7 +1070,7 @@ namespace fefek5.Variables.SaveDataVariable.Runtime
         /// }
         /// </code>
         /// </example>
-        public void SetKey(string filePath, SaveSettings saveSettings, SaveKey saveKey, object value, Action onSetKey)
+        public static void SetKey(string filePath, SaveSettings saveSettings, SaveKey saveKey, object value, Action onSetKey)
         {
             var tmpSaveData = new SaveData();
             
