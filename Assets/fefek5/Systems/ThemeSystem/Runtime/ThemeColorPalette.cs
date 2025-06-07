@@ -1,20 +1,13 @@
 ﻿using fefek5.Common.Runtime.Extensions;
+using fefek5.Common.Runtime.Helpers;
 using UnityEngine;
 
 namespace fefek5.Systems.ThemeSystem.Runtime
 {
-    
-    public static class EditorPaths
-    {
-        public const string FEFEK5 = "fefek5";
-        public const string SYSTEMS = "Systems";
-        public const string THEME_SYSTEM = "ThemeSystem";
-    }
-    
     /// <summary>
     /// Color Palette for the UI Theme System
     /// </summary>
-    [CreateAssetMenu(fileName = "ColorPalette", menuName = "No Release Date/Theme System/Color Palette")]
+    [CreateAssetMenu(fileName = "ColorPalette", menuName = MenuPaths.fefek5.Systems.ThemeSystem.PATH + "/Color Palette")]
     public class ThemeColorPalette : ScriptableObject
     {
         public Color firstColor = new Color().FromHex("#fffef5");
@@ -23,8 +16,7 @@ namespace fefek5.Systems.ThemeSystem.Runtime
         public Color fourthColor = new Color().FromHex("#ad5143");
 
         public Color GetColor(ColorType colorType) =>
-            colorType switch
-            {
+            colorType switch {
                 ColorType.First => firstColor,
                 ColorType.Second => secondColor,
                 ColorType.Third => thirdColor,

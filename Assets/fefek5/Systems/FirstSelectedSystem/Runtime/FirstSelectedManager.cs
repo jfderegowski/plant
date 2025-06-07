@@ -16,18 +16,14 @@ namespace fefek5.Systems.FirstSelectedSystem.Runtime
 
         [SerializeField] private InputActionReference _navigateAction;
 
-        protected override void Awake()
+        protected virtual void Awake()
         {
-            base.Awake();
-            
             _navigateAction.action.performed += OnNavigatePerformed;
             _navigateAction.action.Enable();
         }
 
-        protected override void OnDestroy()
+        protected virtual void OnDestroy()
         {
-            base.OnDestroy();
-            
             _navigateAction.action.Disable();
             
             UnregisterAll();

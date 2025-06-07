@@ -174,7 +174,7 @@ MonoBehaviour:
   _exampleVector2: {x: 1, y: 1}
   _exampleVector4: {x: 1, y: 1, z: 1, w: 1}
   _exampleList:
-  - Daniela
+  - Dan
   - have
   - a dog
   _exampleTransform: {fileID: 582613789}

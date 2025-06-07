@@ -1,22 +1,87 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace fefek5.Systems.SingletonSystem.Runtime
 {
     /// <summary>
     /// Base class for all singletons.
     /// </summary>
-    [DefaultExecutionOrder(-9990)]
+    [DefaultExecutionOrder(10000), RequireComponent(typeof(SingletonBehaviourInitializer), typeof(SingletonBehaviourDisposer))]
     public abstract class SingletonBehaviour : MonoBehaviour
     {
+        #region Events
+
+        /// <summary>
+        /// Invoked when the singleton is initialized.
+        /// </summary>
+        public event Action onInitialize;
+        
+        /// <summary>
+        /// Invoked when the singleton is disposed.
+        /// </summary>
+        public event Action onDispose;
+
+        /// <summary>
+        /// Invoked when the singleton is initialized.
+        /// </summary>
+        protected virtual void OnInitialize() => onInitialize?.Invoke();
+        
+        /// <summary>
+        /// Invoked when the singleton is disposed.
+        /// </summary>
+        protected virtual void OnDispose() => onDispose?.Invoke();
+        
+        #endregion
+        
         /// <summary>
         /// If true, the singleton will be added to the DontDestroyOnLoad list.
         /// </summary>
-        public abstract bool SetDontDestroyOnLoad { get; protected set; }
+        [field: SerializeField, Tooltip("If true, the singleton will be added to the DontDestroyOnLoad list.")]
+        public bool SetDontDestroyOnLoad { get; protected set; } = true;
         
+        /// <summary>
+        /// Indicates whether the singleton is initialized.
+        /// </summary>
+        public bool Initialized { get; private set; }
+
         /// <summary>
         /// Initializes the singleton.
         /// </summary>
-        internal abstract void Initialize();
+        internal virtual void Initialize()
+        {
+            if (Initialized)
+            {
+                Debug.LogWarning($"[SingletonSystem] Singleton of type {GetType().Name} is already initialized.");
+                return;
+            }
+
+            if (SetDontDestroyOnLoad)
+                DontDestroyOnLoad(gameObject);
+            
+            SingletonsStorage.Register(this);
+            
+            Initialized = true;
+            
+            OnInitialize();
+        }
+
+        /// <summary>
+        /// Disposes of the singleton.
+        /// </summary>
+        internal virtual void Dispose()
+        {
+            if (!Initialized)
+            {
+                Debug.LogWarning($"[SingletonSystem] Singleton of type {GetType().Name} is not initialized.");
+                return;
+            }
+
+            SingletonsStorage.UnRegister(this);
+            
+            Initialized = false;
+            
+            OnDispose();
+        }
     }
     
     /// <summary>
@@ -39,39 +104,25 @@ namespace fefek5.Systems.SingletonSystem.Runtime
                 return _instance;
             }
         }
-
-        [field: SerializeField, Tooltip("If true, the singleton will be added to the DontDestroyOnLoad list.")]
-        public override bool SetDontDestroyOnLoad { get; protected set; } = true;
         
         private static T _instance;
 
         /// <summary>
-        /// Remember to call base.Awake() when overriding this method.
-        /// Otherwise, the singleton will not be initialized.
-        /// </summary>
-        protected virtual void Awake() => Initialize();
-
-        /// <summary>
-        /// Remember to call base.OnDestroy() when overriding this method.
-        /// Otherwise, the singleton will not be unregistered.
-        /// </summary>
-        protected virtual void OnDestroy() => SingletonsStorage.UnRegister(this);
-
-        /// <summary>
         /// Initializes the singleton
         /// </summary>
-        internal override void Initialize()
+        internal sealed override void Initialize()
         {
             if (_instance && _instance != this)
             {
-                Debug.LogWarning($"[SingletonSystem] Singleton of type {typeof(T).Name} already exists. Destroying this instance.");
+                Debug.LogWarning($"[SingletonSystem] Singleton of type {typeof(T).Name} already exists" +
+                                 $"in '{_instance.gameObject.scene.name}' scene. " +
+                                 $"Destroying this instance on {gameObject.scene.name}.");
+                
                 Destroy(gameObject);
             }
-            else if (!_instance)
-            {
-                _instance = GetComponent<T>();
-                SingletonsStorage.Register(this);
-            }
+            else if (!_instance) _instance = GetComponent<T>();
+
+            base.Initialize();
         }
     }
 }

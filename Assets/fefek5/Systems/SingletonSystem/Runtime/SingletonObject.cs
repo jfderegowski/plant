@@ -23,10 +23,12 @@ namespace fefek5.Systems.SingletonSystem.Runtime
             {
                 if (_instance) return _instance;
 
-                if (SingletonsStorage._instance)
-                    foreach (var soSingleton in SingletonsStorage._instance.SingletonObjects.Where(
-                                 soSingleton => soSingleton.GetType() == typeof(T)))
+                if (SingletonsStorage.Instance)
+                {
+                    foreach (var soSingleton in SingletonsStorage.Instance.SingletonObjects.Where(singletonObject =>
+                                 singletonObject.GetType() == typeof(T)))
                         return _instance = soSingleton as T;
+                }
 
                 _instance = Resources.Load<T>(typeof(T).Name);
 
@@ -37,17 +39,17 @@ namespace fefek5.Systems.SingletonSystem.Runtime
                 
                 static T CreateScriptableObject()
                 {
-                    var soInstance = CreateInstance<T>();
-                    soInstance.name = typeof(T).Name;
+                    var singletonObject = CreateInstance<T>();
+                    singletonObject.name = typeof(T).Name;
 
                     if (!UnityEditor.AssetDatabase.IsValidFolder("Assets/Resources"))
                         UnityEditor.AssetDatabase.CreateFolder("Assets", "Resources");
 
-                    UnityEditor.AssetDatabase.CreateAsset(soInstance, $"Assets/Resources/{typeof(T).Name}.asset");
+                    UnityEditor.AssetDatabase.CreateAsset(singletonObject, $"Assets/Resources/{typeof(T).Name}.asset");
                     
                     UnityEditor.AssetDatabase.SaveAssets();
 
-                    return soInstance;
+                    return singletonObject;
                 }
 #endif
 

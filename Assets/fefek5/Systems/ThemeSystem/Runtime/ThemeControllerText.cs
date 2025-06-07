@@ -20,11 +20,11 @@ namespace fefek5.Systems.ThemeSystem.Runtime
 
         protected override void UpdateTheme()
         {
-            if (!themeManager || !_text) return;
+            if (!ThemeManager || !_text) return;
             
-            if (_text.color == themeManager.Current.GetColor(colorType)) return;
+            if (_text.color == ThemeManager.Current.GetColor(colorType)) return;
             
-            _text.color = themeManager.Current.GetColor(colorType);
+            _text.color = ThemeManager.Current.GetColor(colorType);
         }
     }
 }

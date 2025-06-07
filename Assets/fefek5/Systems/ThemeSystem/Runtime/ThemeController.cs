@@ -5,7 +5,7 @@ namespace fefek5.Systems.ThemeSystem.Runtime
     [ExecuteInEditMode]
     public abstract class ThemeController : MonoBehaviour
     {
-        public static ThemeManager themeManager => ThemeManager.Instance;
+        public static ThemeManager ThemeManager => ThemeManager.Instance;
 
         protected virtual void Awake()
         {
@@ -16,7 +16,6 @@ namespace fefek5.Systems.ThemeSystem.Runtime
         }
 
 #if UNITY_EDITOR
-        
         private void Update()
         {
             if (Application.isPlaying)
@@ -27,7 +26,6 @@ namespace fefek5.Systems.ThemeSystem.Runtime
             
             UpdateTheme();
         }
-
 #endif
 
         protected abstract void UpdateTheme();

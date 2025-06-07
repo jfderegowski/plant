@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using fefek5.Systems.ResourcesScriptableObjectSystem.Runtime;
 using UnityEngine;
 
 namespace fefek5.Systems.SingletonSystem.Runtime
@@ -7,7 +8,7 @@ namespace fefek5.Systems.SingletonSystem.Runtime
     /// <summary>
     /// Collection of all singletons.
     /// </summary>
-    public class SingletonsStorage : SingletonObject<SingletonsStorage>
+    public class SingletonsStorage : ResourcesScriptableObject<SingletonsStorage>
     {
         /// <summary>
         /// The list of all singletons.
@@ -21,7 +22,15 @@ namespace fefek5.Systems.SingletonSystem.Runtime
         [field: SerializeField, Tooltip("Add a scriptable object singleton to the list and it will be get from there.")]
         public List<SingletonObject> SingletonObjects { get; private set; } = new();
         
-        private void OnValidate() => CheckForDuplicates();
+        /// <summary>
+        /// Call base OnValidate method to ensure that the singletons are valid.
+        /// </summary>
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            
+            CheckForDuplicates();
+        }
 
         /// <summary>
         /// Validates the singletons before initializing them.
@@ -43,7 +52,7 @@ namespace fefek5.Systems.SingletonSystem.Runtime
 
             foreach (var nullSingleton in nulls)
             {
-                Debug.Log($"[SingletonSystem] Removing null singleton", this);
+                Debug.Log("[SingletonSystem] Removing null singleton", this);
                 SingletonBehaviours.Remove(nullSingleton);
             }
         }
@@ -53,23 +62,23 @@ namespace fefek5.Systems.SingletonSystem.Runtime
         /// </summary>
         private void CheckForDuplicates()
         {
-            var duplicates = (from singleton in SingletonBehaviours
-                where singleton
-                let count = SingletonBehaviours.Count(otherSingleton => singleton == otherSingleton)
+            var singletonBehavioursDuplicates = (from singletonBehaviour in SingletonBehaviours
+                where singletonBehaviour
+                let count = SingletonBehaviours.Count(otherSingleton => singletonBehaviour == otherSingleton)
                 where count > 1
-                select singleton).ToList();
+                select singletonBehaviour).ToList();
 
-            foreach (var duplicate in duplicates) 
+            foreach (var duplicate in singletonBehavioursDuplicates) 
                 Debug.Log($"[SingletonSystem] Duplicate singleton: {duplicate}", this);
             
-            var soDuplicates = (from soSingleton in SingletonObjects
-                where soSingleton
-                let count = SingletonObjects.Count(otherSoSingleton => soSingleton == otherSoSingleton)
+            var singletonObjectsDuplicates = (from singletonObject in SingletonObjects
+                where singletonObject
+                let count = SingletonObjects.Count(otherSoSingleton => singletonObject == otherSoSingleton)
                 where count > 1
-                select soSingleton).ToList();
+                select singletonObject).ToList();
             
-            foreach (var soDuplicate in soDuplicates)
-                Debug.Log($"[SingletonSystem] Duplicate scriptable object singleton: {soDuplicate}", this);
+            foreach (var duplicate in singletonObjectsDuplicates)
+                Debug.Log($"[SingletonSystem] Duplicate scriptable object singleton: {duplicate}", this);
         }
 
         #region Initialization
@@ -105,12 +114,7 @@ namespace fefek5.Systems.SingletonSystem.Runtime
 
                 var singletonClone = Instantiate(singletonPrefab);
 
-                singletonPrefab.gameObject.SetActive(prevEnabled);
-
                 singletonClone.Initialize();
-
-                if (singletonClone.SetDontDestroyOnLoad)
-                    DontDestroyOnLoad(singletonClone.gameObject);
                 
                 _singletonsToEnable.Add(singletonClone, prevEnabled);
             }
@@ -137,7 +141,9 @@ namespace fefek5.Systems.SingletonSystem.Runtime
                     if (singleton is T prefab) return prefab;
             }
 
-            Debug.Log($"[SingletonSystem] No found singleton of type {typeof(T).Name}. Calling Object.FindObjectOfType<T>()");
+            Debug.Log($"[SingletonSystem] No found singleton of type {typeof(T).Name}. " +
+                      "Calling FindFirstObjectByType<T>()");
+            
             var findObject = FindFirstObjectByType<T>();
 
             return findObject ? findObject : new GameObject(typeof(T).Name).AddComponent<T>();

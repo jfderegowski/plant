@@ -34,17 +34,13 @@ namespace fefek5.Systems.IntuitiveBackSystem.Runtime
 
         [SerializeField] private InputAction _backAction;
 
-        protected override void Awake()
+        protected virtual void Awake()
         {
-            base.Awake();
-            
             _backAction.performed += OnBackPerformed;
         }
 
-        protected override void OnDestroy()
+        protected virtual void OnDestroy()
         {
-            base.OnDestroy();
-            
             _backAction.performed -= OnBackPerformed;
             UnregisterAll();
         }

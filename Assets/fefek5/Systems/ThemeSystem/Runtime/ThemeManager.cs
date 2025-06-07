@@ -1,9 +1,10 @@
+using fefek5.Common.Runtime.Helpers;
 using fefek5.Systems.SingletonSystem.Runtime;
 using UnityEngine;
 
 namespace fefek5.Systems.ThemeSystem.Runtime
 {
-    [CreateAssetMenu(fileName = "ThemeManager", menuName = "No Release Date/Theme System/Theme Manager")]
+    [CreateAssetMenu(fileName = "ThemeManager", menuName = MenuPaths.fefek5.Systems.ThemeSystem.PATH + "/Theme Manager")]
     public class ThemeManager : SingletonObject<ThemeManager>
     {
         public ThemeColorPalette Current
@@ -11,8 +12,8 @@ namespace fefek5.Systems.ThemeSystem.Runtime
             get
             {
 #if UNITY_EDITOR
-                if (defaultColorPalette)
-                    return defaultColorPalette;
+                if (DefaultColorPalette)
+                    return DefaultColorPalette;
 
                 var newColorPalette = CreateInstance<ThemeColorPalette>();
                     
@@ -21,12 +22,12 @@ namespace fefek5.Systems.ThemeSystem.Runtime
                 UnityEditor.AssetDatabase.SaveAssets();
                 UnityEditor.AssetDatabase.Refresh();
                     
-                defaultColorPalette = newColorPalette;
+                DefaultColorPalette = newColorPalette;
 #endif
-                return defaultColorPalette;
+                return DefaultColorPalette;
             }
         }
 
-        public ThemeColorPalette defaultColorPalette;
+        public ThemeColorPalette DefaultColorPalette;
     }
 }
