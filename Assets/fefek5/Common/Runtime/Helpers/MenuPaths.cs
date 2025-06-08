@@ -20,6 +20,16 @@
                     public const string PATH = Systems.PATH + "/Theme System";
                 }
             }
+            
+            public static class Variables
+            {
+                public const string PATH = fefek5.PATH + "/Variables";
+
+                public static class SaveDataVariable
+                {
+                    public const string PATH = Variables.PATH + "/Save Data Variable";
+                }
+            }
         }
         
         public static class CONTEXT

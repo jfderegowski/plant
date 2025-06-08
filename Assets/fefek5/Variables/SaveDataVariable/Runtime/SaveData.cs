@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using fefek5.Common.Runtime.Extensions;
 using fefek5.Systems.EncryptionSystem;
+using fefek5.Variables.SaveDataVariable.Runtime.Extensions;
 using fefek5.Variables.SaveDataVariable.Runtime.Settings;
 using fefek5.Variables.SerializableGuidVariable.Runtime;
 using Newtonsoft.Json;

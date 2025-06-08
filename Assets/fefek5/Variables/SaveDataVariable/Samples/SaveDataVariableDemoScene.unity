@@ -119,6 +119,75 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &73783330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 73783332}
+  - component: {fileID: 73783331}
+  m_Layer: 0
+  m_Name: SavePositionExample
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &73783331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73783330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51e7c8e215b24163b816a8afd5be4af6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _saveFilePath: ExampleSaveData.sav
+  _saveSettings:
+    _fileLimit:
+      value: 10
+      hasValue: 0
+    _jsonCustomSettings:
+      value:
+        TypeNameHandling: 0
+        Formatting: 1
+        _writeComment:
+          value: 0
+          hasValue: 0
+        _fileComment:
+          value:
+            _title: 
+            _writeGameVersion: 0
+            _writeSaveTime: 0
+          hasValue: 0
+      hasValue: 0
+    _encryption:
+      value:
+        Salt: g46dzQ80
+        InitVector: OFRna74m*aze01xY
+        Password: 9c6845b7-f91e-459a-b1d4-f53694dfec81
+      hasValue: 0
+--- !u!4 &73783332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73783330}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &650216206
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,58 +232,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5f4eb19768b5a4fb4c07b98119d15a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _saveKey:
-    Key:
-      Part1: 2709819082
-      Part2: 1178816049
-      Part3: 4201800632
-      Part4: 4043091505
-    StringKey:
-      value: 
-      hasValue: 0
-    Comment:
-      value: CasData
-      hasValue: 1
-  _saveKeyForList:
-    Key:
-      Part1: 3334446583
-      Part2: 1102437742
-      Part3: 2576614795
-      Part4: 145041746
-    StringKey:
-      value: 
-      hasValue: 0
-    Comment:
-      value: Lista
-      hasValue: 1
-  _list:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  _saveFilePath: ExampleSaveData.sav
+  _exampleStruct:
+    ExampleString: ExampleString
+    ExampleInt: 1
+    ExampleFloat: 1.1
+    ExampleBool: 1
+    ExampleVector3: {x: 1, y: 1, z: 1}
+    ExampleQuaternion: {x: 0, y: 0, z: 0, w: 1}
+    ExampleColor: {r: 1, g: 1, b: 1, a: 1}
+    ExampleVector2: {x: 1, y: 1}
+    ExampleVector4: {x: 1, y: 1, z: 1, w: 1}
+  _exampleEnum: 0
+  _exampleEnumFlags: 1
+  _exampleString: ExampleString
+  _exampleInt: 1
+  _exampleFloat: 1.1
+  _exampleBool: 1
+  _exampleVector3: {x: 1, y: 1, z: 1}
+  _exampleQuaternion: {x: 0, y: 0, z: 0, w: 1}
+  _exampleColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _exampleVector2: {x: 1, y: 1}
+  _exampleVector4: {x: 1, y: 1, z: 1, w: 1}
+  _exampleList:
+  - I
+  - Love
+  - Dan
+  _exampleTransform: {fileID: 650216207}
 --- !u!1 &739358558
 GameObject:
   m_ObjectHideFlags: 11
@@ -266,3 +310,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 739358560}
   - {fileID: 650216207}
+  - {fileID: 73783332}

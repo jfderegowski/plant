@@ -113,8 +113,6 @@ namespace fefek5.Variables.SaveDataVariable.Runtime.Settings
         
         [Header("Comments")]
         [SerializeField] private HasValue<CommentPosition> _writeComment = new(CommentPosition.BeforeObject, true);
-
-        [Header("File Comment")]
         [SerializeField] private HasValue<SaveFileComment> _fileComment = new(new SaveFileComment(), false);
     }
 }

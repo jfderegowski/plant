@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace fefek5.Variables.HasValueVariable.Runtime
 {

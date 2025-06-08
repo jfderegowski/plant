@@ -1,4 +1,5 @@
 ﻿using System;
+using fefek5.Variables.SaveDataVariable.Runtime.Extensions;
 using fefek5.Variables.SaveDataVariable.Runtime.Serializable;
 using Newtonsoft.Json;
 using UnityEngine;
