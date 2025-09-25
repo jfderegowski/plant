@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using fefek5.Variables.HasValueVariable.Runtime;
+﻿using fefek5.Variables.HasValueVariable.Runtime;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
