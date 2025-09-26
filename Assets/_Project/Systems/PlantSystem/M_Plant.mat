@@ -49,13 +49,28 @@ Material:
     - _AtlasIndex1: 0
     - _AtlasIndex2: 0
     - _AtlasIndex3: 0
-    - _Grow: 0
+    - _ENUM: 1
+    - _Float: 1.25
+    - _Grow: 2.77
     - _Pattern: 1
     - _TineIndex0: 0
     - _TineIndex1: 0
     - _TineIndex2: 0
     - _TineIndex3: 0
-    m_Colors: []
+    m_Colors:
+    - _Leaf_0: {r: 0, g: 3, b: 0, a: 0}
+    - _Leaf_0_1: {r: 0, g: 0, b: 0, a: 0}
+    - _Leaf_0_2: {r: 0, g: 0, b: 0, a: 0}
+    - _Leaf_0_3: {r: 0, g: 0, b: 0, a: 0}
+    - _Leaf_1: {r: 0, g: 3, b: 0, a: 0}
+    - _Leaf_2: {r: 0, g: 3, b: 0, a: 0}
+    - _Leaf_3: {r: 0, g: 3, b: 0, a: 0}
+    - _Vector2: {r: 0, g: 0, b: 0, a: 0}
+    - _Vector2_1: {r: 0, g: 0, b: 0, a: 0}
+    - _Vector2_2: {r: 0, g: 0, b: 0, a: 0}
+    - _Vector2_3: {r: 0, g: 0, b: 0, a: 0}
+    - _Vector4: {r: 0, g: 0, b: 0, a: 0}
+    - _Vector4_1: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &4049467587518334337
