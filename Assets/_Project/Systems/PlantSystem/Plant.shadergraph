@@ -1012,7 +1012,7 @@
     "m_FloatType": 1,
     "m_RangeValues": {
         "x": -1.0,
-        "y": 4.0
+        "y": 15.0
     }
 }
 
@@ -1330,7 +1330,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "_TargetGrow",
     "m_StageCapability": 3,
-    "m_Value": 1.0,
+    "m_Value": 4.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
@@ -3275,7 +3275,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "_TargetGrow",
     "m_StageCapability": 3,
-    "m_Value": 2.0,
+    "m_Value": 8.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
@@ -4151,7 +4151,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "_TargetGrow",
     "m_StageCapability": 3,
-    "m_Value": 3.0,
+    "m_Value": 12.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
