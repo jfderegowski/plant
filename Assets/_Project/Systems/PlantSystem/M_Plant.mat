@@ -57,15 +57,17 @@ Material:
     - _TineIndex1: 0
     - _TineIndex2: 0
     - _TineIndex3: 0
+    - _WindSpeed: 0.1
+    - _WindStrenght: 0.1
     m_Colors:
     - _Grow_1: {r: 0, g: 0, b: 0, a: 0}
-    - _Leaf_0: {r: 0, g: 2, b: 0, a: 0}
+    - _Leaf_0: {r: 0, g: 3, b: 0, a: 0}
     - _Leaf_0_1: {r: 0, g: 0, b: 0, a: 0}
     - _Leaf_0_2: {r: 0, g: 0, b: 0, a: 0}
     - _Leaf_0_3: {r: 0, g: 0, b: 0, a: 0}
-    - _Leaf_1: {r: 2, g: 2, b: 0, a: 0}
-    - _Leaf_2: {r: 0, g: 2, b: 0, a: 0}
-    - _Leaf_3: {r: 1, g: 2, b: 0, a: 0}
+    - _Leaf_1: {r: 0, g: 3, b: 0, a: 0}
+    - _Leaf_2: {r: 0, g: 3, b: 0, a: 0}
+    - _Leaf_3: {r: 0, g: 3, b: 0, a: 0}
     - _Vector2: {r: 0, g: 0, b: 0, a: 0}
     - _Vector2_1: {r: 0, g: 0, b: 0, a: 0}
     - _Vector2_2: {r: 0, g: 0, b: 0, a: 0}
